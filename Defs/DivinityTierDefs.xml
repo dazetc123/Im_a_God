@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- The god holds the highest tier whose minFollowers and minLifetimeFaith are both met.
+       Followers count colonists of the player's primary ideoligion; slaves count as half. -->
+
+  <ImAGod.DivinityTierDef>
+    <defName>IAG_Tier_Nascent</defName>
+    <label>nascent god</label>
+    <description>A young god, known only to a handful of believers. Its voice is faint, but it is heard.</description>
+    <level>1</level>
+    <minFollowers>1</minFollowers>
+    <minLifetimeFaith>0</minLifetimeFaith>
+    <faithCapBase>120</faithCapBase>
+    <faithCapPerFollower>10</faithCapPerFollower>
+    <passiveFaithPerFollowerPerDay>1</passiveFaithPerFollowerPerDay>
+  </ImAGod.DivinityTierDef>
+
+  <ImAGod.DivinityTierDef>
+    <defName>IAG_Tier_Revered</defName>
+    <label>revered god</label>
+    <description>A god whose name is spoken with reverence. It can now strike down the wicked and kindle genius in its faithful.</description>
+    <level>2</level>
+    <minFollowers>5</minFollowers>
+    <minLifetimeFaith>400</minLifetimeFaith>
+    <faithCapBase>200</faithCapBase>
+    <faithCapPerFollower>15</faithCapPerFollower>
+    <passiveFaithPerFollowerPerDay>1.25</passiveFaithPerFollowerPerDay>
+  </ImAGod.DivinityTierDef>
+
+  <ImAGod.DivinityTierDef>
+    <defName>IAG_Tier_Mighty</defName>
+    <label>mighty god</label>
+    <description>A god of real power. Through its prophet it can bless the harvest, terrify armies and even return the faithful dead.</description>
+    <level>3</level>
+    <minFollowers>9</minFollowers>
+    <minLifetimeFaith>2000</minLifetimeFaith>
+    <faithCapBase>350</faithCapBase>
+    <faithCapPerFollower>20</faithCapPerFollower>
+    <passiveFaithPerFollowerPerDay>1.5</passiveFaithPerFollowerPerDay>
+  </ImAGod.DivinityTierDef>
+
+  <ImAGod.DivinityTierDef>
+    <defName>IAG_Tier_Exalted</defName>
+    <label>exalted god</label>
+    <description>A god at the height of its glory. It may now descend and walk among its people in the flesh of a chosen follower.</description>
+    <level>4</level>
+    <minFollowers>14</minFollowers>
+    <minLifetimeFaith>6000</minLifetimeFaith>
+    <faithCapBase>500</faithCapBase>
+    <faithCapPerFollower>25</faithCapPerFollower>
+    <passiveFaithPerFollowerPerDay>1.75</passiveFaithPerFollowerPerDay>
+  </ImAGod.DivinityTierDef>
+
+</Defs>

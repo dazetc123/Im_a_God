@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <JobDef>
+    <defName>IAG_Pray</defName>
+    <driverClass>ImAGod.JobDriver_Pray</driverClass>
+    <reportString>praying at TargetA.</reportString>
+    <joyDuration>2000</joyDuration>
+    <joyMaxParticipants>1</joyMaxParticipants>
+    <joyKind>Meditative</joyKind>
+    <allowOpportunisticPrefix>true</allowOpportunisticPrefix>
+  </JobDef>
+
+  <JoyGiverDef>
+    <defName>IAG_Pray</defName>
+    <giverClass>ImAGod.JoyGiver_Pray</giverClass>
+    <baseChance>2.5</baseChance>
+    <thingDefs>
+      <li>IAG_DivineShrine</li>
+    </thingDefs>
+    <jobDef>IAG_Pray</jobDef>
+    <joyKind>Meditative</joyKind>
+  </JoyGiverDef>
+
+</Defs>

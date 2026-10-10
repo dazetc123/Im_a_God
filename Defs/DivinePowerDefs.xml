@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    faithCost      base cost; multiplied by the cost setting and by divine strain (+15% per point of strain)
+    minTier        divinity tier required
+    cooldownDays   days before the power can be used again
+    targetMode     None / Cell / Pawn / Corpse
+    requiresProphet  the prophet (moral guide, else leader) must be conscious and, for targeted powers, on the target map
+    prophetStrain  severity of "divine channeling" added to the prophet
+    witnessRadius  believers in this radius witness the miracle
+    amount / amountPerTier / amountPerFollower / radius / durationDays / thingDef / hediffDef  are read by the worker;
+    amountPerTier is added once for each tier above minTier
+  -->
+
+  <!-- ===== Tier 1 ===== -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Foresight</defName>
+    <label>divine foresight</label>
+    <description>Open your eyes upon the threads of fate. For a time, every threat the world sends against your colony is revealed to you in a prophecy before it arrives, giving your people time to prepare.\n\nThe prophecies are always true: no new threats are created, the coming ones are only foreseen. As your divinity grows, your sight reaches further ahead, names the enemy faction (tier 2) and measures its strength (tier 3).</description>
+    <workerClass>ImAGod.DivinePowerWorker_Foresight</workerClass>
+    <iconPath>ImAGod/Powers/Foresight</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>6</cooldownDays>
+    <targetMode>None</targetMode>
+    <durationDays>4</durationDays>
+    <amount>6</amount>          <!-- lead time in hours -->
+    <amountPerTier>6</amountPerTier>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Mend</defName>
+    <label>mending touch</label>
+    <description>Lay your hand upon one of your people and close their wounds. Bleeding wounds are healed first.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Mend</workerClass>
+    <iconPath>ImAGod/Powers/Mend</iconPath>
+    <order>2</order>
+    <minTier>1</minTier>
+    <faithCost>45</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <amount>25</amount>         <!-- injury severity healed -->
+    <amountPerTier>10</amountPerTier>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Manna</defName>
+    <label>manna from heaven</label>
+    <description>Food falls from the sky for your hungry faithful. The more followers you have, the more you can provide.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Powers/Manna</iconPath>
+    <order>3</order>
+    <minTier>1</minTier>
+    <faithCost>60</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <thingDef>MealSimple</thingDef>
+    <amount>4</amount>          <!-- meals -->
+    <amountPerFollower>1</amountPerFollower>
+  </ImAGod.DivinePowerDef>
+
+  <!-- ===== Tier 2 ===== -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Smite</defName>
+    <label>smite</label>
+    <description>Call down lightning upon the enemies of the faith. Mighty gods strike more than once.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Smite</workerClass>
+    <iconPath>ImAGod/Powers/Smite</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>0.25</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>3</radius>
+    <amount>1</amount>          <!-- strikes -->
+    <amountPerTier>1</amountPerTier>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Inspire</defName>
+    <label>divine inspiration</label>
+    <description>Whisper to a follower in a dream, kindling a random inspiration within them.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Inspire</workerClass>
+    <iconPath>ImAGod/Powers/Inspire</iconPath>
+    <order>2</order>
+    <minTier>2</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Pawn</targetMode>
+  </ImAGod.DivinePowerDef>
+
+  <!-- ===== Tier 3: great miracles, channeled by the prophet ===== -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Bounty</defName>
+    <label>bountiful harvest</label>
+    <description>Your prophet blesses the fields. Crops in the area grow by leaps and bounds.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Bounty</workerClass>
+    <iconPath>ImAGod/Powers/Bounty</iconPath>
+    <order>1</order>
+    <minTier>3</minTier>
+    <faithCost>140</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.3</prophetStrain>
+    <radius>7.9</radius>
+    <amount>0.35</amount>       <!-- growth added -->
+    <amountPerTier>0.1</amountPerTier>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Terror</defName>
+    <label>divine terror</label>
+    <description>Your prophet reveals a glimpse of your true face to the enemy. Hostile people in the area flee in terror.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Terror</workerClass>
+    <iconPath>ImAGod/Powers/Terror</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>160</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.45</prophetStrain>
+    <radius>8.9</radius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Resurrect</defName>
+    <label>resurrection</label>
+    <description>Your prophet calls a fallen believer back from beyond. The body must not yet be dessicated. This is the greatest gift you can give, and it costs dearly.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Resurrect</workerClass>
+    <iconPath>ImAGod/Powers/Resurrect</iconPath>
+    <order>3</order>
+    <minTier>3</minTier>
+    <faithCost>450</faithCost>
+    <cooldownDays>20</cooldownDays>
+    <targetMode>Corpse</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.8</prophetStrain>
+  </ImAGod.DivinePowerDef>
+
+  <!-- ===== Tier 4 ===== -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Incarnation</defName>
+    <label>incarnation</label>
+    <description>Descend into the flesh of a chosen follower for one day. The vessel becomes faster, stronger, more perceptive, feels no pain and shrugs off harm. When the god departs, the vessel is left exhausted for two days.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Incarnation</workerClass>
+    <iconPath>ImAGod/Powers/Incarnation</iconPath>
+    <order>1</order>
+    <minTier>4</minTier>
+    <faithCost>350</faithCost>
+    <cooldownDays>10</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <hediffDef>IAG_Incarnation</hediffDef>
+  </ImAGod.DivinePowerDef>
+
+</Defs>

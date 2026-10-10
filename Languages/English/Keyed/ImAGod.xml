@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+  <IAG_ModName>I'm a God</IAG_ModName>
+
+  <!-- Settings -->
+  <IAG_Setting_FaithGain>Faith gain: {0}</IAG_Setting_FaithGain>
+  <IAG_Setting_PowerCost>Miracle cost: {0}</IAG_Setting_PowerCost>
+  <IAG_Setting_Foresight>Enable divine foresight</IAG_Setting_Foresight>
+  <IAG_Setting_ForesightDesc>When disabled, the divine foresight miracle cannot be used and threats are never delayed by prophecies.</IAG_Setting_ForesightDesc>
+
+  <!-- Divinity tab -->
+  <IAG_GodOf>God of {0}</IAG_GodOf>
+  <IAG_TierLabel>Tier {0}: {1}</IAG_TierLabel>
+  <IAG_NoTier>You have no followers. A god without believers has no power.</IAG_NoTier>
+  <IAG_FaithBar>Faith {0} / {1}</IAG_FaithBar>
+  <IAG_FaithTip>Faith is offered by your followers: a little every day from their devotion, more when they pray at a divine shrine, and much more when they hold rituals of your ideoligion.\n\nThe maximum grows with your tier and your number of followers.</IAG_FaithTip>
+  <IAG_Followers>Followers: {0} (weight {1})</IAG_Followers>
+  <IAG_FollowersTip>Colonists who believe in your colony's primary ideoligion. Slaves count as half a follower.</IAG_FollowersTip>
+  <IAG_Devotion>Average certainty: {0}</IAG_Devotion>
+  <IAG_PassiveFaith>Daily devotion: +{0} faith/day</IAG_PassiveFaith>
+  <IAG_PassiveFaithTip>Faith offered every day without prayer, proportional to the certainty of your followers. Prayer and rituals add more.</IAG_PassiveFaithTip>
+  <IAG_LifetimeFaith>Faith ever offered: {0}</IAG_LifetimeFaith>
+  <IAG_Strain>Divine strain {0}</IAG_Strain>
+  <IAG_StrainTip>Every miracle adds 1 strain, which fades by 0.5 per day. Each point of strain makes miracles 15% more expensive.</IAG_StrainTip>
+  <IAG_Prophet>Prophet: {PROPHET_labelShort}</IAG_Prophet>
+  <IAG_NoProphet>Prophet: none</IAG_NoProphet>
+  <IAG_ProphetTip>Great miracles are channeled through your prophet: the moral guide of your ideoligion, or its leader if there is no moral guide. Channeling strains the prophet, who cannot channel again while overwhelmed.</IAG_ProphetTip>
+  <IAG_ForesightActive>Divine foresight: {0} left</IAG_ForesightActive>
+  <IAG_NextTier>Next tier: {0}</IAG_NextTier>
+  <IAG_NextTierFollowers>  Followers: {0} / {1}</IAG_NextTierFollowers>
+  <IAG_NextTierFaith>  Faith ever offered: {0} / {1}</IAG_NextTierFaith>
+  <IAG_Prophecies>Prophecies</IAG_Prophecies>
+  <IAG_ProphecyEntry>{0} in {1}</IAG_ProphecyEntry>
+  <IAG_PowerCost>{0} faith · tier {1}</IAG_PowerCost>
+  <IAG_PowerProphet>[prophet]</IAG_PowerProphet>
+  <IAG_PowerCooldown>cooldown {0} days</IAG_PowerCooldown>
+  <IAG_Invoke>Invoke</IAG_Invoke>
+
+  <!-- Power effect summaries -->
+  <IAG_Effect_Foresight>lasts {0}, foresees {1} ahead</IAG_Effect_Foresight>
+  <IAG_Effect_Mend>heals {0} damage</IAG_Effect_Mend>
+  <IAG_Effect_Manna>{0} × {1}</IAG_Effect_Manna>
+  <IAG_Effect_Smite>{0} lightning strike(s)</IAG_Effect_Smite>
+  <IAG_Effect_Bounty>+{0} growth, radius {1}</IAG_Effect_Bounty>
+  <IAG_Effect_Radius>radius {0}</IAG_Effect_Radius>
+
+  <!-- Reasons a miracle cannot be worked -->
+  <IAG_Reason_NoIdeo>Your colony has no ideoligion to be the god of. This mod requires the Ideology DLC.</IAG_Reason_NoIdeo>
+  <IAG_Reason_TierTooLow>Requires divinity tier {0}.</IAG_Reason_TierTooLow>
+  <IAG_Reason_Cooldown>ready in {0}</IAG_Reason_Cooldown>
+  <IAG_Reason_NotEnoughFaith>Requires {0} faith.</IAG_Reason_NotEnoughFaith>
+  <IAG_Reason_NoProphet>You have no prophet to channel this miracle. Assign a moral guide or leader in your ideoligion.</IAG_Reason_NoProphet>
+  <IAG_Reason_ProphetIncapable>{PROPHET_labelShort} is in no state to channel a miracle.</IAG_Reason_ProphetIncapable>
+  <IAG_Reason_ProphetNotHere>{PROPHET_labelShort} must be on this map to channel the miracle.</IAG_Reason_ProphetNotHere>
+  <IAG_Reason_ProphetOverwhelmed>{PROPHET_labelShort} is overwhelmed by divine power and must rest first.</IAG_Reason_ProphetOverwhelmed>
+  <IAG_Reason_InvalidTarget>Invalid target.</IAG_Reason_InvalidTarget>
+  <IAG_Reason_Fogged>You cannot work miracles where your people cannot see.</IAG_Reason_Fogged>
+  <IAG_Reason_NotStandable>Choose open ground.</IAG_Reason_NotStandable>
+  <IAG_Reason_MustTargetColonyPawn>Must target a member of the colony or a prisoner.</IAG_Reason_MustTargetColonyPawn>
+  <IAG_Reason_NoInjuries>{PAWN_labelShort} has no injuries to heal.</IAG_Reason_NoInjuries>
+  <IAG_Reason_MustTargetFollower>Must target one of your followers.</IAG_Reason_MustTargetFollower>
+  <IAG_Reason_AlreadyInspired>{PAWN_labelShort} is already inspired.</IAG_Reason_AlreadyInspired>
+  <IAG_Reason_CannotInspire>{PAWN_labelShort} cannot be inspired right now.</IAG_Reason_CannotInspire>
+  <IAG_Reason_NoCrops>There are no growing crops there.</IAG_Reason_NoCrops>
+  <IAG_Reason_NoEnemies>There are no enemies there to terrify.</IAG_Reason_NoEnemies>
+  <IAG_Reason_MustTargetCorpse>Must target the body of a dead person.</IAG_Reason_MustTargetCorpse>
+  <IAG_Reason_NotABeliever>{PAWN_labelShort} did not believe in you in life.</IAG_Reason_NotABeliever>
+  <IAG_Reason_Dessicated>The body is too far gone.</IAG_Reason_Dessicated>
+  <IAG_Reason_AlreadyVessel>{PAWN_labelShort} is already your vessel.</IAG_Reason_AlreadyVessel>
+  <IAG_Reason_ForesightDisabled>Divine foresight is disabled in the mod settings.</IAG_Reason_ForesightDisabled>
+
+  <!-- Miracle results -->
+  <IAG_ForesightLabel>Divine foresight</IAG_ForesightLabel>
+  <IAG_ForesightText>Your eyes open upon the threads of fate. For the next {0}, every threat sent against your colony will be revealed to you {1} before it arrives.</IAG_ForesightText>
+  <IAG_ProphecyLabel>Prophecy: {0}</IAG_ProphecyLabel>
+  <IAG_ProphecyText>A vision comes to you: {0} will befall {1} in about {2}.\n\nPrepare your people.</IAG_ProphecyText>
+  <IAG_ProphecyFaction>You see the banners of {0}.</IAG_ProphecyFaction>
+  <IAG_ProphecyStrength>You sense {0} (about {1} threat points).</IAG_ProphecyStrength>
+  <IAG_Strength_Small>a small band</IAG_Strength_Small>
+  <IAG_Strength_Medium>a sizable force</IAG_Strength_Medium>
+  <IAG_Strength_Large>a great host</IAG_Strength_Large>
+  <IAG_Strength_Overwhelming>an overwhelming horde</IAG_Strength_Overwhelming>
+  <IAG_MendDone>The wounds of {PAWN_labelShort} close under a divine touch.</IAG_MendDone>
+  <IAG_MannaDone>{0} {1} fall from the heavens.</IAG_MannaDone>
+  <IAG_InspirationReason>A whisper from their god.</IAG_InspirationReason>
+  <IAG_BountyDone>{0} crops swell with divine blessing.</IAG_BountyDone>
+  <IAG_TerrorReason>Saw the true face of a god.</IAG_TerrorReason>
+  <IAG_TerrorDone>{0} enemies flee in terror.</IAG_TerrorDone>
+  <IAG_ResurrectDone>{PAWN_labelShort} has been called back from beyond!</IAG_ResurrectDone>
+  <IAG_IncarnationLabel>The god descends</IAG_IncarnationLabel>
+  <IAG_IncarnationText>You descend into the flesh of {PAWN_labelShort}. For one day, your faithful will see their god walk among them.</IAG_IncarnationText>
+  <IAG_ConvertedByMiracle>Having witnessed a miracle, {PAWN_labelShort} has converted to {1}.</IAG_ConvertedByMiracle>
+  <IAG_RitualFaith>{0} offered {1} faith to the god.</IAG_RitualFaith>
+
+</LanguageData>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>I'm a God</name>
+  <author>dazetc123</author>
+  <packageId>dazetc123.ImAGod</packageId>
+  <supportedVersions>
+    <li>1.6</li>
+  </supportedVersions>
+  <modDependencies>
+    <li>
+      <packageId>brrainz.harmony</packageId>
+      <displayName>Harmony</displayName>
+      <steamWorkshopUrl>steam://url/CommunityFilePage/2009463077</steamWorkshopUrl>
+      <downloadUrl>https://github.com/pardeike/HarmonyRimWorld/releases/latest</downloadUrl>
+    </li>
+    <li>
+      <packageId>Ludeon.RimWorld.Ideology</packageId>
+      <displayName>Ideology</displayName>
+    </li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Ludeon.RimWorld</li>
+    <li>Ludeon.RimWorld.Ideology</li>
+  </loadAfter>
+  <description>You are no longer just the storyteller's audience. You are the god your colonists worship.
+
+Your power grows with the number of your followers and the faith they offer you:
+- Followers: every colonist (and, at half weight, every slave) who believes in your colony's primary ideoligion.
+- Faith: earned from prayer at Divine Shrines, from your ideoligion's rituals, and from the quiet devotion of believers. Spend it to work miracles.
+- Divine tiers: from Nascent God to Exalted God. Each tier unlocks new miracles and a larger reservoir of faith.
+
+Miracles include divine foresight (prophecies that warn you of coming threats), healing, manna from heaven, smiting lightning, inspiration, bountiful harvests, divine terror, resurrection and, at the highest tier, incarnating yourself in a chosen follower.
+
+Great miracles must be channeled through your prophet (the moral guide, or the leader if there is none), who bears the strain. Every miracle grows more costly if used too often, and believers who witness one grow more certain in their faith.
+
+Requires the Ideology DLC and Harmony.</description>
+</ModMetaData>

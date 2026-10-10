@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <MainButtonDef>
+    <defName>IAG_Divinity</defName>
+    <label>divinity</label>
+    <description>Your faith, followers and miracles.</description>
+    <tabWindowClass>ImAGod.MainTabWindow_Divinity</tabWindowClass>
+    <iconPath>ImAGod/UI/DivinityTab</iconPath>
+    <order>65</order>
+    <minimized>true</minimized>
+  </MainButtonDef>
+
+</Defs>
