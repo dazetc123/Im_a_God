@@ -9,7 +9,8 @@ namespace ImAGod
         None,
         Cell,
         Pawn,
-        Corpse
+        Corpse,
+        RivalGod
     }
 
     public class DivinePowerDef : Def
@@ -28,6 +29,9 @@ namespace ImAGod
 
         /// <summary>Radius in which believers witness the miracle. Zero disables witnessing.</summary>
         public float witnessRadius = 12f;
+
+        /// <summary>Change in the colony's doubt when the miracle is worked. Miracles reassure believers.</summary>
+        public float doubtOffset = -2f;
 
         // Free parameters interpreted by the worker.
         public float radius;

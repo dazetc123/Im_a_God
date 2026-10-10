@@ -6,22 +6,11 @@ using Verse;
 
 namespace ImAGod
 {
-    public class Prophecy : IExposable
-    {
-        public string label;
-        public int fireTick;
-
-        public void ExposeData()
-        {
-            Scribe_Values.Look(ref label, "label");
-            Scribe_Values.Look(ref fireTick, "fireTick");
-        }
-    }
-
     /// <summary>
-    /// Holds the god's state: faith, divine strain, cooldowns, active foresight and prophecies.
+    /// Holds the god's state: faith, divine strain and cooldowns. Faith crisis, rival gods and prophecies live in
+    /// the other parts of this partial class.
     /// </summary>
-    public class GameComponent_Divinity : GameComponent
+    public partial class GameComponent_Divinity : GameComponent
     {
         private const int RecountInterval = 250;
         private const float StrainDecayPerDay = 0.5f;
@@ -32,9 +21,7 @@ namespace ImAGod
         public float faith;
         public float lifetimeFaith;
         public float strain;
-        public int foresightUntilTick = -1;
-        public int foresightLeadTicks;
-        public List<Prophecy> prophecies = new List<Prophecy>();
+        public int lastMiracleTick = -1;
         private Dictionary<DivinePowerDef, int> lastUsedTick = new Dictionary<DivinePowerDef, int>();
 
         private int followerCount;
@@ -55,8 +42,8 @@ namespace ImAGod
         public DivinityTierDef Tier => tier;
         public int TierLevel => tier?.level ?? 0;
         public float FaithCap => tier == null ? 0f : tier.faithCapBase + tier.faithCapPerFollower * followerWeight;
-        public float PassiveFaithPerDay => tier == null ? 0f : devotion * tier.passiveFaithPerFollowerPerDay * ImAGodMod.Settings.faithGainMultiplier;
-        public bool ForesightActive => Find.TickManager.TicksGame < foresightUntilTick;
+        public float PassiveFaithPerDay =>
+            tier == null ? 0f : devotion * tier.passiveFaithPerFollowerPerDay * PassiveFaithFactor * ImAGodMod.Settings.faithGainMultiplier;
 
         public DivinityTierDef NextTier =>
             DefDatabase<DivinityTierDef>.AllDefsListForReading.Where(t => t.level > TierLevel).OrderBy(t => t.level).FirstOrDefault();
@@ -64,6 +51,7 @@ namespace ImAGod
         public override void FinalizeInit()
         {
             Recount();
+            SyncRivals();
         }
 
         public override void GameComponentTick()
@@ -77,9 +65,11 @@ namespace ImAGod
 
         private void HourlyTick()
         {
-            AddFaith(devotion * (tier?.passiveFaithPerFollowerPerDay ?? 0f) / GenDate.HoursPerDay);
+            AddFaith(devotion * (tier?.passiveFaithPerFollowerPerDay ?? 0f) * PassiveFaithFactor / GenDate.HoursPerDay);
             strain = Mathf.Max(0f, strain - StrainDecayPerDay / GenDate.HoursPerDay);
-            prophecies.RemoveAll(p => p.fireTick < Find.TickManager.TicksGame);
+            CrisisHourlyTick();
+            RivalsHourlyTick();
+            ProphecyHourlyTick();
         }
 
         public void Recount()
@@ -161,10 +151,20 @@ namespace ImAGod
             }
 
             DivinePowerWorker worker = power.Worker;
-            if (power.targetMode == DivineTargetMode.None)
+            switch (power.targetMode)
             {
-                TryApply(power, LocalTargetInfo.Invalid, Find.CurrentMap);
-                return;
+                case DivineTargetMode.None:
+                    TryApply(power, LocalTargetInfo.Invalid, Find.CurrentMap);
+                    return;
+                case DivineTargetMode.RivalGod:
+                    var options = rivals.Where(r => r.IsValid)
+                        .Select(r => new FloatMenuOption(r.NameCap + " (" + "IAG_RivalPowerShort".Translate(r.power.ToString("0")) + ")", () => TryApplyOnRival(power, r)))
+                        .ToList();
+                    if (options.Count == 0)
+                        Messages.Message("IAG_Reason_NoRivals".Translate(), MessageTypeDefOf.RejectInput, false);
+                    else
+                        Find.WindowStack.Add(new FloatMenu(options));
+                    return;
             }
 
             Find.MainTabsRoot.EscapeCurrentTab(false);
@@ -187,19 +187,34 @@ namespace ImAGod
                 report = DivinityUtility.CanProphetChannel(power.targetMode == DivineTargetMode.None ? null : map);
             if (report.Accepted)
                 report = power.Worker.CanApplyOn(target, map);
-            if (!report.Accepted)
-            {
-                Messages.Message(report.Reason, MessageTypeDefOf.RejectInput, false);
-                return;
-            }
+            if (!Reject(report) && power.Worker.Apply(target, map))
+                Commit(power, map, target.IsValid ? target.Cell : IntVec3.Invalid);
+        }
 
-            int cost = CostOf(power);
-            if (!power.Worker.Apply(target, map))
-                return;
+        public void TryApplyOnRival(DivinePowerDef power, RivalGod rival)
+        {
+            AcceptanceReport report = CanInvoke(power);
+            if (report.Accepted)
+                report = power.Worker.CanApplyOnRival(rival);
+            if (!Reject(report) && power.Worker.ApplyOnRival(rival))
+                Commit(power, null, IntVec3.Invalid);
+        }
 
-            faith -= cost;
+        private static bool Reject(AcceptanceReport report)
+        {
+            if (report.Accepted)
+                return false;
+            Messages.Message(report.Reason, MessageTypeDefOf.RejectInput, false);
+            return true;
+        }
+
+        /// <summary>Pays for a miracle that has just been worked and lets believers witness it.</summary>
+        private void Commit(DivinePowerDef power, Map map, IntVec3 cell)
+        {
+            faith -= CostOf(power);
             strain += 1f;
             lastUsedTick[power] = Find.TickManager.TicksGame;
+            lastMiracleTick = Find.TickManager.TicksGame;
 
             if (power.requiresProphet && power.prophetStrain > 0f)
             {
@@ -208,8 +223,11 @@ namespace ImAGod
                     HealthUtility.AdjustSeverity(prophet, IAG_DefOf.IAG_DivineChanneling, power.prophetStrain);
             }
 
-            if (target.IsValid && map != null && power.witnessRadius > 0f)
-                Witness(map, target.Cell, power.witnessRadius);
+            if (power.doubtOffset != 0f)
+                AddDoubt(power.doubtOffset, "IAG_DoubtReason_Miracle".Translate(power.label));
+
+            if (cell.IsValid && map != null && power.witnessRadius > 0f)
+                Witness(map, cell, power.witnessRadius);
         }
 
         /// <summary>Believers who see a miracle grow more certain; non-believers begin to doubt their own faith.</summary>
@@ -238,24 +256,18 @@ namespace ImAGod
             }
         }
 
-        public void StartForesight(int durationTicks, int leadTicks)
-        {
-            foresightUntilTick = Find.TickManager.TicksGame + durationTicks;
-            foresightLeadTicks = leadTicks;
-        }
-
         public override void ExposeData()
         {
             Scribe_Values.Look(ref faith, "faith");
             Scribe_Values.Look(ref lifetimeFaith, "lifetimeFaith");
             Scribe_Values.Look(ref strain, "strain");
-            Scribe_Values.Look(ref foresightUntilTick, "foresightUntilTick", -1);
-            Scribe_Values.Look(ref foresightLeadTicks, "foresightLeadTicks");
-            Scribe_Collections.Look(ref prophecies, "prophecies", LookMode.Deep);
+            Scribe_Values.Look(ref lastMiracleTick, "lastMiracleTick", -1);
             Scribe_Collections.Look(ref lastUsedTick, "lastUsedTick", LookMode.Def, LookMode.Value);
+            ExposeProphecy();
+            ExposeCrisis();
+            ExposeRivals();
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
-                prophecies ??= new List<Prophecy>();
                 lastUsedTick ??= new Dictionary<DivinePowerDef, int>();
                 lastUsedTick.RemoveAll(kv => kv.Key == null);
             }

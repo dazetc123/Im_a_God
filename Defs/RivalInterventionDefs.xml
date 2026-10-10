@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    What a hostile rival god may do to the colony. A rival intervenes at most every 6 days, and all rivals together
+    at most every 4 days; how often depends on its power and the "rival god activity" setting. Interventions are
+    foreseen by divine foresight and repelled while the rival is humbled.
+    minPower  rival power required (0 - 1000)
+    weight    relative chance among the available interventions
+  -->
+
+  <ImAGod.RivalInterventionDef>
+    <defName>IAG_Rival_Whispers</defName>
+    <label>whispers of doubt</label>
+    <workerClass>ImAGod.RivalInterventionWorker_Whispers</workerClass>
+    <minPower>0</minPower>
+    <weight>3</weight>
+    <amount>10</amount>         <!-- doubt added -->
+  </ImAGod.RivalInterventionDef>
+
+  <ImAGod.RivalInterventionDef>
+    <defName>IAG_Rival_Blight</defName>
+    <label>curse of blight</label>
+    <workerClass>ImAGod.RivalInterventionWorker_Incident</workerClass>
+    <incident>CropBlight</incident>
+    <minPower>150</minPower>
+    <weight>1.5</weight>
+  </ImAGod.RivalInterventionDef>
+
+  <ImAGod.RivalInterventionDef>
+    <defName>IAG_Rival_Storm</defName>
+    <label>wrathful storm</label>
+    <workerClass>ImAGod.RivalInterventionWorker_Storm</workerClass>
+    <minPower>250</minPower>
+    <weight>1.5</weight>
+    <amount>4</amount>          <!-- lightning strikes -->
+  </ImAGod.RivalInterventionDef>
+
+  <ImAGod.RivalInterventionDef>
+    <defName>IAG_Rival_Heresy</defName>
+    <label>seed of heresy</label>
+    <workerClass>ImAGod.RivalInterventionWorker_Heresy</workerClass>
+    <minPower>450</minPower>
+    <weight>1</weight>
+    <amount>0.6</amount>        <!-- only followers below this certainty can be lured -->
+  </ImAGod.RivalInterventionDef>
+
+</Defs>

@@ -259,3 +259,54 @@ namespace ImAGod
         }
     }
 }
+
+namespace ImAGod
+{
+    /// <summary>The prophet preaches a revelation: doubt fades, believers grow certain and heretics may return.</summary>
+    public class DivinePowerWorker_Revelation : DivinePowerWorker
+    {
+        private const float HereticConversionPower = 0.2f;
+
+        public override bool Apply(LocalTargetInfo target, Map map)
+        {
+            GameComponent_Divinity divinity = Divinity;
+            Ideo ideo = DivinityUtility.PlayerIdeo;
+            foreach (Pawn pawn in PawnsFinder.AllMapsCaravansAndTravellingTransporters_Alive_OfPlayerFaction)
+            {
+                if (DivinityUtility.IsFollower(pawn))
+                    pawn.ideo.OffsetCertainty(def.amount);
+            }
+            int returned = 0;
+            foreach (Pawn heretic in divinity.heretics.ToList())
+            {
+                if (heretic.ideo != null && heretic.ideo.IdeoConversionAttempt(HereticConversionPower, ideo))
+                    returned++;
+            }
+            Find.LetterStack.ReceiveLetter("IAG_RevelationLabel".Translate(), "IAG_RevelationText".Translate(def.amount.ToStringPercent(), (-def.doubtOffset).ToString("0")), LetterDefOf.PositiveEvent);
+            return true;
+        }
+
+        public override string EffectSummary() =>
+            "IAG_Effect_Revelation".Translate((-def.doubtOffset).ToString("0"), def.amount.ToStringPercent());
+    }
+
+    /// <summary>The prophet challenges a rival god, humbling its power and warding the colony against it for a while.</summary>
+    public class DivinePowerWorker_Challenge : DivinePowerWorker
+    {
+        private float Reduction => def.amount + def.amountPerFollower * (Divinity?.FollowerWeight ?? 0f);
+        private int WardTicks => Mathf.RoundToInt(def.durationDays * GenDate.TicksPerDay);
+
+        public override bool ApplyOnRival(RivalGod rival)
+        {
+            float before = rival.power;
+            rival.Humble(Reduction);
+            rival.humbledUntilTick = Find.TickManager.TicksGame + WardTicks;
+            Find.LetterStack.ReceiveLetter("IAG_ChallengeLabel".Translate(rival.NameCap),
+                "IAG_ChallengeText".Translate(rival.NameCap, (before - rival.power).ToString("0"), WardTicks.ToStringTicksToPeriod()), LetterDefOf.PositiveEvent);
+            return true;
+        }
+
+        public override string EffectSummary() =>
+            "IAG_Effect_Challenge".Translate(Reduction.ToString("0"), WardTicks.ToStringTicksToPeriod());
+    }
+}

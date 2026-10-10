@@ -12,6 +12,7 @@ namespace ImAGod
         public const float FaithPerHour = 4f;
         private const int MinTicksForBlessing = 600;
         private const float CertaintyGain = 0.01f;
+        private const float PrayerDoubt = -0.3f;
 
         private int ticksPrayed;
 
@@ -32,8 +33,9 @@ namespace ImAGod
             {
                 pawn.rotationTracker.FaceTarget(job.targetA);
                 ticksPrayed += delta;
+                GameComponent_Divinity divinity = GameComponent_Divinity.Instance;
                 float certainty = pawn.ideo?.Certainty ?? 0f;
-                GameComponent_Divinity.Instance?.AddFaith(FaithPerHour * certainty * delta / GenDate.TicksPerHour);
+                divinity?.AddFaith(FaithPerHour * certainty * divinity.PrayerFaithFactor * delta / GenDate.TicksPerHour);
                 JoyUtility.JoyTickCheckEnd(pawn, delta, JoyTickFullJoyAction.EndJob, 1f, job.targetA.Thing as Building);
             };
             pray.AddFinishAction(() =>
@@ -42,6 +44,7 @@ namespace ImAGod
                     return;
                 pawn.ideo?.OffsetCertainty(CertaintyGain);
                 DivinityUtility.GainMemory(pawn, IAG_DefOf.IAG_Prayed);
+                GameComponent_Divinity.Instance?.AddDoubt(PrayerDoubt, null);
             });
             yield return pray;
         }

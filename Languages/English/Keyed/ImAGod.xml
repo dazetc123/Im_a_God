@@ -93,4 +93,104 @@
   <IAG_ConvertedByMiracle>Having witnessed a miracle, {PAWN_labelShort} has converted to {1}.</IAG_ConvertedByMiracle>
   <IAG_RitualFaith>{0} offered {1} faith to the god.</IAG_RitualFaith>
 
+  <!-- Settings (continued) -->
+  <IAG_Setting_FaithCrisis>Enable faith crisis and heresy</IAG_Setting_FaithCrisis>
+  <IAG_Setting_FaithCrisisDesc>When enabled, the colony's doubt rises and falls with events. High doubt weakens the god, saddens believers and can turn them into heretics.</IAG_Setting_FaithCrisisDesc>
+  <IAG_Setting_RivalActivity>Rival god activity: {0}</IAG_Setting_RivalActivity>
+  <IAG_Setting_RivalActivityDesc>How often hostile rival gods intervene against your colony and bless champions in their raids. At "off" rival gods still exist and can be humbled, but never act.</IAG_Setting_RivalActivityDesc>
+  <IAG_Off>off</IAG_Off>
+
+  <!-- Tabs -->
+  <IAG_Tab_Miracles>Miracles</IAG_Tab_Miracles>
+  <IAG_Tab_Rivals>Rival gods</IAG_Tab_Rivals>
+  <IAG_Tab_Faith>Prophecies &amp; faith</IAG_Tab_Faith>
+
+  <!-- Prophecy details -->
+  <IAG_ProphecyImminent>{0}: imminent</IAG_ProphecyImminent>
+  <IAG_ProphecyArrivalWalk>They will come on foot from {0}.</IAG_ProphecyArrivalWalk>
+  <IAG_ProphecyArrivalOther>They will arrive by {0}, {1}.</IAG_ProphecyArrivalOther>
+  <IAG_ProphecyStrategy>Their plan: {0}.</IAG_ProphecyStrategy>
+  <IAG_ProphecyChampion>A champion blessed by {0} leads them.</IAG_ProphecyChampion>
+  <IAG_NoPropheciesYet>Your eyes are open, but no threat approaches yet.</IAG_NoPropheciesYet>
+  <IAG_NoForesight>Work the divine foresight miracle to see what is coming.</IAG_NoForesight>
+  <IAG_RivalProphecyText>A vision comes to you: {0} is preparing {1} against {2}. It will strike in about {3}.
+
+Humble this god before then and its curse will be repelled.</IAG_RivalProphecyText>
+  <IAG_Dir_Center>the heart of the land</IAG_Dir_Center>
+  <IAG_Dir_N>the north</IAG_Dir_N>
+  <IAG_Dir_NE>the north-east</IAG_Dir_NE>
+  <IAG_Dir_E>the east</IAG_Dir_E>
+  <IAG_Dir_SE>the south-east</IAG_Dir_SE>
+  <IAG_Dir_S>the south</IAG_Dir_S>
+  <IAG_Dir_SW>the south-west</IAG_Dir_SW>
+  <IAG_Dir_W>the west</IAG_Dir_W>
+  <IAG_Dir_NW>the north-west</IAG_Dir_NW>
+
+  <!-- Faith crisis -->
+  <IAG_FaithCrisisHeader>Faith crisis</IAG_FaithCrisisHeader>
+  <IAG_DoubtBar>Doubt {0} · {1}</IAG_DoubtBar>
+  <IAG_DoubtRate>Ongoing change: {0} doubt/day</IAG_DoubtRate>
+  <IAG_DoubtRecent>Recent events:</IAG_DoubtRecent>
+  <IAG_DoubtTip>Doubt rises when believers die (more for the prophet), rituals go poorly, heretics live among the faithful, rival gods whisper, and when you hoard faith while staying silent. It falls slowly over time, and faster with miracles, fulfilled prophecies, good rituals, prayer and divine revelation.
+
+25+: murmurs of doubt. 50+: crisis of faith. 75+: schism.</IAG_DoubtTip>
+  <IAG_DoubtLevel_Faithful>faithful</IAG_DoubtLevel_Faithful>
+  <IAG_DoubtLevel_Murmurs>murmurs of doubt</IAG_DoubtLevel_Murmurs>
+  <IAG_DoubtLevel_Crisis>crisis of faith</IAG_DoubtLevel_Crisis>
+  <IAG_DoubtLevel_Schism>schism</IAG_DoubtLevel_Schism>
+  <IAG_DoubtEffects_Faithful>Your people's faith is steady.</IAG_DoubtEffects_Faithful>
+  <IAG_DoubtEffects_Murmurs>Daily devotion -25%. Believers are slightly unhappy.</IAG_DoubtEffects_Murmurs>
+  <IAG_DoubtEffects_Crisis>Daily devotion -50%, prayer -25%. Believers lose certainty and may fall into heresy.</IAG_DoubtEffects_Crisis>
+  <IAG_DoubtEffects_Schism>Daily devotion -75%, prayer -50%. Believers lose certainty quickly and heresy spreads.</IAG_DoubtEffects_Schism>
+  <IAG_DoubtLevelChanged>The colony's faith: {0}. {1}</IAG_DoubtLevelChanged>
+  <IAG_GodSilent>Your believers wonder why you stay silent.</IAG_GodSilent>
+  <IAG_GodSilentTip>Your faith is nearly full and you have worked no miracle for 3 days. Doubt grows while you hoard their offerings.</IAG_GodSilentTip>
+  <IAG_Heretics>Heretics: {0}</IAG_Heretics>
+  <IAG_DoubtReason_Death>{0} died</IAG_DoubtReason_Death>
+  <IAG_DoubtReason_PoorRitual>{0} went poorly</IAG_DoubtReason_PoorRitual>
+  <IAG_DoubtReason_GoodRitual>{0} was moving</IAG_DoubtReason_GoodRitual>
+  <IAG_DoubtReason_Miracle>Miracle: {0}</IAG_DoubtReason_Miracle>
+  <IAG_DoubtReason_Prophecy>Prophecy fulfilled: {0}</IAG_DoubtReason_Prophecy>
+  <IAG_DoubtReason_Heresy>{0} fell into heresy</IAG_DoubtReason_Heresy>
+  <IAG_DoubtReason_Repented>{0} returned to the faith</IAG_DoubtReason_Repented>
+  <IAG_DoubtReason_Whispers>Whispers of {0}</IAG_DoubtReason_Whispers>
+  <IAG_DoubtReason_ChampionSlain>Champion of {0} slain</IAG_DoubtReason_ChampionSlain>
+  <IAG_HeresyLabel>Heresy</IAG_HeresyLabel>
+  <IAG_HeresyText>{PAWN_labelShort} has turned away from you and now worships {1}, following the ideoligion {2}.
+
+Heretics spread doubt among the faithful and may try to convert others. You can win {PAWN_objective} back through conversion, a divine revelation, or deal with {PAWN_objective} as you see fit.</IAG_HeresyText>
+  <IAG_HereticRepented>{PAWN_labelShort} has returned to the faith.</IAG_HereticRepented>
+  <IAG_Effect_Revelation>-{0} doubt, +{1} certainty to all believers</IAG_Effect_Revelation>
+  <IAG_RevelationLabel>Divine revelation</IAG_RevelationLabel>
+  <IAG_RevelationText>Your prophet speaks with your voice, and the faithful listen. Every believer grows {0} more certain and the colony's doubt falls by {1}.</IAG_RevelationText>
+
+  <!-- Rival gods -->
+  <IAG_RivalGodOf>the god of {0}</IAG_RivalGodOf>
+  <IAG_RivalsIntro>The gods of other factions' ideoligions. They grow stronger with the settlements that worship them. Gods of factions hostile to you may curse your colony and bless champions to lead their raids. Slay their champions, or have your prophet humble them, to weaken them.</IAG_RivalsIntro>
+  <IAG_RivalsDisabled>Rival god activity is turned off in the mod settings. Rival gods exist, but never act against you.</IAG_RivalsDisabled>
+  <IAG_Reason_NoRivals>There are no rival gods.</IAG_Reason_NoRivals>
+  <IAG_RivalTier>tier {0}</IAG_RivalTier>
+  <IAG_RivalHostile>hostile</IAG_RivalHostile>
+  <IAG_RivalPeaceful>not hostile</IAG_RivalPeaceful>
+  <IAG_RivalIdeo>{0} ({1})</IAG_RivalIdeo>
+  <IAG_RivalPower>Power {0} / {1}</IAG_RivalPower>
+  <IAG_RivalPowerShort>power {0}</IAG_RivalPowerShort>
+  <IAG_RivalPowerTip>A rival god's power grows every day with the settlements that worship it. Power 150+: curses of blight. 250+: wrathful storms. 300+: champions in raids. 450+: seeds of heresy.</IAG_RivalPowerTip>
+  <IAG_RivalHumbled>humbled, your colony is warded for {0}</IAG_RivalHumbled>
+  <IAG_RivalChampionChance>{0} chance of a champion in its raids</IAG_RivalChampionChance>
+  <IAG_Rival_Repelled>Your ward repels the {1} of {0}. Its power wanes.</IAG_Rival_Repelled>
+  <IAG_Rival_WhispersLabel>Whispers of {0}</IAG_Rival_WhispersLabel>
+  <IAG_Rival_WhispersText>{0} whispers to your believers in their dreams, telling them that you are weak and their prayers go unheard.
+
+The colony's doubt rises by {1} and every believer grows a little less certain.</IAG_Rival_WhispersText>
+  <IAG_Rival_IncidentMessage>This {1} is the curse of {0}.</IAG_Rival_IncidentMessage>
+  <IAG_Rival_StormLabel>Wrath of {0}</IAG_Rival_StormLabel>
+  <IAG_Rival_StormText>{0} hurls lightning at your colony.</IAG_Rival_StormText>
+  <IAG_ChampionArrives>{PAWN_labelShort} leads the raid as a champion of {1}. Slay {PAWN_objective} to humble that god.</IAG_ChampionArrives>
+  <IAG_ChampionSlainLabel>Champion slain</IAG_ChampionSlainLabel>
+  <IAG_ChampionSlainText>{PAWN_labelShort}, champion of {1}, has fallen. The false god is humbled, and your believers rejoice.</IAG_ChampionSlainText>
+  <IAG_Effect_Challenge>-{0} power, ward for {1}</IAG_Effect_Challenge>
+  <IAG_ChallengeLabel>{0} humbled</IAG_ChallengeLabel>
+  <IAG_ChallengeText>Your prophet confronts {0} in your name and prevails. The rival god loses {1} power, and for {2} its curses cannot touch your colony and no champion of it will lead a raid.</IAG_ChallengeText>
+
 </LanguageData>

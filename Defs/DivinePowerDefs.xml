@@ -5,10 +5,11 @@
     faithCost      base cost; multiplied by the cost setting and by divine strain (+15% per point of strain)
     minTier        divinity tier required
     cooldownDays   days before the power can be used again
-    targetMode     None / Cell / Pawn / Corpse
+    targetMode     None / Cell / Pawn / Corpse / RivalGod
     requiresProphet  the prophet (moral guide, else leader) must be conscious and, for targeted powers, on the target map
     prophetStrain  severity of "divine channeling" added to the prophet
     witnessRadius  believers in this radius witness the miracle
+    doubtOffset    change in the colony's doubt when the miracle is worked (default -2)
     amount / amountPerTier / amountPerFollower / radius / durationDays / thingDef / hediffDef  are read by the worker;
     amountPerTier is added once for each tier above minTier
   -->
@@ -18,7 +19,7 @@
   <ImAGod.DivinePowerDef>
     <defName>IAG_Foresight</defName>
     <label>divine foresight</label>
-    <description>Open your eyes upon the threads of fate. For a time, every threat the world sends against your colony is revealed to you in a prophecy before it arrives, giving your people time to prepare.\n\nThe prophecies are always true: no new threats are created, the coming ones are only foreseen. As your divinity grows, your sight reaches further ahead, names the enemy faction (tier 2) and measures its strength (tier 3).</description>
+    <description>Open your eyes upon the threads of fate. For a time, every threat the storyteller sends against your colony is revealed to you in a prophecy before it arrives, giving your people time to prepare.\n\nThe prophecies are always true: no threat is created, the coming ones are only foreseen and held back a little. As your divinity grows your sight reaches further ahead. Tier 2: names the enemy faction, reveals whether a champion leads it, and also foresees plagues. Tier 3: reveals where and how the enemy will arrive, their tactics and their strength. Interventions of rival gods are foreseen too.</description>
     <workerClass>ImAGod.DivinePowerWorker_Foresight</workerClass>
     <iconPath>ImAGod/Powers/Foresight</iconPath>
     <order>1</order>
@@ -26,6 +27,7 @@
     <faithCost>90</faithCost>
     <cooldownDays>6</cooldownDays>
     <targetMode>None</targetMode>
+    <doubtOffset>-2</doubtOffset>
     <durationDays>4</durationDays>
     <amount>6</amount>          <!-- lead time in hours -->
     <amountPerTier>6</amountPerTier>
@@ -94,7 +96,45 @@
     <targetMode>Pawn</targetMode>
   </ImAGod.DivinePowerDef>
 
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Revelation</defName>
+    <label>divine revelation</label>
+    <description>Your prophet preaches a revelation to the faithful. Doubt melts away, believers grow more certain, and heretics may be moved to return to the faith.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Revelation</workerClass>
+    <iconPath>ImAGod/Powers/Revelation</iconPath>
+    <order>3</order>
+    <minTier>2</minTier>
+    <faithCost>110</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>None</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.3</prophetStrain>
+    <doubtOffset>-25</doubtOffset>
+    <amount>0.05</amount>       <!-- certainty gained by every follower -->
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
   <!-- ===== Tier 3: great miracles, channeled by the prophet ===== -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Challenge</defName>
+    <label>humble a false god</label>
+    <description>Your prophet challenges a rival god in your name. Its power is diminished, the more so the more followers you have, and for a time its curses cannot touch your colony and its raids are led by no champion.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Challenge</workerClass>
+    <iconPath>ImAGod/Powers/Challenge</iconPath>
+    <order>4</order>
+    <minTier>3</minTier>
+    <faithCost>200</faithCost>
+    <cooldownDays>7</cooldownDays>
+    <targetMode>RivalGod</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <doubtOffset>-5</doubtOffset>
+    <amount>120</amount>         <!-- power removed -->
+    <amountPerFollower>12</amountPerFollower>
+    <durationDays>10</durationDays> <!-- ward -->
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
 
   <ImAGod.DivinePowerDef>
     <defName>IAG_Bounty</defName>

@@ -62,7 +62,13 @@ namespace ImAGod
         }
 
         /// <summary>Works the miracle. Returns false if nothing happened, in which case no faith is spent.</summary>
-        public abstract bool Apply(LocalTargetInfo target, Map map);
+        public virtual bool Apply(LocalTargetInfo target, Map map) => false;
+
+        public virtual AcceptanceReport CanApplyOnRival(RivalGod rival) =>
+            rival != null && rival.IsValid ? (AcceptanceReport)true : "IAG_Reason_InvalidTarget".Translate();
+
+        /// <summary>Works a miracle aimed at a rival god (target mode RivalGod).</summary>
+        public virtual bool ApplyOnRival(RivalGod rival) => false;
 
         /// <summary>An extra line for the divinity tab describing the power's current strength.</summary>
         public virtual string EffectSummary() => null;

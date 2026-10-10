@@ -30,4 +30,28 @@
     </stages>
   </ThoughtDef>
 
+  <ThoughtDef>
+    <defName>IAG_FaithCrisis</defName>
+    <thoughtClass>Thought_Situational</thoughtClass>
+    <workerClass>ImAGod.ThoughtWorker_FaithCrisis</workerClass>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>murmurs of doubt</label>
+        <description>People are starting to wonder whether our god is truly with us.</description>
+        <baseMoodEffect>-2</baseMoodEffect>
+      </li>
+      <li>
+        <label>crisis of faith</label>
+        <description>Our faith is shaken. Is anyone listening to our prayers?</description>
+        <baseMoodEffect>-4</baseMoodEffect>
+      </li>
+      <li>
+        <label>schism</label>
+        <description>Our community of faith is tearing itself apart.</description>
+        <baseMoodEffect>-6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
 </Defs>

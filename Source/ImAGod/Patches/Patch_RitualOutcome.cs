@@ -14,6 +14,10 @@ namespace ImAGod
         private const float BaseFaith = 15f;
         private const float FaithPerBeliever = 6f;
         private const float MinQualityFactor = 0.25f;
+        private const float PoorQuality = 0.3f;
+        private const float GoodQuality = 0.7f;
+        private const float PoorRitualDoubt = 5f;
+        private const float GoodRitualDoubt = -6f;
 
         private static readonly Func<RitualOutcomeEffectWorker_FromQuality, LordJob_Ritual, float, float> getQuality =
             AccessTools.MethodDelegate<Func<RitualOutcomeEffectWorker_FromQuality, LordJob_Ritual, float, float>>(
@@ -41,6 +45,10 @@ namespace ImAGod
                 float gained = divinity.AddFaith((BaseFaith + FaithPerBeliever * believers) * (MinQualityFactor + quality));
                 if (gained > 0f)
                     Messages.Message("IAG_RitualFaith".Translate(jobRitual.Ritual.LabelCap, gained.ToString("0")), MessageTypeDefOf.PositiveEvent, false);
+                if (quality < PoorQuality)
+                    divinity.AddDoubt(PoorRitualDoubt, "IAG_DoubtReason_PoorRitual".Translate(jobRitual.Ritual.LabelCap));
+                else if (quality >= GoodQuality)
+                    divinity.AddDoubt(GoodRitualDoubt, "IAG_DoubtReason_GoodRitual".Translate(jobRitual.Ritual.LabelCap));
             }
             catch (Exception e)
             {
