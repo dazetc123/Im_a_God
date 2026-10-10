@@ -4,14 +4,15 @@
   <ThingDef ParentName="BuildingBase">
     <defName>IAG_DivineShrine</defName>
     <label>divine shrine</label>
-    <description>A small shrine where believers of the colony's ideoligion can pray to their god in their free time. Prayer is a meditative recreation that offers faith to the god, more from those whose belief is certain.</description>
+    <description>A statue of the colony's god on a stepped pedestal, where believers of the colony's ideoligion can pray to their god in their free time. Prayer is a meditative recreation that offers faith to the god, more from those whose belief is certain.</description>
     <thingClass>Building</thingClass>
     <graphicData>
       <texPath>ImAGod/Buildings/DivineShrine</texPath>
-      <graphicClass>Graphic_Single</graphicClass>
-      <drawSize>(1.3,1.3)</drawSize>
+      <graphicClass>Graphic_Multi</graphicClass>
+      <drawSize>(1.8,1.8)</drawSize>
       <shadowData>
-        <volume>(0.5,0.4,0.4)</volume>
+        <volume>(0.6,0.5,0.5)</volume>
+        <offset>(0,0,-0.1)</offset>
       </shadowData>
     </graphicData>
     <uiIconScale>0.9</uiIconScale>
@@ -19,7 +20,7 @@
     <passability>PassThroughOnly</passability>
     <pathCost>42</pathCost>
     <fillPercent>0.4</fillPercent>
-    <rotatable>false</rotatable>
+    <rotatable>true</rotatable>
     <size>(1,1)</size>
     <hasInteractionCell>true</hasInteractionCell>
     <interactionCellOffset>(0,0,-1)</interactionCellOffset>
