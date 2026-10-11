@@ -368,4 +368,78 @@ The colony's doubt rises by {1} and every believer grows a little less certain.<
   <IAG_Sacrificed>{0} was sacrificed. +{1} faith.</IAG_Sacrificed>
   <IAG_DoubtReason_Sacrifice>Sacrificed {0}</IAG_DoubtReason_Sacrifice>
 
+  <!-- Divine messengers -->
+  <IAG_MessengersHeader>Divine messengers</IAG_MessengersHeader>
+  <IAG_NoMessengers>No great messenger walks the mortal world. At tier 3 the prophet can call down your god's messenger: a Seraphim for the path of Creation, Tiamat for the path of Chaos.</IAG_NoMessengers>
+  <IAG_MessengerLine>{0}: returns to the heavens in {1}</IAG_MessengerLine>
+  <IAG_MessengerLineAvatar>{0}: avatar of {1}, come to destroy you</IAG_MessengerLineAvatar>
+  <IAG_MessengerHealth>health {0}</IAG_MessengerHealth>
+  <IAG_MessengerFell>{0} has fallen and returns to the heavens.</IAG_MessengerFell>
+  <IAG_MessengerDeparted>{0} returns to the heavens.</IAG_MessengerDeparted>
+  <IAG_MessengerAutoCast>Use skills freely</IAG_MessengerAutoCast>
+  <IAG_MessengerAutoCastDesc>When on, the messenger uses its skills on its own whenever they are worth it. Turn off to use them only when you order.</IAG_MessengerAutoCastDesc>
+  <IAG_MessengerGuard>Stand guard</IAG_MessengerGuard>
+  <IAG_MessengerGuardDesc>Send the messenger to a place to guard it. It fights only enemies that come near its post.</IAG_MessengerGuardDesc>
+  <IAG_MessengerRoam>Fight freely</IAG_MessengerRoam>
+  <IAG_MessengerRoamDesc>Leave the post and hunt down every enemy on the map.</IAG_MessengerRoamDesc>
+  <IAG_MessengerAttack>Attack</IAG_MessengerAttack>
+  <IAG_MessengerAttackDesc>Order the messenger to attack a target.</IAG_MessengerAttackDesc>
+  <IAG_MessengerDismiss>Return to the heavens</IAG_MessengerDismiss>
+  <IAG_MessengerDismissDesc>Dismiss the messenger now. It leaves the mortal world at once.</IAG_MessengerDismissDesc>
+  <IAG_MessengerTimeLeft>Returns to the heavens in {0}</IAG_MessengerTimeLeft>
+  <IAG_MessengerGuarding>Standing guard</IAG_MessengerGuarding>
+  <IAG_AvatarInspect>Avatar of {0}</IAG_AvatarInspect>
+  <IAG_MessengerArrivedLabel>{0} descends</IAG_MessengerArrivedLabel>
+  <IAG_MessengerArrivedText>Your god has heard the prophet and sent its messenger: the {0} now walks the mortal world to fight for the colony. It stays for {1}.
+
+It fights on its own. Select it to command it: order its skills, set it to guard a place or to fight freely, order an attack, or send it back early.</IAG_MessengerArrivedText>
+  <IAG_Reason_NotStandable>The messenger cannot stand there.</IAG_Reason_NotStandable>
+  <IAG_Reason_MessengerPresent>{0} already walks the mortal world.</IAG_Reason_MessengerPresent>
+  <IAG_Effect_Messenger>Calls down the {0} for {1}.</IAG_Effect_Messenger>
+  <IAG_AvatarName>{0}'s avatar</IAG_AvatarName>
+  <IAG_AvatarLabel>Avatar of {0}</IAG_AvatarLabel>
+  <IAG_AvatarText>{0} has grown so mighty that it no longer works through omens: it has sent its avatar, in the form of {1}, to destroy your colony, and the faithful of {2} march with it.
+
+Slay the avatar to humble {0} for many days. Your own god's messenger can fight it.</IAG_AvatarText>
+  <IAG_DoubtReason_AvatarCame>The avatar of {0} came</IAG_DoubtReason_AvatarCame>
+  <IAG_AvatarSlainLabel>{0}'s avatar slain</IAG_AvatarSlainLabel>
+  <IAG_AvatarSlainText>The avatar of {0} has fallen. Your believers rejoice: their god is the true one.
+
++{1} faith. {0} loses much of its power and is humbled for {2} days.</IAG_AvatarSlainText>
+  <IAG_DoubtReason_AvatarSlain>Slew the avatar of {0}</IAG_DoubtReason_AvatarSlain>
+  <IAG_RivalCanSendAvatar>may send its avatar ({0})</IAG_RivalCanSendAvatar>
+
+  <!-- Missions -->
+  <IAG_MissionsHeader>Missions</IAG_MissionsHeader>
+  <IAG_MissionsIntro>Send a caravan with believers to a friendly or neutral settlement and choose "Preach the faith". After two days of preaching the settlement may come closer to your god. A converted settlement offers faith every day and no longer feeds its old god; when half a faction's settlements believe, the whole faction takes your ideoligion.</IAG_MissionsIntro>
+  <IAG_MissionLine>{0} preaching in {1} ({2} left)</IAG_MissionLine>
+  <IAG_MissionsConverted>Converted settlements: {0} (+{1} faith per day)</IAG_MissionsConverted>
+  <IAG_SettlementConvertedShort>believes</IAG_SettlementConvertedShort>
+  <IAG_Preach>Preach the faith</IAG_Preach>
+  <IAG_PreachDesc>The believers in this caravan preach the word of your god here for {0} days. The caravan must stay until they finish.
+
+Chance of success: {1}. It grows with the missionaries' social skill and number, your god's tier, a demigod or the prophet among them, and the hosts' goodwill; a strong rival god makes it harder.</IAG_PreachDesc>
+  <IAG_SettlementConversion>Belief in your god: {0}</IAG_SettlementConversion>
+  <IAG_SettlementConverted>Converted to {0}</IAG_SettlementConverted>
+  <IAG_Reason_MissionHostile>{0} is hostile to you.</IAG_Reason_MissionHostile>
+  <IAG_Reason_AlreadyBelieves>{0} already believes in your god.</IAG_Reason_AlreadyBelieves>
+  <IAG_Reason_MissionUnderway>A mission is already underway.</IAG_Reason_MissionUnderway>
+  <IAG_Reason_NoMissionary>No believer in the caravan can preach.</IAG_Reason_NoMissionary>
+  <IAG_MissionStarted>{0} begins preaching in {1}. It must stay for {2} days.</IAG_MissionStarted>
+  <IAG_MissionAbandoned>The mission in {0} was abandoned.</IAG_MissionAbandoned>
+  <IAG_MissionSuccessLabel>Mission succeeded</IAG_MissionSuccessLabel>
+  <IAG_MissionSuccessText>The people of {0} listened to your missionaries. {1} of them now believe in your god.
+
++{2} faith.</IAG_MissionSuccessText>
+  <IAG_MissionFailed>The people of {0} would not listen to your missionaries.</IAG_MissionFailed>
+  <IAG_MissionDisasterLabel>Missionaries driven out</IAG_MissionDisasterLabel>
+  <IAG_MissionDisasterText>The people of {0} took offence at your missionaries. {PAWN_labelShort} was beaten before the caravan was driven off, and the faction thinks less of you.</IAG_MissionDisasterText>
+  <IAG_DoubtReason_MissionDisaster>Missionaries driven out of {0}</IAG_DoubtReason_MissionDisaster>
+  <IAG_SettlementConvertedLabel>{0} believes</IAG_SettlementConvertedLabel>
+  <IAG_SettlementConvertedText>The people of {0} have embraced your god. Though they remain of {1}, they now pray to your god (+{2} faith per day) and no longer feed their old god.</IAG_SettlementConvertedText>
+  <IAG_DoubtReason_SettlementConverted>{0} converted</IAG_DoubtReason_SettlementConverted>
+  <IAG_FactionConvertedLabel>{0} converted</IAG_FactionConvertedLabel>
+  <IAG_FactionConvertedText>So many of their settlements have turned to your god that {0} has abandoned {1} and taken {2} as its own ideoligion.</IAG_FactionConvertedText>
+  <IAG_DoubtReason_FactionConverted>{0} took our faith</IAG_DoubtReason_FactionConverted>
+
 </LanguageData>

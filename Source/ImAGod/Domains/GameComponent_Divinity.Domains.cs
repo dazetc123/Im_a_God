@@ -49,6 +49,8 @@ namespace ImAGod
         {
             if (power.demigodOnly)
                 return false;
+            if (power.path != null && power.path != path)
+                return false;
             if (!DivinityDefCache.IsDomainPower(power))
                 return true;
             return unlockedNodes.Any(n => n.power == power);

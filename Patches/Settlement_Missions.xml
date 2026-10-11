@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!-- Lets caravans of believers preach in other factions' settlements. -->
+  <Operation Class="PatchOperationConditional">
+    <xpath>Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
+    <match Class="PatchOperationAdd">
+      <xpath>Defs/WorldObjectDef[defName="Settlement"]/comps</xpath>
+      <value>
+        <li Class="ImAGod.WorldObjectCompProperties_Mission" />
+      </value>
+    </match>
+    <nomatch Class="PatchOperationAdd">
+      <xpath>Defs/WorldObjectDef[defName="Settlement"]</xpath>
+      <value>
+        <comps>
+          <li Class="ImAGod.WorldObjectCompProperties_Mission" />
+        </comps>
+      </value>
+    </nomatch>
+  </Operation>
+
+</Patch>

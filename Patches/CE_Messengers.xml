@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+
+  <!--
+    Combat Extended: the messengers' attacks pierce armour like a god's should. Melee penetration is
+    30-40 mm sharp and 160-180 MPa blunt; their own armour, dodge, parry and crit are set in CE units.
+    Skill damage uses armorPenetrationCE in Defs/Messengers/Skills.xml.
+  -->
+  <Operation Class="PatchOperationFindMod">
+    <mods>
+      <li>Combat Extended</li>
+    </mods>
+    <match Class="PatchOperationSequence">
+      <operations>
+        <!-- IAG_Seraphim -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/tools</xpath>
+          <value>
+            <tools>
+            <li Class="CombatExtended.ToolCE">
+              <label>flaming blade</label>
+              <capacities><li>Cut</li></capacities>
+              <power>34</power>
+              <cooldownTime>1.6</cooldownTime>
+              <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+              <armorPenetrationSharp>38</armorPenetrationSharp>
+              <armorPenetrationBlunt>175</armorPenetrationBlunt><extraMeleeDamages><li><def>Flame</def><amount>12</amount><chance>0.5</chance></li></extraMeleeDamages>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>holy spear</label>
+              <capacities><li>Stab</li></capacities>
+              <power>30</power>
+              <cooldownTime>1.5</cooldownTime>
+              <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+              <armorPenetrationSharp>40</armorPenetrationSharp>
+              <armorPenetrationBlunt>170</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>wing buffet</label>
+              <capacities><li>Blunt</li></capacities>
+              <power>26</power>
+              <cooldownTime>2</cooldownTime>
+              <linkedBodyPartsGroup>IAG_SeraphWings</linkedBodyPartsGroup>
+              <armorPenetrationSharp>30</armorPenetrationSharp>
+              <armorPenetrationBlunt>180</armorPenetrationBlunt><chanceFactor>0.6</chanceFactor>
+            </li>
+            </tools>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]</xpath>
+          <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+              <bodyShape>Humanoid</bodyShape>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/ArmorRating_Sharp</xpath>
+          <value><ArmorRating_Sharp>22</ArmorRating_Sharp></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/ArmorRating_Blunt</xpath>
+          <value><ArmorRating_Blunt>55</ArmorRating_Blunt></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/MeleeDodgeChance</xpath>
+          <value><MeleeDodgeChance>0.25</MeleeDodgeChance></value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/MeleeCritChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/MeleeCritChance</xpath>
+            <value><MeleeCritChance>0.3</MeleeCritChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases</xpath>
+            <value><MeleeCritChance>0.3</MeleeCritChance></value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/MeleeParryChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases/MeleeParryChance</xpath>
+            <value><MeleeParryChance>0.3</MeleeParryChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_Seraphim"]/statBases</xpath>
+            <value><MeleeParryChance>0.3</MeleeParryChance></value>
+          </nomatch>
+        </li>
+        <!-- IAG_WingedBeholder -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/tools</xpath>
+          <value>
+            <tools>
+            <li Class="CombatExtended.ToolCE">
+              <label>maw</label>
+              <capacities><li>Bite</li></capacities>
+              <power>12</power>
+              <cooldownTime>1.4</cooldownTime>
+              <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+              <armorPenetrationSharp>30</armorPenetrationSharp>
+              <armorPenetrationBlunt>160</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>wing</label>
+              <capacities><li>Blunt</li></capacities>
+              <power>8</power>
+              <cooldownTime>1.6</cooldownTime>
+              <linkedBodyPartsGroup>IAG_BeholderWings</linkedBodyPartsGroup>
+              <armorPenetrationSharp>30</armorPenetrationSharp>
+              <armorPenetrationBlunt>160</armorPenetrationBlunt>
+            </li>
+            </tools>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]</xpath>
+          <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+              <bodyShape>Birdlike</bodyShape>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/ArmorRating_Sharp</xpath>
+          <value><ArmorRating_Sharp>6</ArmorRating_Sharp></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/ArmorRating_Blunt</xpath>
+          <value><ArmorRating_Blunt>14</ArmorRating_Blunt></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/MeleeDodgeChance</xpath>
+          <value><MeleeDodgeChance>0.3</MeleeDodgeChance></value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/MeleeCritChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/MeleeCritChance</xpath>
+            <value><MeleeCritChance>0.1</MeleeCritChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases</xpath>
+            <value><MeleeCritChance>0.1</MeleeCritChance></value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/MeleeParryChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases/MeleeParryChance</xpath>
+            <value><MeleeParryChance>0</MeleeParryChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_WingedBeholder"]/statBases</xpath>
+            <value><MeleeParryChance>0</MeleeParryChance></value>
+          </nomatch>
+        </li>
+        <!-- IAG_Tiamat -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/tools</xpath>
+          <value>
+            <tools>
+            <li Class="CombatExtended.ToolCE">
+              <label>five maws</label>
+              <capacities><li>Bite</li></capacities>
+              <power>38</power>
+              <cooldownTime>1.7</cooldownTime>
+              <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+              <armorPenetrationSharp>40</armorPenetrationSharp>
+              <armorPenetrationBlunt>180</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>left claw</label>
+              <capacities><li>Scratch</li></capacities>
+              <power>30</power>
+              <cooldownTime>1.5</cooldownTime>
+              <linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+              <armorPenetrationSharp>36</armorPenetrationSharp>
+              <armorPenetrationBlunt>170</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>right claw</label>
+              <capacities><li>Scratch</li></capacities>
+              <power>30</power>
+              <cooldownTime>1.5</cooldownTime>
+              <linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+              <armorPenetrationSharp>36</armorPenetrationSharp>
+              <armorPenetrationBlunt>170</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>tail</label>
+              <capacities><li>Blunt</li></capacities>
+              <power>34</power>
+              <cooldownTime>2.2</cooldownTime>
+              <linkedBodyPartsGroup>IAG_DragonTail</linkedBodyPartsGroup>
+              <armorPenetrationSharp>30</armorPenetrationSharp>
+              <armorPenetrationBlunt>180</armorPenetrationBlunt><chanceFactor>0.6</chanceFactor>
+            </li>
+            </tools>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]</xpath>
+          <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+              <bodyShape>Quadruped</bodyShape>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/ArmorRating_Sharp</xpath>
+          <value><ArmorRating_Sharp>26</ArmorRating_Sharp></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/ArmorRating_Blunt</xpath>
+          <value><ArmorRating_Blunt>65</ArmorRating_Blunt></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/MeleeDodgeChance</xpath>
+          <value><MeleeDodgeChance>0.05</MeleeDodgeChance></value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/MeleeCritChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/MeleeCritChance</xpath>
+            <value><MeleeCritChance>0.35</MeleeCritChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases</xpath>
+            <value><MeleeCritChance>0.35</MeleeCritChance></value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/MeleeParryChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases/MeleeParryChance</xpath>
+            <value><MeleeParryChance>0.15</MeleeParryChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_Tiamat"]/statBases</xpath>
+            <value><MeleeParryChance>0.15</MeleeParryChance></value>
+          </nomatch>
+        </li>
+        <!-- IAG_Mushussu -->
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/tools</xpath>
+          <value>
+            <tools>
+            <li Class="CombatExtended.ToolCE">
+              <label>fangs</label>
+              <capacities><li>Bite</li></capacities>
+              <power>20</power>
+              <cooldownTime>1.4</cooldownTime>
+              <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+              <armorPenetrationSharp>32</armorPenetrationSharp>
+              <armorPenetrationBlunt>165</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>scorpion sting</label>
+              <capacities><li>Stab</li></capacities>
+              <power>18</power>
+              <cooldownTime>1.8</cooldownTime>
+              <linkedBodyPartsGroup>IAG_DragonTail</linkedBodyPartsGroup>
+              <armorPenetrationSharp>34</armorPenetrationSharp>
+              <armorPenetrationBlunt>160</armorPenetrationBlunt><hediff>ToxicBuildup</hediff>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>left claw</label>
+              <capacities><li>Scratch</li></capacities>
+              <power>14</power>
+              <cooldownTime>1.3</cooldownTime>
+              <linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+              <armorPenetrationSharp>30</armorPenetrationSharp>
+              <armorPenetrationBlunt>160</armorPenetrationBlunt>
+            </li>
+            <li Class="CombatExtended.ToolCE">
+              <label>right claw</label>
+              <capacities><li>Scratch</li></capacities>
+              <power>14</power>
+              <cooldownTime>1.3</cooldownTime>
+              <linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+              <armorPenetrationSharp>30</armorPenetrationSharp>
+              <armorPenetrationBlunt>160</armorPenetrationBlunt>
+            </li>
+            </tools>
+          </value>
+        </li>
+        <li Class="PatchOperationAddModExtension">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]</xpath>
+          <value>
+            <li Class="CombatExtended.RacePropertiesExtensionCE">
+              <bodyShape>Quadruped</bodyShape>
+            </li>
+          </value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/ArmorRating_Sharp</xpath>
+          <value><ArmorRating_Sharp>10</ArmorRating_Sharp></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/ArmorRating_Blunt</xpath>
+          <value><ArmorRating_Blunt>22</ArmorRating_Blunt></value>
+        </li>
+        <li Class="PatchOperationReplace">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/MeleeDodgeChance</xpath>
+          <value><MeleeDodgeChance>0.15</MeleeDodgeChance></value>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/MeleeCritChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/MeleeCritChance</xpath>
+            <value><MeleeCritChance>0.15</MeleeCritChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases</xpath>
+            <value><MeleeCritChance>0.15</MeleeCritChance></value>
+          </nomatch>
+        </li>
+        <li Class="PatchOperationConditional">
+          <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/MeleeParryChance</xpath>
+          <match Class="PatchOperationReplace">
+            <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases/MeleeParryChance</xpath>
+            <value><MeleeParryChance>0.05</MeleeParryChance></value>
+          </match>
+          <nomatch Class="PatchOperationAdd">
+            <xpath>Defs/ThingDef[defName="IAG_Mushussu"]/statBases</xpath>
+            <value><MeleeParryChance>0.05</MeleeParryChance></value>
+          </nomatch>
+        </li>
+      </operations>
+    </match>
+  </Operation>
+
+</Patch>

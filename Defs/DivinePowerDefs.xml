@@ -220,4 +220,47 @@
     <hediffDef>IAG_Incarnation</hediffDef>
   </ImAGod.DivinePowerDef>
 
+  <!-- Great messengers: the path of Creation sends a Seraphim, the path of Chaos sends Tiamat. Only one at a time. -->
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_SummonSeraphim</defName>
+    <label>send the Seraphim</label>
+    <description>The prophet calls down the god's highest messenger: a Seraphim of six burning wings. For three days it fights for the colony on its own, speaking in arcs of holy fire and pillars of judgement, hurling enemies away, shielding the faithful and calling winged beholders to its side. Guide it with its commands.</description>
+    <workerClass>ImAGod.DivinePowerWorker_SummonMessenger</workerClass>
+    <iconPath>ImAGod/Powers/SummonSeraphim</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>800</faithCost>
+    <cooldownDays>12</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.6</prophetStrain>
+    <doubtOffset>-8</doubtOffset>
+    <witnessRadius>25</witnessRadius>
+    <radius>4</radius>
+    <durationDays>3</durationDays>
+    <path>IAG_Path_Creation</path>
+    <pawnKind>IAG_Seraphim</pawnKind>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_SummonTiamat</defName>
+    <label>unleash Tiamat</label>
+    <description>The prophet tears open the deep and lets the mother of monsters into the world: Tiamat, the five-headed dragon of chaos. For three days she fights for the colony on her own, breathing fire, lightning, venom, acid and frost, roaring her enemies into terror and birthing serpent-dragons. Guide her with her commands.</description>
+    <workerClass>ImAGod.DivinePowerWorker_SummonMessenger</workerClass>
+    <iconPath>ImAGod/Powers/SummonTiamat</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>800</faithCost>
+    <cooldownDays>12</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.6</prophetStrain>
+    <doubtOffset>-8</doubtOffset>
+    <witnessRadius>25</witnessRadius>
+    <radius>4</radius>
+    <durationDays>3</durationDays>
+    <path>IAG_Path_Chaos</path>
+    <pawnKind>IAG_Tiamat</pawnKind>
+  </ImAGod.DivinePowerDef>
+
 </Defs>

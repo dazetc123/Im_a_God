@@ -69,6 +69,10 @@ namespace ImAGod
         /// <summary>A weaker variant used by demigod abilities; never listed among the god's own miracles.</summary>
         public bool demigodOnly;
 
+        /// <summary>Only a god of this path may work the miracle.</summary>
+        public DivinePathDef path;
+        public PawnKindDef pawnKind;
+
         [Unsaved] private DivinePowerWorker workerInt;
         [Unsaved] private Texture2D iconInt;
 

@@ -19,6 +19,16 @@ namespace ImAGod
         public static ThoughtDef IAG_WitnessedSacrifice;
         public static ThoughtDef IAG_CommandmentKept;
         public static JobDef IAG_Sacrifice;
+        public static JobDef IAG_MessengerCast;
+        public static FleckDef IAG_Fleck_Beam;
+        public static FleckDef IAG_Fleck_Glow;
+        public static HediffDef IAG_DivineBody;
+        public static HediffDef IAG_RivalAvatar;
+        public static PawnKindDef IAG_Seraphim;
+        public static PawnKindDef IAG_Tiamat;
+        public static ThoughtDef IAG_MessengerDescended;
+        public static ThoughtDef IAG_AvatarSlain;
+        public static ThoughtDef IAG_MissionSucceeded;
 
         static IAG_DefOf()
         {

@@ -67,6 +67,7 @@ namespace ImAGod
                 Recount();
             if (ticks % GenDate.TicksPerHour == 0)
                 HourlyTick();
+            MessengersTick();
         }
 
         private void HourlyTick()
@@ -81,6 +82,7 @@ namespace ImAGod
             PetitionsHourlyTick();
             CommandmentsHourlyTick();
             HolyDaysHourlyTick();
+            MissionsHourlyTick();
         }
 
         public void Recount()
@@ -294,6 +296,8 @@ namespace ImAGod
             ExposePetitions();
             ExposeCommandments();
             ExposeHolyDays();
+            ExposeMessengers();
+            ExposeMissions();
             ExposeDev();
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {

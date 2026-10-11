@@ -350,6 +350,8 @@ namespace ImAGod
             float championChance = divinity.ChampionChance(rival);
             if (rival.HostileToPlayer && championChance > 0f)
                 notes.Add("IAG_RivalChampionChance".Translate(championChance.ToStringPercent()));
+            if (rival.HostileToPlayer && rival.power >= AvatarMinPower)
+                notes.Add("IAG_RivalCanSendAvatar".Translate(MessengerUtility.AvatarKindFor(rival).label));
             Widgets.Label(new Rect(text.x, text.y + 58f, text.width, 18f), string.Join("  ·  ", notes));
             Text.Font = GameFont.Small;
 
@@ -379,6 +381,10 @@ namespace ImAGod
             DrawPetitions(list, divinity);
             list.GapLine();
             DrawHolyDays(list, divinity);
+            list.GapLine();
+            DrawMessengers(list, divinity);
+            list.GapLine();
+            DrawMissions(list, divinity);
             list.GapLine();
 
             Text.Font = GameFont.Medium;
@@ -454,6 +460,62 @@ namespace ImAGod
             }
             if (!can.Accepted)
                 list.Label(can.Reason);
+        }
+
+        private static readonly float AvatarMinPower = DefDatabase<RivalInterventionDef>.GetNamedSilentFail("IAG_Rival_Avatar")?.minPower ?? 700f;
+
+        private static void DrawMessengers(Listing_Standard list, GameComponent_Divinity divinity)
+        {
+            Text.Font = GameFont.Medium;
+            list.Label("IAG_MessengersHeader".Translate());
+            Text.Font = GameFont.Small;
+            List<Pawn> messengers = divinity.ActiveMessengers.Where(p => !p.Messenger().Props.minion).ToList();
+            if (messengers.Count == 0)
+            {
+                GUI.color = new Color(0.8f, 0.8f, 0.8f);
+                list.Label("IAG_NoMessengers".Translate());
+                GUI.color = Color.white;
+            }
+            foreach (Pawn pawn in messengers)
+            {
+                CompMessenger comp = pawn.Messenger();
+                string line = comp.avatar
+                    ? "IAG_MessengerLineAvatar".Translate(pawn.LabelShortCap, divinity.RivalFor(comp.rivalIdeo)?.NameCap ?? "?").ToString()
+                    : "IAG_MessengerLine".Translate(pawn.LabelShortCap, comp.expiresTick < 0 ? "-" : Mathf.Max(0, comp.expiresTick - Find.TickManager.TicksGame).ToStringTicksToPeriod()).ToString();
+                line += "  (" + "IAG_MessengerHealth".Translate(pawn.health.summaryHealth.SummaryHealthPercent.ToStringPercent()) + ")";
+                Rect row = list.GetRect(Text.LineHeight);
+                Widgets.Label(row, "• " + line);
+                if (Widgets.ButtonInvisible(row))
+                    CameraJumper.TryJumpAndSelect(pawn);
+                Widgets.DrawHighlightIfMouseover(row);
+            }
+        }
+
+        private static void DrawMissions(Listing_Standard list, GameComponent_Divinity divinity)
+        {
+            Text.Font = GameFont.Medium;
+            list.Label("IAG_MissionsHeader".Translate());
+            Text.Font = GameFont.Small;
+            GUI.color = new Color(0.8f, 0.8f, 0.8f);
+            list.Label("IAG_MissionsIntro".Translate());
+            GUI.color = Color.white;
+            foreach (Mission mission in divinity.missions)
+            {
+                list.Label("• " + "IAG_MissionLine".Translate(mission.caravan?.Label ?? "?", mission.settlement?.LabelCap ?? "?",
+                    Mathf.Max(0, mission.endTick - Find.TickManager.TicksGame).ToStringTicksToPeriod()));
+            }
+            var converting = Find.WorldObjects.Settlements
+                .Select(s => (settlement: s, comp: s.MissionComp()))
+                .Where(x => x.comp != null && x.settlement.Faction != null && !x.settlement.Faction.IsPlayer && (x.comp.converted || x.comp.conversion > 0f))
+                .OrderByDescending(x => x.comp.converted).ThenByDescending(x => x.comp.conversion)
+                .ToList();
+            int converted = converting.Count(x => x.comp.converted);
+            list.Label("IAG_MissionsConverted".Translate(converted, (converted * 6f).ToString("0")));
+            foreach (var x in converting)
+            {
+                string state = x.comp.converted ? "IAG_SettlementConvertedShort".Translate().ToString() : x.comp.conversion.ToStringPercent();
+                list.Label("   " + x.settlement.LabelCap + " (" + x.settlement.Faction.Name + "): " + state);
+            }
         }
 
         private static void DrawPetitions(Listing_Standard list, GameComponent_Divinity divinity)

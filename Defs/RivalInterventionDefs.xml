@@ -45,4 +45,14 @@
     <amount>0.6</amount>        <!-- only followers below this certainty can be lured -->
   </ImAGod.RivalInterventionDef>
 
+  <!-- War of avatars: the mightiest rival gods send their avatar (a Seraphim or Tiamat) with an escort raid. -->
+  <ImAGod.RivalInterventionDef>
+    <defName>IAG_Rival_Avatar</defName>
+    <label>descent of the avatar</label>
+    <workerClass>ImAGod.RivalInterventionWorker_Avatar</workerClass>
+    <minPower>700</minPower>
+    <weight>0.8</weight>
+    <amount>0.5</amount>        <!-- escort raid strength, as a share of normal raid points (0 = no escort) -->
+  </ImAGod.RivalInterventionDef>
+
 </Defs>

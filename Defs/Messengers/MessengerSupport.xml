@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- ================================================================ AI -->
+
+  <!-- Cast a ready skill; follow a lord's orders (an avatar's assault); fight in melee; keep to a post or march on the colony. -->
+  <ThinkTreeDef>
+    <defName>IAG_Messenger</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ImAGod.JobGiver_MessengerSkill" />
+        <li Class="ThinkNode_Duty" />
+        <li Class="ImAGod.JobGiver_MessengerFight" />
+        <li Class="ImAGod.JobGiver_MessengerIdle" />
+        <li Class="JobGiver_IdleError" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <!-- Checked every half second, even mid-fight, so a ready skill interrupts a melee exchange. -->
+  <ThinkTreeDef>
+    <defName>IAG_MessengerConstant</defName>
+    <thinkRoot Class="ThinkNode_Priority">
+      <subNodes>
+        <li Class="ImAGod.JobGiver_MessengerSkill" />
+        <li Class="ImAGod.JobGiver_Nothing" />
+      </subNodes>
+    </thinkRoot>
+  </ThinkTreeDef>
+
+  <JobDef>
+    <defName>IAG_MessengerCast</defName>
+    <driverClass>ImAGod.JobDriver_MessengerCast</driverClass>
+    <reportString>unleashing divine power.</reportString>
+    <casualInterruptible>false</casualInterruptible>
+    <suspendable>false</suspendable>
+    <alwaysShowWeapon>false</alwaysShowWeapon>
+  </JobDef>
+
+  <!-- ================================================================ Effects -->
+
+  <!-- A straight beam of light; stretched between two points in code. -->
+  <FleckDef>
+    <defName>IAG_Fleck_Beam</defName>
+    <fleckSystemClass>FleckSystemStatic</fleckSystemClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.03</fadeInTime>
+    <solidTime>0.18</solidTime>
+    <fadeOutTime>0.45</fadeOutTime>
+    <graphicData>
+      <texPath>ImAGod/Effects/Beam</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </FleckDef>
+
+  <!-- A soft glow: breath clouds, sparks of power. -->
+  <FleckDef>
+    <defName>IAG_Fleck_Glow</defName>
+    <fleckSystemClass>FleckSystemStatic</fleckSystemClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.2</solidTime>
+    <fadeOutTime>0.9</fadeOutTime>
+    <growthRate>0.6</growthRate>
+    <graphicData>
+      <texPath>ImAGod/Effects/Glow</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </FleckDef>
+
+  <!-- ================================================================ Hediffs -->
+
+  <HediffDef>
+    <defName>IAG_DivineBody</defName>
+    <label>divine body</label>
+    <description>A body of divine substance. It feels little pain, does not bleed out easily and mends its wounds swiftly.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1, 0.85, 0.4)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <stages>
+      <li>
+        <painFactor>0.2</painFactor>
+        <totalBleedFactor>0.2</totalBleedFactor>
+        <statFactors>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>IAG_RivalAvatar</defName>
+    <label>avatar of a rival god</label>
+    <description>A rival god pours its own might into this body. It strikes harder and is harder to harm. Slaying it humbles the rival god for many days.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.8, 0.4, 1)</defaultLabelColor>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0.85</IncomingDamageFactor>
+          <MeleeDamageFactor>1.15</MeleeDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>IAG_SeraphWard</defName>
+    <label>seraphic ward</label>
+    <description>Wrapped in the light of a Seraphim's hymn. Harm taken is halved.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(1, 0.9, 0.5)</defaultLabelColor>
+    <isBad>false</isBad>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>1500~1500</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <HediffDef>
+    <defName>IAG_Frozen</defName>
+    <label>frozen</label>
+    <description>Rimed over by the argent breath of Tiamat. Slow and stiff.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <defaultLabelColor>(0.6, 0.85, 1)</defaultLabelColor>
+    <isBad>true</isBad>
+    <comps>
+      <li Class="HediffCompProperties_Disappears">
+        <disappearsAfterTicks>900~900</disappearsAfterTicks>
+        <showRemainingTime>true</showRemainingTime>
+      </li>
+    </comps>
+    <stages>
+      <li>
+        <capMods>
+          <li>
+            <capacity>Moving</capacity>
+            <offset>-0.5</offset>
+          </li>
+          <li>
+            <capacity>Manipulation</capacity>
+            <offset>-0.3</offset>
+          </li>
+        </capMods>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================================================================ Thoughts -->
+
+  <ThoughtDef>
+    <defName>IAG_MessengerDescended</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>2</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>our god sent its messenger</label>
+        <description>A messenger of our god walks among us. We are not alone.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>IAG_AvatarSlain</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>6</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>a false god's avatar was slain</label>
+        <description>The avatar of a rival god came to destroy us, and it fell. Our god is the true one.</description>
+        <baseMoodEffect>10</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <ThoughtDef>
+    <defName>IAG_MissionSucceeded</defName>
+    <thoughtClass>Thought_Memory</thoughtClass>
+    <durationDays>4</durationDays>
+    <stackLimit>1</stackLimit>
+    <stages>
+      <li>
+        <label>spread the faith</label>
+        <description>I preached the word of our god to strangers, and they listened.</description>
+        <baseMoodEffect>6</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+</Defs>

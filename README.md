@@ -158,10 +158,96 @@ Mỗi ideoligion của faction khác là một **thần đối thủ**. Sức m�
 | 250+ | Cơn bão thịnh nộ: sét đánh vào khu Home |
 | 300+ | **Champion**: raid của faction đó có thể có một kẻ được ban phước dẫn đầu (mạnh hơn, chịu ít sát thương). Giết champion thì thần đó mất 15% sức mạnh, bạn được +30 đức tin và −10 nghi ngờ. Đây không phải raid mới, chỉ là raid storyteller đã gửi được tăng cường. |
 | 450+ | Gieo dị giáo vào tín đồ có certainty < 60% |
+| 700+ | **Hiện thân giáng thế**: thần đối thủ gửi hiện thân (Seraphim hoặc Tiamat, xem dưới) kèm một đoàn raid hộ tống (50% sức raid thường) |
 
 Can thiệp của thần đối thủ **là sự kiện thêm**, nằm ngoài storyteller. Bạn có thể chỉnh tần suất (0–200%) hoặc tắt hẳn trong Mod Settings.
 
 **Mod settings:** chỉnh hệ số nhận đức tin, hệ số giá phép, bật/tắt Thiên nhãn, bật/tắt khủng hoảng đức tin, và mức hoạt động của thần đối thủ (0 = tắt).
+
+## Sứ giả thần thánh và Chiến tranh hiện thân
+
+Từ **thần cấp 3**, nhà tiên tri có thể gọi **sứ giả lớn** của thần xuống trần (800 đức tin, hồi 12 ngày, ở lại 3 ngày, mỗi lúc chỉ một con):
+
+- **Con đường Sáng tạo → Seraphim**: thiên thần sáu cánh lửa trắng, cánh đầy mắt, hào quang, kiếm lửa và giáo thánh. Sức mạnh kiểu quả cầu nocto (Anomaly) nhưng mạnh hơn.
+- **Con đường Hỗn mang → Tiamat**: rồng năm đầu, mẹ của quái vật. Mỗi đầu một màu, mỗi màu một hơi thở.
+
+Sứ giả **không cần draft**: nó tự đánh và tự dùng kỹ năng khi đáng dùng. Chọn nó để ra lệnh qua các nút:
+
+- dùng từng kỹ năng (chọn mục tiêu);
+- bật/tắt tự dùng kỹ năng;
+- canh gác một chỗ (chỉ đánh kẻ đến gần) hoặc đánh tự do;
+- ra lệnh tấn công một mục tiêu;
+- cho về trời sớm.
+
+Khi bị hạ gục, nó trở về trời và không để lại xác.
+
+| Seraphim | Tác dụng | Hồi |
+|---|---|---|
+| Cung lửa thánh | Tia lửa trắng dài 30 ô, xuyên mọi kẻ địch trên đường, gây cháy | 7 giây |
+| Cột phán xét | Đánh dấu một chỗ; 1,5 giây sau cột lửa thánh giáng xuống, nổ bán kính 3,9 | 15 giây |
+| Dịch chuyển thánh | Biến mất rồi hiện ra cạnh mục tiêu (50 ô), làm choáng kẻ quanh chỗ đáp | 12 giây |
+| Trục xuất | Ném tối đa 5 kẻ địch quanh nó văng xa 12–25 ô, choáng 3 giây | 25 giây |
+| Thánh ca Seraphim | Hồi máu đồng minh trong 12 ô, ban khiên giảm 50% sát thương trong 25 giây | 40 giây |
+| Gọi Kẻ Canh Giữ | Triệu hồi 3 **Winged Beholder** (mắt có cánh) chiến đấu nửa ngày, tối đa 6 con | 2 giờ trong game |
+
+**Winged Beholder**: con mắt lớn có cánh. Nó bắn **tia laser từ mắt** xuyên thẳng hàng (3 giây/lần) và có **ánh nhìn tê liệt** làm choáng một kẻ địch.
+
+| Tiamat | Tác dụng | Hồi |
+|---|---|---|
+| Hơi thở đỏ thẫm | Hình nón lửa 13 ô, đốt cháy mọi thứ | 10 giây |
+| Hơi thở lam | Sét nhảy qua 5 kẻ địch, gây choáng | 12 giây |
+| Hơi thở lục | Mây độc hình nón, gây nhiễm độc (toxic buildup) | 18 giây |
+| Hơi thở hắc thạch | Tia axit đen xuyên thẳng hàng, xuyên giáp rất cao | 10 giây |
+| Hơi thở bạc | Hình nón băng giá, gây bỏng lạnh và làm chậm 50% | 14 giây |
+| Gầm hỗn mang | Choáng mọi kẻ địch trong 14 ô; 45% bỏ chạy hoảng loạn | 45 giây |
+| Mẹ của quái vật | Đẻ 2 **Mušḫuššu** (rồng rắn: chân sư tử, móng đại bàng, đuôi bọ cạp có độc), chiến đấu 1 ngày, tối đa 4 con | 2 giờ trong game |
+
+Đòn đánh thường của sứ giả có xuyên giáp cao (vanilla 100–130%).
+
+**Combat Extended**: bản patch riêng tự bật khi có CE:
+
+- đòn cận chiến xuyên **30–40 mm sharp** và **160–180 MPa blunt**;
+- giáp, né, đỡ, chí mạng tính theo đơn vị CE;
+- kỹ năng dùng giá trị `armorPenetrationCE`.
+
+**Chiến tranh hiện thân**: thần đối thủ thù địch từ **700 sức mạnh** có thể gửi hiện thân của nó kèm raid hộ tống.
+
+- Thần của tôn giáo tàn bạo (Raider, Supremacist, PainIsVirtue, Cannibal…) hiện thân thành Tiamat; còn lại là Seraphim.
+- Hiện thân mạnh hơn sứ giả thường: nhận ít sát thương hơn, đánh mạnh hơn.
+- Thiên nhãn báo trước được, và bị đẩy lùi nếu thần đó đang bị hạ nhục.
+- Giết được hiện thân:
+  - thần đó mất 40% sức mạnh và bị hạ nhục 15 ngày;
+  - bạn nhận +150 + 50×cấp đức tin và −15 nghi ngờ;
+  - mọi tín đồ được +10 tâm trạng trong 6 ngày.
+- Sứ giả của bạn đánh được hiện thân: thần đấu thần.
+
+## Truyền giáo
+
+Cho một **đoàn caravan có tín đồ** đến settlement của faction trung lập hoặc thân thiện, rồi bấm **"Preach the faith"**. Đoàn phải ở lại **2 ngày**.
+
+Tỉ lệ thành công:
+
+- **tăng** theo Social cao nhất của các nhà truyền giáo, số người, thần cấp, quan hệ với faction;
+- **+15%** nếu có Á thần đi cùng, **+10%** nếu có nhà tiên tri;
+- **giảm** nếu thần của làng đó mạnh, hoặc colony đang khủng hoảng đức tin.
+
+Kết quả:
+
+| Kết quả | Hiệu ứng |
+|---|---|
+| Thành công | Làng tin thêm 25–40% (+10% nếu có Á thần), +30 + 10×cấp đức tin, +5 quan hệ, thần đối thủ −20 sức mạnh, nhà truyền giáo được +6 tâm trạng |
+| Thất bại | +5% niềm tin, −2 quan hệ |
+| Thảm hoạ | Nhà truyền giáo bị đánh, −12 quan hệ, +4 nghi ngờ |
+
+Khi niềm tin đạt 100%, **settlement được cải đạo**:
+
+- +6 đức tin mỗi ngày;
+- không còn nuôi thần cũ (thần cũ −60 sức mạnh);
+- +15 quan hệ.
+
+Khi **một nửa số settlement** của một faction đã cải đạo, **cả faction đổi sang ideoligion của bạn**: thần cũ −150 sức mạnh, +25 quan hệ, −15 nghi ngờ. Từ đó người của faction đó sinh ra đã là tín đồ của bạn.
+
+Mỗi settlement phải chờ 3 ngày giữa hai lần truyền giáo. Tiến độ hiện ở trang Faith của tab Divinity và khi chọn settlement trên bản đồ thế giới.
 
 ## Dev mode (để test)
 
@@ -173,6 +259,7 @@ Bật **Development mode** trong Options → mở nút **Debug actions** (biểu
 | Con đường | Đặt lại con đường và lĩnh vực (mở lại hộp thoại chọn); nhận lĩnh vực bất kỳ bỏ qua giới hạn ô; mở khoá mọi phép của các lĩnh vực đang có; quên hết phép miễn phí |
 | Khủng hoảng & đối thủ | Nghi ngờ +25 / −25 / về 0; gây dị giáo ngay; thần đối thủ +300 sức mạnh; chọn thần đối thủ và can thiệp để chạy ngay (bị Thiên nhãn báo trước nếu đang bật) |
 | Đời sống tôn giáo | Bật Thiên nhãn 3 ngày; tạo lời cầu xin theo loại (bỏ qua điều kiện); cho mọi lời cầu xin hết hạn; ban thiên luật bỏ qua cooldown; kết thúc thiên luật (giữ / phạm); xoá cooldown thiên luật; biến hôm nay thành ngày thánh của lĩnh vực bất kỳ |
+| Sứ giả & truyền giáo | Gọi Seraphim / Tiamat của bạn tại chỗ chuột; thả hiện thân thù địch tại chỗ chuột; hoàn thành mọi chuyến truyền giáo ngay; cải đạo settlement (công cụ bản đồ thế giới). Hiện thân của thần đối thủ cũng chạy được qua "Rival intervention now..." |
 | Công cụ chọn pawn | Biến thành tín đồ (certainty 100%); phong Á thần bỏ qua giới hạn; Á thần +1 cấp / cấp tối đa; cho ban thánh khí lại; giáng Á thần về người thường; biến pawn thành champion của thần đối thủ |
 
 Ép thần cấp được lưu vào save cho tới khi chọn lại "Automatic". Phép miễn phí không được lưu, khởi động lại game là tắt.
@@ -184,6 +271,8 @@ About/                 About.xml
 1.6/Assemblies/        ImAGod.dll (đã build sẵn)
 Defs/                  thần cấp, phép lạ, bàn thờ, job, thought, hediff, main tab
 Defs/Divinity/         con đường, 11 lĩnh vực (phép, cây, kỹ năng Á thần), Á thần
+Defs/Messengers/       thân thể, chủng loài, kỹ năng và AI của sứ giả
+Patches/               thêm truyền giáo vào settlement; patch Combat Extended
 Languages/English/     chuỗi giao diện (Keyed)
 Textures/ImAGod/       icon phép, icon tab, texture bàn thờ
 Source/ImAGod/         mã nguồn C#
@@ -200,6 +289,8 @@ Source/ImAGod/         mã nguồn C#
   Prayer/              JobDriver_Pray, JoyGiver_Pray
   Patches/             Harmony: Storyteller.TryFire, IncidentQueue, nghi lễ, Pawn.Kill
   UI/                  MainTabWindow_Divinity
+  Messengers/          sứ giả (Seraphim, Tiamat...), kỹ năng, AI, hiện thân thần đối thủ
+  Missions/            truyền giáo, cải đạo settlement và faction
   Dev/                 công cụ Dev mode (debug actions)
 ```
 
@@ -233,5 +324,8 @@ Copy (hoặc tạo symlink) cả thư mục repo vào `RimWorld/Mods/ImAGod`. B�
 - [x] Thần đối thủ: can thiệp, champion, Thần chiến
 - [x] Con đường Sáng tạo / Hỗn mang, 11 lĩnh vực, cây phép, Á thần
 - [x] Công cụ Dev mode
+- [x] Sứ giả thần thánh (Seraphim, Winged Beholder, Tiamat, Mušḫuššu) và chiến tranh hiện thân
+- [x] Truyền giáo, cải đạo settlement và faction
+- [x] Tương thích Combat Extended cho sứ giả
 - [ ] Bản dịch tiếng Việt
 - [ ] Ảnh preview cho Steam Workshop

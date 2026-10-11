@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Divine messengers. The player's god may send its great messenger (a Seraphim for Creation, Tiamat for Chaos);
+    rival gods send theirs as avatars. Messengers are not drafted: they fight on their own and are guided with
+    their gizmos. Skills are in Skills.xml; Combat Extended values are in Patches/CE_Messengers.xml.
+  -->
+  <ThingDef ParentName="AnimalThingBase" Name="IAG_MessengerBase" Abstract="True">
+    <tradeability>None</tradeability>
+    <statBases>
+      <ComfyTemperatureMin>-120</ComfyTemperatureMin>
+      <ComfyTemperatureMax>160</ComfyTemperatureMax>
+      <PsychicSensitivity>0.2</PsychicSensitivity>
+      <ToxicResistance>0.8</ToxicResistance>
+      <Flammability>0</Flammability>
+      <FilthRate>0</FilthRate>
+      <MarketValue>5000</MarketValue>
+      <PainShockThreshold>0.95</PainShockThreshold>
+    </statBases>
+    <race>
+      <intelligence>Animal</intelligence>
+      <thinkTreeMain>IAG_Messenger</thinkTreeMain>
+      <thinkTreeConstant>IAG_MessengerConstant</thinkTreeConstant>
+      <foodType>None</foodType>
+      <needsRest>false</needsRest>
+      <hasGenders>false</hasGenders>
+      <hasMeat>false</hasMeat>
+      <trainability>None</trainability>
+      <petness>0</petness>
+      <manhunterOnDamageChance>0</manhunterOnDamageChance>
+      <manhunterOnTameFailChance>0</manhunterOnTameFailChance>
+      <canBePredatorPrey>false</canBePredatorPrey>
+      <predator>false</predator>
+      <herdAnimal>false</herdAnimal>
+      <canReleaseToWild>false</canReleaseToWild>
+      <isImmuneToInfections>true</isImmuneToInfections>
+      <lifeExpectancy>100000</lifeExpectancy>
+      <lifeStageAges>
+        <li>
+          <def>AnimalAdult</def>
+          <minAge>0</minAge>
+        </li>
+      </lifeStageAges>
+      <soundMeleeHitPawn>Pawn_Melee_BigBash_HitPawn</soundMeleeHitPawn>
+      <soundMeleeHitBuilding>Pawn_Melee_BigBash_HitBuilding</soundMeleeHitBuilding>
+      <soundMeleeMiss>Pawn_Melee_BigBash_Miss</soundMeleeMiss>
+    </race>
+  </ThingDef>
+
+  <PawnKindDef ParentName="AnimalKindBase" Name="IAG_MessengerKindBase" Abstract="True">
+    <canArriveManhunter>false</canArriveManhunter>
+    <ecoSystemWeight>0</ecoSystemWeight>
+  </PawnKindDef>
+
+  <!-- ================================================================ Seraphim -->
+
+  <ThingDef ParentName="IAG_MessengerBase">
+    <defName>IAG_Seraphim</defName>
+    <label>seraphim</label>
+    <description>The burning one: the highest of the god's messengers, a figure of white fire wrapped in six wings, its body set with watchful eyes. Two of its wings veil its face, two its feet, and with two it flies. It speaks with arcs of holy light, strikes the wicked down with pillars of judgement, hurls them away across the land, shields the faithful, and calls the many-eyed winged beholders to its side.</description>
+    <statBases>
+      <MoveSpeed>5.6</MoveSpeed>
+      <ArmorRating_Sharp>1.1</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.8</ArmorRating_Blunt>
+      <ArmorRating_Heat>2</ArmorRating_Heat>
+      <MeleeDodgeChance>0.25</MeleeDodgeChance>
+    </statBases>
+    <tools>
+      <li>
+        <label>flaming blade</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>34</power>
+        <cooldownTime>1.6</cooldownTime>
+        <armorPenetration>1.2</armorPenetration>
+        <linkedBodyPartsGroup>RightHand</linkedBodyPartsGroup>
+        <extraMeleeDamages>
+          <li>
+            <def>Flame</def>
+            <amount>12</amount>
+            <chance>0.5</chance>
+          </li>
+        </extraMeleeDamages>
+      </li>
+      <li>
+        <label>holy spear</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>30</power>
+        <cooldownTime>1.5</cooldownTime>
+        <armorPenetration>1.3</armorPenetration>
+        <linkedBodyPartsGroup>LeftHand</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>wing buffet</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>26</power>
+        <cooldownTime>2</cooldownTime>
+        <armorPenetration>1</armorPenetration>
+        <linkedBodyPartsGroup>IAG_SeraphWings</linkedBodyPartsGroup>
+        <chanceFactor>0.6</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>IAG_SeraphimBody</body>
+      <baseBodySize>4.5</baseBodySize>
+      <baseHealthScale>14</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="ImAGod.CompProperties_Messenger">
+        <regenPerDay>220</regenPerDay>
+        <skills>
+          <li>IAG_Skill_HolyArc</li>
+          <li>IAG_Skill_Judgement</li>
+          <li>IAG_Skill_DivineSkip</li>
+          <li>IAG_Skill_Banishment</li>
+          <li>IAG_Skill_SeraphicHymn</li>
+          <li>IAG_Skill_CallBeholders</li>
+        </skills>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="IAG_MessengerKindBase">
+    <defName>IAG_Seraphim</defName>
+    <label>seraphim</label>
+    <labelPlural>seraphim</labelPlural>
+    <race>IAG_Seraphim</race>
+    <combatPower>1500</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>ImAGod/Messengers/Seraphim</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>6</drawSize>
+          <shadowData>
+            <volume>(1.2, 0.5, 0.8)</volume>
+            <offset>(0, 0, -0.6)</offset>
+          </shadowData>
+        </bodyGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>ImAGod/Messengers/Seraphim_Dessicated</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>6</drawSize>
+        </dessicatedBodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+  <!-- ================================================================ Winged beholder -->
+
+  <ThingDef ParentName="IAG_MessengerBase">
+    <defName>IAG_WingedBeholder</defName>
+    <label>winged beholder</label>
+    <description>A lesser messenger called by a Seraphim: a great unblinking eye borne on feathered wings and ringed with smaller eyes. It burns the wicked with a beam of light from its eye and freezes them in place with its gaze.</description>
+    <statBases>
+      <MoveSpeed>6</MoveSpeed>
+      <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.2</ArmorRating_Heat>
+      <MeleeDodgeChance>0.3</MeleeDodgeChance>
+    </statBases>
+    <tools>
+      <li>
+        <label>maw</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>12</power>
+        <cooldownTime>1.4</cooldownTime>
+        <armorPenetration>0.6</armorPenetration>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>wing</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>8</power>
+        <cooldownTime>1.6</cooldownTime>
+        <linkedBodyPartsGroup>IAG_BeholderWings</linkedBodyPartsGroup>
+      </li>
+    </tools>
+    <race>
+      <body>IAG_BeholderBody</body>
+      <baseBodySize>0.9</baseBodySize>
+      <baseHealthScale>1.8</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="ImAGod.CompProperties_Messenger">
+        <minion>true</minion>
+        <regenPerDay>40</regenPerDay>
+        <skills>
+          <li>IAG_Skill_EyeLaser</li>
+          <li>IAG_Skill_ParalysingGaze</li>
+        </skills>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="IAG_MessengerKindBase">
+    <defName>IAG_WingedBeholder</defName>
+    <label>winged beholder</label>
+    <race>IAG_WingedBeholder</race>
+    <combatPower>150</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>ImAGod/Messengers/WingedBeholder</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2.2</drawSize>
+          <shadowData>
+            <volume>(0.4, 0.3, 0.3)</volume>
+            <offset>(0, 0, -0.4)</offset>
+          </shadowData>
+        </bodyGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>ImAGod/Messengers/WingedBeholder_Dessicated</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>2.2</drawSize>
+        </dessicatedBodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+  <!-- ================================================================ Tiamat -->
+
+  <ThingDef ParentName="IAG_MessengerBase">
+    <defName>IAG_Tiamat</defName>
+    <label>Tiamat</label>
+    <description>The primordial sea of chaos given flesh: a vast five-headed dragon, each head of a different hue and each breathing its own ruin. The crimson head breathes fire, the azure head lightning, the verdant head venom, the obsidian head acid that eats through armour, and the argent head a killing frost. Her roar breaks the courage of mortals, and as the mother of monsters she births serpent-dragons to fight at her side.</description>
+    <statBases>
+      <MoveSpeed>4.6</MoveSpeed>
+      <ArmorRating_Sharp>1.3</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.9</ArmorRating_Blunt>
+      <ArmorRating_Heat>1.4</ArmorRating_Heat>
+      <MeleeDodgeChance>0.05</MeleeDodgeChance>
+    </statBases>
+    <tools>
+      <li>
+        <label>five maws</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>38</power>
+        <cooldownTime>1.7</cooldownTime>
+        <armorPenetration>1.3</armorPenetration>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>left claw</label>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>30</power>
+        <cooldownTime>1.5</cooldownTime>
+        <armorPenetration>1.2</armorPenetration>
+        <linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right claw</label>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>30</power>
+        <cooldownTime>1.5</cooldownTime>
+        <armorPenetration>1.2</armorPenetration>
+        <linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>tail</label>
+        <capacities>
+          <li>Blunt</li>
+        </capacities>
+        <power>34</power>
+        <cooldownTime>2.2</cooldownTime>
+        <armorPenetration>1</armorPenetration>
+        <linkedBodyPartsGroup>IAG_DragonTail</linkedBodyPartsGroup>
+        <chanceFactor>0.6</chanceFactor>
+      </li>
+    </tools>
+    <race>
+      <body>IAG_TiamatBody</body>
+      <baseBodySize>6</baseBodySize>
+      <baseHealthScale>17</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="ImAGod.CompProperties_Messenger">
+        <regenPerDay>200</regenPerDay>
+        <skills>
+          <li>IAG_Skill_FireBreath</li>
+          <li>IAG_Skill_LightningBreath</li>
+          <li>IAG_Skill_VenomBreath</li>
+          <li>IAG_Skill_AcidBreath</li>
+          <li>IAG_Skill_FrostBreath</li>
+          <li>IAG_Skill_ChaosRoar</li>
+          <li>IAG_Skill_MotherOfMonsters</li>
+        </skills>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="IAG_MessengerKindBase">
+    <defName>IAG_Tiamat</defName>
+    <label>Tiamat</label>
+    <race>IAG_Tiamat</race>
+    <combatPower>1600</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>ImAGod/Messengers/Tiamat</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>7</drawSize>
+          <shadowData>
+            <volume>(1.6, 0.6, 1.1)</volume>
+            <offset>(0, 0, -0.5)</offset>
+          </shadowData>
+        </bodyGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>ImAGod/Messengers/Tiamat_Dessicated</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>7</drawSize>
+        </dessicatedBodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+  <!-- ================================================================ Mushussu -->
+
+  <ThingDef ParentName="IAG_MessengerBase">
+    <defName>IAG_Mushussu</defName>
+    <label>mushussu</label>
+    <description>A serpent-dragon of the brood of Tiamat: a scaled body on lion's forelegs and eagle's hind talons, with a horned serpent head and a scorpion's tail. It lunges across the battlefield and its sting carries venom.</description>
+    <statBases>
+      <MoveSpeed>5.4</MoveSpeed>
+      <ArmorRating_Sharp>0.6</ArmorRating_Sharp>
+      <ArmorRating_Blunt>0.4</ArmorRating_Blunt>
+      <ArmorRating_Heat>0.6</ArmorRating_Heat>
+      <MeleeDodgeChance>0.15</MeleeDodgeChance>
+    </statBases>
+    <tools>
+      <li>
+        <label>fangs</label>
+        <capacities>
+          <li>Bite</li>
+        </capacities>
+        <power>20</power>
+        <cooldownTime>1.4</cooldownTime>
+        <armorPenetration>0.8</armorPenetration>
+        <linkedBodyPartsGroup>Teeth</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>scorpion sting</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>18</power>
+        <cooldownTime>1.8</cooldownTime>
+        <armorPenetration>0.9</armorPenetration>
+        <linkedBodyPartsGroup>IAG_DragonTail</linkedBodyPartsGroup>
+        <hediff>ToxicBuildup</hediff>
+      </li>
+      <li>
+        <label>left claw</label>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>14</power>
+        <cooldownTime>1.3</cooldownTime>
+        <linkedBodyPartsGroup>FrontLeftPaw</linkedBodyPartsGroup>
+      </li>
+      <li>
+        <label>right claw</label>
+        <capacities>
+          <li>Scratch</li>
+        </capacities>
+        <power>14</power>
+        <cooldownTime>1.3</cooldownTime>
+        <linkedBodyPartsGroup>FrontRightPaw</linkedBodyPartsGroup>
+      </li>
+    </tools>
+    <race>
+      <body>IAG_MushussuBody</body>
+      <baseBodySize>2</baseBodySize>
+      <baseHealthScale>3.2</baseHealthScale>
+    </race>
+    <comps>
+      <li Class="ImAGod.CompProperties_Messenger">
+        <minion>true</minion>
+        <regenPerDay>60</regenPerDay>
+        <skills>
+          <li>IAG_Skill_Lunge</li>
+        </skills>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <PawnKindDef ParentName="IAG_MessengerKindBase">
+    <defName>IAG_Mushussu</defName>
+    <label>mushussu</label>
+    <race>IAG_Mushussu</race>
+    <combatPower>220</combatPower>
+    <lifeStages>
+      <li>
+        <bodyGraphicData>
+          <texPath>ImAGod/Messengers/Mushussu</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3.2</drawSize>
+          <shadowData>
+            <volume>(0.6, 0.3, 0.4)</volume>
+            <offset>(0, 0, -0.3)</offset>
+          </shadowData>
+        </bodyGraphicData>
+        <dessicatedBodyGraphicData>
+          <texPath>ImAGod/Messengers/Mushussu_Dessicated</texPath>
+          <graphicClass>Graphic_Multi</graphicClass>
+          <drawSize>3.2</drawSize>
+        </dessicatedBodyGraphicData>
+      </li>
+    </lifeStages>
+  </PawnKindDef>
+
+</Defs>

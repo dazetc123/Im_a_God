@@ -48,7 +48,7 @@ namespace ImAGod
 
         public bool HostileToPlayer => Factions.Any(f => f.HostileTo(Faction.OfPlayer));
 
-        public int SettlementCount => Find.WorldObjects.Settlements.Count(s => s.Faction != null && !s.Faction.IsPlayer && s.Faction.ideos?.PrimaryIdeo == ideo);
+        public int SettlementCount => Find.WorldObjects.Settlements.Count(s => s.Faction != null && !s.Faction.IsPlayer && s.Faction.ideos?.PrimaryIdeo == ideo && !MissionUtility.IsConverted(s));
 
         public void Humble(float amount)
         {

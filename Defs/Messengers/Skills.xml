@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Skills of the divine messengers. The AI casts a ready skill when it is worth it (aiMinTargets enemies caught),
+    trying skills with higher aiPriority first; the player can also order any skill from the messenger's gizmos.
+    cooldownTicks / warmupTicks: 60 ticks = 1 second.
+    armorPenetration is vanilla (1 = 100%); armorPenetrationCE is used with Combat Extended (mm for sharp, MPa for blunt).
+  -->
+
+  <!-- ================================================================ Seraphim -->
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_HolyArc</defName>
+    <label>holy arc</label>
+    <description>A sweeping arc of white fire from the Seraphim's six wings, burning through every enemy in a long line.</description>
+    <workerClass>ImAGod.MessengerSkill_Beam</workerClass>
+    <iconPath>ImAGod/Skills/HolyArc</iconPath>
+    <range>30</range>
+    <width>1.1</width>
+    <cooldownTicks>420</cooldownTicks>
+    <warmupTicks>40</warmupTicks>
+    <damageDef>Flame</damageDef>
+    <damage>42</damage>
+    <armorPenetration>1.2</armorPenetration>
+    <armorPenetrationCE>38</armorPenetrationCE>
+    <fireChance>0.35</fireChance>
+    <color>(255, 235, 170)</color>
+    <sound>Pawn_Nociosphere_Arc</sound>
+    <aiPriority>2</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_Judgement</defName>
+    <label>pillar of judgement</label>
+    <description>Marks a place with a ring of light; a moment later a pillar of holy fire falls on it, blasting everything around.</description>
+    <workerClass>ImAGod.MessengerSkill_Pillar</workerClass>
+    <iconPath>ImAGod/Skills/Judgement</iconPath>
+    <target>Cell</target>
+    <range>45</range>
+    <needsLineOfSight>false</needsLineOfSight>
+    <radius>3.9</radius>
+    <delayTicks>90</delayTicks>
+    <cooldownTicks>900</cooldownTicks>
+    <warmupTicks>30</warmupTicks>
+    <damageDef>Bomb</damageDef>
+    <damage>60</damage>
+    <armorPenetration>1.1</armorPenetration>
+    <armorPenetrationCE>170</armorPenetrationCE>
+    <fireChance>0.2</fireChance>
+    <color>(255, 225, 140)</color>
+    <aiMinTargets>2</aiMinTargets>
+    <aiPriority>3</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_DivineSkip</defName>
+    <label>divine skip</label>
+    <description>The Seraphim folds space and appears beside its target in a flash of light, dazzling the enemies around where it lands.</description>
+    <workerClass>ImAGod.MessengerSkill_Blink</workerClass>
+    <iconPath>ImAGod/Skills/DivineSkip</iconPath>
+    <range>50</range>
+    <needsLineOfSight>false</needsLineOfSight>
+    <radius>2.5</radius>
+    <cooldownTicks>720</cooldownTicks>
+    <warmupTicks>15</warmupTicks>
+    <stunTicks>90</stunTicks>
+    <color>(255, 245, 210)</color>
+    <sound>Psycast_Skip_Exit</sound>
+    <aiPriority>1</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_Banishment</defName>
+    <label>banishment</label>
+    <description>Up to five enemies close to the Seraphim are hurled far across the land and left dazed.</description>
+    <workerClass>ImAGod.MessengerSkill_Banish</workerClass>
+    <iconPath>ImAGod/Skills/Banishment</iconPath>
+    <target>Self</target>
+    <radius>5.9</radius>
+    <count>5</count>
+    <cooldownTicks>1500</cooldownTicks>
+    <warmupTicks>20</warmupTicks>
+    <damageDef>Blunt</damageDef>
+    <damage>10</damage>
+    <armorPenetration>0.5</armorPenetration>
+    <armorPenetrationCE>160</armorPenetrationCE>
+    <stunTicks>180</stunTicks>
+    <color>(200, 220, 255)</color>
+    <sound>Psycast_Skip_Pulse</sound>
+    <aiMinTargets>3</aiMinTargets>
+    <aiPriority>4</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_SeraphicHymn</defName>
+    <label>seraphic hymn</label>
+    <description>The Seraphim sings "holy, holy, holy". Every ally nearby is healed and wrapped in a ward that halves the harm they take for a while.</description>
+    <workerClass>ImAGod.MessengerSkill_Aura</workerClass>
+    <iconPath>ImAGod/Skills/SeraphicHymn</iconPath>
+    <target>Self</target>
+    <radius>12</radius>
+    <heal>40</heal>
+    <hediff>IAG_SeraphWard</hediff>
+    <cooldownTicks>2400</cooldownTicks>
+    <warmupTicks>45</warmupTicks>
+    <color>(255, 240, 190)</color>
+    <aiMinTargets>4</aiMinTargets>
+    <aiPriority>5</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_CallBeholders</defName>
+    <label>call the beholders</label>
+    <description>Three winged beholders descend to fight beside the Seraphim for half a day (at most six at a time).</description>
+    <workerClass>ImAGod.MessengerSkill_Summon</workerClass>
+    <iconPath>ImAGod/Skills/CallBeholders</iconPath>
+    <target>Self</target>
+    <pawnKind>IAG_WingedBeholder</pawnKind>
+    <count>3</count>
+    <maxSummons>6</maxSummons>
+    <lifetimeDays>0.5</lifetimeDays>
+    <cooldownTicks>5000</cooldownTicks>
+    <warmupTicks>60</warmupTicks>
+    <color>(255, 230, 160)</color>
+    <aiMinTargets>2</aiMinTargets>
+    <aiPriority>6</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <!-- ================================================================ Winged beholder -->
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_EyeLaser</defName>
+    <label>eye beam</label>
+    <description>A searing beam of light from the great eye that pierces every enemy in its path.</description>
+    <workerClass>ImAGod.MessengerSkill_Beam</workerClass>
+    <iconPath>ImAGod/Skills/EyeLaser</iconPath>
+    <range>24</range>
+    <width>0.6</width>
+    <cooldownTicks>200</cooldownTicks>
+    <warmupTicks>20</warmupTicks>
+    <damageDef>Burn</damageDef>
+    <damage>16</damage>
+    <armorPenetration>0.9</armorPenetration>
+    <armorPenetrationCE>32</armorPenetrationCE>
+    <fireChance>0.1</fireChance>
+    <color>(255, 210, 120)</color>
+    <aiPriority>1</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_ParalysingGaze</defName>
+    <label>paralysing gaze</label>
+    <description>The beholder fixes one enemy with its stare, freezing them where they stand.</description>
+    <workerClass>ImAGod.MessengerSkill_Strike</workerClass>
+    <iconPath>ImAGod/Skills/ParalysingGaze</iconPath>
+    <range>16</range>
+    <cooldownTicks>720</cooldownTicks>
+    <warmupTicks>15</warmupTicks>
+    <stunTicks>150</stunTicks>
+    <color>(170, 220, 255)</color>
+    <aiPriority>2</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <!-- ================================================================ Tiamat -->
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_FireBreath</defName>
+    <label>crimson breath</label>
+    <description>The crimson head breathes a cone of fire that sets everything in front of Tiamat ablaze.</description>
+    <workerClass>ImAGod.MessengerSkill_Cone</workerClass>
+    <iconPath>ImAGod/Skills/FireBreath</iconPath>
+    <range>13</range>
+    <angle>50</angle>
+    <cooldownTicks>600</cooldownTicks>
+    <warmupTicks>35</warmupTicks>
+    <damageDef>Flame</damageDef>
+    <damage>30</damage>
+    <armorPenetration>1.1</armorPenetration>
+    <armorPenetrationCE>36</armorPenetrationCE>
+    <fireChance>0.6</fireChance>
+    <color>(255, 110, 40)</color>
+    <aiMinTargets>2</aiMinTargets>
+    <aiPriority>3</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_LightningBreath</defName>
+    <label>azure breath</label>
+    <description>The azure head looses a bolt of lightning that leaps from enemy to enemy.</description>
+    <workerClass>ImAGod.MessengerSkill_Chain</workerClass>
+    <iconPath>ImAGod/Skills/LightningBreath</iconPath>
+    <range>26</range>
+    <jumps>4</jumps>
+    <jumpRange>7</jumpRange>
+    <cooldownTicks>720</cooldownTicks>
+    <warmupTicks>30</warmupTicks>
+    <damageDef>Burn</damageDef>
+    <damage>32</damage>
+    <armorPenetration>1.2</armorPenetration>
+    <armorPenetrationCE>34</armorPenetrationCE>
+    <stunTicks>60</stunTicks>
+    <color>(120, 180, 255)</color>
+    <aiPriority>2</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_VenomBreath</defName>
+    <label>verdant breath</label>
+    <description>The verdant head breathes a cloud of venom that poisons everyone it touches.</description>
+    <workerClass>ImAGod.MessengerSkill_Cone</workerClass>
+    <iconPath>ImAGod/Skills/VenomBreath</iconPath>
+    <range>11</range>
+    <angle>65</angle>
+    <cooldownTicks>1080</cooldownTicks>
+    <warmupTicks>30</warmupTicks>
+    <damageDef>Scratch</damageDef>
+    <damage>6</damage>
+    <armorPenetration>2</armorPenetration>
+    <armorPenetrationCE>40</armorPenetrationCE>
+    <hediff>ToxicBuildup</hediff>
+    <severity>0.35</severity>
+    <color>(120, 230, 90)</color>
+    <aiMinTargets>2</aiMinTargets>
+    <aiPriority>4</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_AcidBreath</defName>
+    <label>obsidian breath</label>
+    <description>The obsidian head spits a line of black acid that eats through armour and flesh alike.</description>
+    <workerClass>ImAGod.MessengerSkill_Beam</workerClass>
+    <iconPath>ImAGod/Skills/AcidBreath</iconPath>
+    <range>22</range>
+    <width>0.9</width>
+    <cooldownTicks>600</cooldownTicks>
+    <warmupTicks>30</warmupTicks>
+    <damageDef>AcidBurn</damageDef>
+    <damage>36</damage>
+    <armorPenetration>1.6</armorPenetration>
+    <armorPenetrationCE>40</armorPenetrationCE>
+    <color>(150, 60, 200)</color>
+    <aiPriority>2</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_FrostBreath</defName>
+    <label>argent breath</label>
+    <description>The argent head breathes a killing frost that bites through flesh and slows everyone it touches.</description>
+    <workerClass>ImAGod.MessengerSkill_Cone</workerClass>
+    <iconPath>ImAGod/Skills/FrostBreath</iconPath>
+    <range>12</range>
+    <angle>55</angle>
+    <cooldownTicks>840</cooldownTicks>
+    <warmupTicks>30</warmupTicks>
+    <damageDef>Frostbite</damageDef>
+    <damage>24</damage>
+    <armorPenetration>1</armorPenetration>
+    <armorPenetrationCE>30</armorPenetrationCE>
+    <hediff>IAG_Frozen</hediff>
+    <color>(200, 235, 255)</color>
+    <aiMinTargets>2</aiMinTargets>
+    <aiPriority>3</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_ChaosRoar</defName>
+    <label>roar of chaos</label>
+    <description>All five heads roar as one. Enemies nearby are stunned, and many flee in terror.</description>
+    <workerClass>ImAGod.MessengerSkill_Roar</workerClass>
+    <iconPath>ImAGod/Skills/ChaosRoar</iconPath>
+    <target>Self</target>
+    <radius>14</radius>
+    <cooldownTicks>2700</cooldownTicks>
+    <warmupTicks>40</warmupTicks>
+    <stunTicks>120</stunTicks>
+    <mentalState>PanicFlee</mentalState>
+    <chance>0.45</chance>
+    <color>(220, 60, 90)</color>
+    <aiMinTargets>4</aiMinTargets>
+    <aiPriority>5</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_MotherOfMonsters</defName>
+    <label>mother of monsters</label>
+    <description>Tiamat births two mushussu serpent-dragons, which fight at her side for a day (at most four at a time).</description>
+    <workerClass>ImAGod.MessengerSkill_Summon</workerClass>
+    <iconPath>ImAGod/Skills/MotherOfMonsters</iconPath>
+    <target>Self</target>
+    <pawnKind>IAG_Mushussu</pawnKind>
+    <count>2</count>
+    <maxSummons>4</maxSummons>
+    <lifetimeDays>1</lifetimeDays>
+    <cooldownTicks>5000</cooldownTicks>
+    <warmupTicks>60</warmupTicks>
+    <color>(200, 40, 70)</color>
+    <aiMinTargets>2</aiMinTargets>
+    <aiPriority>6</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+  <!-- ================================================================ Mushussu -->
+
+  <ImAGod.MessengerSkillDef>
+    <defName>IAG_Skill_Lunge</defName>
+    <label>lunge</label>
+    <description>The serpent-dragon springs across the battlefield onto its prey, knocking down those where it lands.</description>
+    <workerClass>ImAGod.MessengerSkill_Blink</workerClass>
+    <iconPath>ImAGod/Skills/Lunge</iconPath>
+    <range>14</range>
+    <radius>1.5</radius>
+    <cooldownTicks>600</cooldownTicks>
+    <warmupTicks>15</warmupTicks>
+    <damageDef>Blunt</damageDef>
+    <damage>10</damage>
+    <armorPenetration>0.5</armorPenetration>
+    <armorPenetrationCE>165</armorPenetrationCE>
+    <stunTicks>60</stunTicks>
+    <color>(200, 40, 70)</color>
+    <aiPriority>1</aiPriority>
+  </ImAGod.MessengerSkillDef>
+
+</Defs>

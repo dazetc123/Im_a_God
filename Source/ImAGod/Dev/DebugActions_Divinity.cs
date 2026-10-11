@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LudeonTK;
 using RimWorld;
+using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -158,6 +159,15 @@ namespace ImAGod
             if (demigod != null)
                 Unmake(demigod);
         }
+
+        internal void DevFinishMissions()
+        {
+            foreach (Mission mission in missions)
+                mission.endTick = Find.TickManager.TicksGame;
+            MissionsHourlyTick();
+        }
+
+        internal void DevConvert(Settlement settlement) => ConvertSettlement(settlement);
 
         internal string DevReport()
         {
@@ -355,6 +365,50 @@ namespace ImAGod
             options.AddRange(DefDatabase<DivineDomainDef>.AllDefsListForReading.Where(d => d.holyDay >= 0)
                 .Select(d => Option($"{d.HolyDayName} ({d.LabelCap})", () => divinity.DevForceHolyDay(d))));
             ShowOptions(options);
+        }
+
+        // ---------------------------------------------------------------- Messengers and missions
+
+        [DebugAction(Category, "Spawn Seraphim (yours)", actionType = DebugActionType.ToolMap, allowedGameStates = AllowedGameStates.PlayingOnMap, displayPriority = 50)]
+        private static void SpawnSeraphim() => SummonAtMouse(IAG_DefOf.IAG_Seraphim);
+
+        [DebugAction(Category, "Spawn Tiamat (yours)", actionType = DebugActionType.ToolMap, allowedGameStates = AllowedGameStates.PlayingOnMap, displayPriority = 49)]
+        private static void SpawnTiamat() => SummonAtMouse(IAG_DefOf.IAG_Tiamat);
+
+        [DebugAction(Category, "Spawn hostile avatar", actionType = DebugActionType.ToolMap, allowedGameStates = AllowedGameStates.PlayingOnMap, displayPriority = 48)]
+        private static void SpawnAvatar()
+        {
+            GameComponent_Divinity divinity = Divinity;
+            divinity.SyncRivals();
+            RivalGod rival = divinity.rivals.Where(r => r.IsValid && r.HostileToPlayer).RandomElementWithFallback();
+            Faction faction = rival?.Factions.FirstOrDefault(f => f.HostileTo(Faction.OfPlayer)) ?? Find.FactionManager.RandomEnemyFaction();
+            IntVec3 cell = UI.MouseCell();
+            Map map = Find.CurrentMap;
+            if (faction == null || !cell.InBounds(map))
+                return;
+            PawnKindDef kind = rival != null ? MessengerUtility.AvatarKindFor(rival) : IAG_DefOf.IAG_Tiamat;
+            Pawn avatar = divinity.SpawnMessenger(kind, faction, cell, map, 0f, null, true, rival?.ideo);
+            Verse.AI.Group.LordMaker.MakeNewLord(faction, new LordJob_AssaultColony(faction, false, false, false, false, false), map, new List<Pawn> { avatar });
+        }
+
+        private static void SummonAtMouse(PawnKindDef kind)
+        {
+            IntVec3 cell = UI.MouseCell();
+            Map map = Find.CurrentMap;
+            if (cell.InBounds(map) && cell.Standable(map))
+                Divinity.SummonGreatMessenger(kind, cell, map, 3f);
+        }
+
+        [DebugAction(Category, "Finish all missions now", allowedGameStates = AllowedGameStates.Playing, displayPriority = 47)]
+        private static void FinishMissions() => Divinity.DevFinishMissions();
+
+        [DebugAction(Category, "Convert settlement", actionType = DebugActionType.ToolWorld, allowedGameStates = AllowedGameStates.PlayingOnWorld, displayPriority = 46)]
+        private static void ConvertSettlement()
+        {
+            Settlement settlement = Find.WorldObjects.SettlementAt(GenWorld.MouseTile());
+            if (settlement?.Faction == null || settlement.Faction.IsPlayer || settlement.MissionComp() == null)
+                return;
+            Divinity.DevConvert(settlement);
         }
 
         // ---------------------------------------------------------------- Pawn tools
