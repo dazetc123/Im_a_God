@@ -64,6 +64,7 @@ namespace ImAGod
             }
             FleckMaker.ThrowMetaIcon(pawn.Position, map, FleckDefOf.HealingCross);
             Messages.Message("IAG_MendDone".Translate(pawn.Named("PAWN")), pawn, MessageTypeDefOf.PositiveEvent);
+            GameComponent_Divinity.Instance?.Notify_PawnBlessed(pawn, def);
             return true;
         }
 

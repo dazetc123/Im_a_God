@@ -10,6 +10,8 @@
     <color>(0.45, 0.85, 0.6)</color>
     <order>6</order>
     <blessing>IAG_Blessing_Life</blessing>
+    <holyDay>3</holyDay>
+    <demigodTitle>saint of healing</demigodTitle>
     <recordOfferings>
       <li>
         <record>TimesTendedOther</record>

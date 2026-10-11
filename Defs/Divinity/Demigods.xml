@@ -15,6 +15,27 @@
         <compClass>ImAGod.HediffComp_Demigod</compClass>
       </li>
     </comps>
+    <!-- a glowing halo above the demigod's head: behind it seen from the front, in front of it seen from behind -->
+    <renderNodeProperties>
+      <li>
+        <nodeClass>PawnRenderNode</nodeClass>
+        <workerClass>PawnRenderNodeWorker</workerClass>
+        <texPath>ImAGod/Things/DemigodHalo</texPath>
+        <parentTagDef>Head</parentTagDef>
+        <shaderTypeDef>MoteGlow</shaderTypeDef>
+        <drawData>
+          <scale>1</scale>
+          <defaultData>
+            <layer>45</layer>
+            <offset>(0, 0, 0.22)</offset>
+          </defaultData>
+          <dataNorth>
+            <layer>85</layer>
+            <offset>(0, 0, 0.22)</offset>
+          </dataNorth>
+        </drawData>
+      </li>
+    </renderNodeProperties>
     <aptitudes>
       <li><skill>Shooting</skill><level>8</level></li>
       <li><skill>Melee</skill><level>8</level></li>

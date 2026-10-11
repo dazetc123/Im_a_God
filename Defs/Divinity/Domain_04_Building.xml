@@ -10,6 +10,8 @@
     <color>(0.78, 0.6, 0.38)</color>
     <order>4</order>
     <blessing>IAG_Blessing_Building</blessing>
+    <holyDay>8</holyDay>
+    <demigodTitle>master builder</demigodTitle>
     <recordOfferings>
       <li>
         <record>ThingsConstructed</record>

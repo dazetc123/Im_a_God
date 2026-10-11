@@ -290,4 +290,82 @@ The colony's doubt rises by {1} and every believer grows a little less certain.<
   <IAG_Reason_NothingToRepair>Nothing there needs repair.</IAG_Reason_NothingToRepair>
   <IAG_Reason_NoFrames>No construction there has all its materials.</IAG_Reason_NoFrames>
 
+  <!-- Respec -->
+  <IAG_RespecButton>Re-sanctify ({0} faith)</IAG_RespecButton>
+  <IAG_RespecTip>Forget every miracle you have unlocked and get all your divine points back.</IAG_RespecTip>
+  <IAG_ConfirmRespec>Forget every unlocked miracle and regain your divine points, for {0} faith?</IAG_ConfirmRespec>
+  <IAG_RespecDone>Your miracles are forgotten and your divine points returned.</IAG_RespecDone>
+  <IAG_Reason_NothingToReset>There is nothing to reset.</IAG_Reason_NothingToReset>
+  <IAG_DemigodResetButton>Reset abilities ({0})</IAG_DemigodResetButton>
+  <IAG_ConfirmDemigodReset>Make {PAWN_labelShort} forget every ability and regain the points, for {1} faith?</IAG_ConfirmDemigodReset>
+  <IAG_DemigodReset>{PAWN_labelShort} has forgotten {PAWN_possessive} abilities.</IAG_DemigodReset>
+
+  <!-- Demigod titles and relics -->
+  <IAG_DemigodTitleDefault>demigod</IAG_DemigodTitleDefault>
+  <IAG_RelicButton>Bestow relic ({0})</IAG_RelicButton>
+  <IAG_RelicTip>Forge a legendary divine blade for this demigod: a sunblade for a god of creation, a bloodblade for a god of chaos. Once per demigod.</IAG_RelicTip>
+  <IAG_RelicLabel>A divine relic</IAG_RelicLabel>
+  <IAG_RelicText>A blade of divine making falls before {PAWN_labelShort}: {1}.</IAG_RelicText>
+  <IAG_Reason_RelicGiven>{PAWN_labelShort} already bears a relic.</IAG_Reason_RelicGiven>
+  <IAG_Reason_NotHere>{PAWN_labelShort} must be on a map.</IAG_Reason_NotHere>
+
+  <!-- Petitions -->
+  <IAG_PetitionsHeader>Petitions</IAG_PetitionsHeader>
+  <IAG_NoPetitions>No one is praying for anything right now.</IAG_NoPetitions>
+  <IAG_PetitionsStatus>{0} petition(s) await your answer</IAG_PetitionsStatus>
+  <IAG_PetitionLabel>{0} prays to you</IAG_PetitionLabel>
+  <IAG_PetitionText>{PAWN_labelShort} kneels and prays: {1}\n\n{2}\n\nAnswer within {3} and your believers will see that you listen. Ignore it and doubt will grow.</IAG_PetitionText>
+  <IAG_Petition_Healing>"Heal me, I beg you." ({0})</IAG_Petition_Healing>
+  <IAG_Petition_Food>"Our stores are empty. Feed your children." ({0})</IAG_Petition_Food>
+  <IAG_Petition_Protection>"They are upon us! Protect us!" ({0})</IAG_Petition_Protection>
+  <IAG_Petition_Sign>"Are you there? Show us a sign." ({0})</IAG_Petition_Sign>
+  <IAG_Petition_Weather>"End this cursed weather." ({0})</IAG_Petition_Weather>
+  <IAG_PetitionHint_Healing>Answer with a healing miracle on them: mending touch, cure, healing light, restoration.</IAG_PetitionHint_Healing>
+  <IAG_PetitionHint_Food>Answer with a miracle that brings food: manna from heaven, gift of the fields.</IAG_PetitionHint_Food>
+  <IAG_PetitionHint_Protection>Answer with a miracle against the enemy: smite, terror, explosions, curses.</IAG_PetitionHint_Protection>
+  <IAG_PetitionHint_Sign>Answer by letting them witness any miracle.</IAG_PetitionHint_Sign>
+  <IAG_PetitionHint_Weather>Answer with clear skies or a change of weather.</IAG_PetitionHint_Weather>
+  <IAG_PetitionAnswered>You answered the prayer of {PAWN_labelShort}. +{1} faith.</IAG_PetitionAnswered>
+  <IAG_PetitionIgnored>The prayer of {PAWN_labelShort} went unanswered.</IAG_PetitionIgnored>
+  <IAG_DoubtReason_PetitionAnswered>Answered {0}'s prayer</IAG_DoubtReason_PetitionAnswered>
+  <IAG_DoubtReason_PetitionIgnored>Ignored {0}'s prayer</IAG_DoubtReason_PetitionIgnored>
+
+  <!-- Commandments -->
+  <IAG_CommandmentHeader>Commandment</IAG_CommandmentHeader>
+  <IAG_CommandmentIntro>Lay a commandment on your followers for a few days. Keep it and they are rewarded; break or fail it and they doubt. One at a time, five days apart.</IAG_CommandmentIntro>
+  <IAG_IssueCommandment>Issue a commandment</IAG_IssueCommandment>
+  <IAG_CommandmentReward>+{0} faith, {1} days</IAG_CommandmentReward>
+  <IAG_CommandmentStatus>Commandment: {0}</IAG_CommandmentStatus>
+  <IAG_CommandmentTimeLeft>{0} left</IAG_CommandmentTimeLeft>
+  <IAG_CommandmentProgress>progress {0} / {1}</IAG_CommandmentProgress>
+  <IAG_CommandmentGoal>Goal: {0}.</IAG_CommandmentGoal>
+  <IAG_CommandmentLabel>Commandment: {0}</IAG_CommandmentLabel>
+  <IAG_CommandmentText>Your voice rings in the hearts of your followers:\n\n{0} {1}\n\nThey have {2}. Keep it, and they will offer you {3} faith.</IAG_CommandmentText>
+  <IAG_CommandmentKeptLabel>Commandment kept</IAG_CommandmentKeptLabel>
+  <IAG_CommandmentKeptText>Your followers kept the commandment of {0}. They offer you {1} faith and their faith grows.</IAG_CommandmentKeptText>
+  <IAG_CommandmentBrokenLabel>Commandment broken</IAG_CommandmentBrokenLabel>
+  <IAG_CommandmentBrokenText>Your followers failed the commandment of {0}. Doubt spreads among them.</IAG_CommandmentBrokenText>
+  <IAG_Reason_CommandmentActive>A commandment is already in force.</IAG_Reason_CommandmentActive>
+  <IAG_DoubtReason_CommandmentKept>Kept the commandment of {0}</IAG_DoubtReason_CommandmentKept>
+  <IAG_DoubtReason_CommandmentBroken>Broke the commandment of {0}</IAG_DoubtReason_CommandmentBroken>
+
+  <!-- Holy days -->
+  <IAG_HolyDaysHeader>Holy days</IAG_HolyDaysHeader>
+  <IAG_HolyDaysIntro>On the holy day of each of your domains, rituals offer twice the faith, prayer half again as much, and your believers celebrate.</IAG_HolyDaysIntro>
+  <IAG_HolyDayOf>feast of {0}</IAG_HolyDayOf>
+  <IAG_HolyDayToday>(today)</IAG_HolyDayToday>
+  <IAG_HolyDayLabel>{0}</IAG_HolyDayLabel>
+  <IAG_HolyDayText>Today is the {0}, the holy day of your domain of {1}.\n\nRituals offer twice the faith today, prayer half again as much, and your believers celebrate.</IAG_HolyDayText>
+  <IAG_DayOfYear>{0} {1}</IAG_DayOfYear>
+
+  <!-- Sacrifice -->
+  <IAG_OfferSacrifice>Offer sacrifice</IAG_OfferSacrifice>
+  <IAG_OfferSacrificeDesc>Choose a prisoner or one of the colony's animals to sacrifice to your god. Your prophet, or another follower, performs the rite.</IAG_OfferSacrificeDesc>
+  <IAG_SacrificeOption>{0} (+{1} faith)</IAG_SacrificeOption>
+  <IAG_NoVictims>There is no one to sacrifice.</IAG_NoVictims>
+  <IAG_Reason_NoSacrificer>No follower here is able to perform the rite.</IAG_Reason_NoSacrificer>
+  <IAG_Reason_ChaosOnly>Only a god of the path of chaos accepts blood sacrifice.</IAG_Reason_ChaosOnly>
+  <IAG_Sacrificed>{0} was sacrificed. +{1} faith.</IAG_Sacrificed>
+  <IAG_DoubtReason_Sacrifice>Sacrificed {0}</IAG_DoubtReason_Sacrifice>
+
 </LanguageData>

@@ -10,6 +10,8 @@
     <color>(0.92, 0.55, 0.22)</color>
     <order>5</order>
     <blessing>IAG_Blessing_Crafting</blessing>
+    <holyDay>47</holyDay>
+    <demigodTitle>divine artisan</demigodTitle>
     <recordOfferings>
       <li>
         <record>ThingsCrafted</record>

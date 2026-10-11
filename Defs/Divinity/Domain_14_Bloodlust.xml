@@ -10,6 +10,8 @@
     <color>(0.75, 0.12, 0.15)</color>
     <order>4</order>
     <blessing>IAG_Blessing_Bloodlust</blessing>
+    <holyDay>33</holyDay>
+    <demigodTitle>blood reaper</demigodTitle>
     <recordOfferings>
       <li>
         <record>KillsHumanlikes</record>

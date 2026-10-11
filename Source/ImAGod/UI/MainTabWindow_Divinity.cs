@@ -162,6 +162,17 @@ namespace ImAGod
                 list.Label("IAG_NoProphet".Translate(), -1f, "IAG_ProphetTip".Translate());
             }
 
+            DivineDomainDef holyToday = divinity.CurrentHolyDay;
+            if (holyToday != null)
+            {
+                GUI.color = new Color(1f, 0.85f, 0.4f);
+                list.Label("IAG_HolyDayToday".Translate() + " " + holyToday.HolyDayName);
+                GUI.color = Color.white;
+            }
+            if (divinity.commandment != null)
+                list.Label("IAG_CommandmentStatus".Translate(divinity.commandment.def.LabelCap));
+            if (divinity.petitions.Count > 0)
+                list.Label("IAG_PetitionsStatus".Translate(divinity.petitions.Count));
             if (divinity.ForesightActive)
                 list.Label("IAG_ForesightActive".Translate((divinity.foresightUntilTick - Find.TickManager.TicksGame).ToStringTicksToPeriod()));
 
@@ -353,10 +364,22 @@ namespace ImAGod
             }
         }
 
+        private Vector2 faithScroll;
+        private float faithHeight = 900f;
+
         private void DrawFaith(Rect rect, GameComponent_Divinity divinity)
         {
+            Rect view = new Rect(0f, 0f, rect.width - 16f, faithHeight);
+            Widgets.BeginScrollView(rect, ref faithScroll, view);
             var list = new Listing_Standard();
-            list.Begin(rect);
+            list.Begin(view);
+
+            DrawCommandment(list, divinity);
+            list.GapLine();
+            DrawPetitions(list, divinity);
+            list.GapLine();
+            DrawHolyDays(list, divinity);
+            list.GapLine();
 
             Text.Font = GameFont.Medium;
             list.Label("IAG_Prophecies".Translate());
@@ -393,7 +416,83 @@ namespace ImAGod
                 foreach (DoubtEvent e in divinity.doubtLog)
                     list.Label("  " + e.amount.ToStringWithSign("0") + "   " + e.label + "  (" + (Find.TickManager.TicksGame - e.tick).ToStringTicksToPeriod() + ")");
             }
+            faithHeight = list.CurHeight + 20f;
             list.End();
+            Widgets.EndScrollView();
+        }
+
+        private static void DrawCommandment(Listing_Standard list, GameComponent_Divinity divinity)
+        {
+            Text.Font = GameFont.Medium;
+            list.Label("IAG_CommandmentHeader".Translate());
+            Text.Font = GameFont.Small;
+            Commandment active = divinity.commandment;
+            if (active != null)
+            {
+                list.Label(active.def.LabelCap + ": " + active.def.description);
+                string status = "IAG_CommandmentTimeLeft".Translate((active.endTick - Find.TickManager.TicksGame).ToStringTicksToPeriod());
+                if (active.IsGoal)
+                    status += "  ·  " + "IAG_CommandmentProgress".Translate(active.progress.ToString("0"), active.goal.ToString("0"));
+                list.Label(status);
+                return;
+            }
+            GUI.color = new Color(0.8f, 0.8f, 0.8f);
+            list.Label("IAG_CommandmentIntro".Translate());
+            GUI.color = Color.white;
+            AcceptanceReport can = divinity.CanIssueCommandment();
+            if (list.ButtonText("IAG_IssueCommandment".Translate()) )
+            {
+                if (!can.Accepted)
+                {
+                    Messages.Message(can.Reason, MessageTypeDefOf.RejectInput, false);
+                    return;
+                }
+                var options = divinity.AvailableCommandments.Select(c => new FloatMenuOption(
+                    c.LabelCap + " (" + "IAG_CommandmentReward".Translate(c.rewardFaith.ToString("0"), c.durationDays.ToString("0.#")) + ")",
+                    () => divinity.IssueCommandment(c))).ToList();
+                Find.WindowStack.Add(new FloatMenu(options));
+            }
+            if (!can.Accepted)
+                list.Label(can.Reason);
+        }
+
+        private static void DrawPetitions(Listing_Standard list, GameComponent_Divinity divinity)
+        {
+            Text.Font = GameFont.Medium;
+            list.Label("IAG_PetitionsHeader".Translate());
+            Text.Font = GameFont.Small;
+            if (divinity.petitions.Count == 0)
+            {
+                GUI.color = new Color(0.8f, 0.8f, 0.8f);
+                list.Label("IAG_NoPetitions".Translate());
+                GUI.color = Color.white;
+            }
+            foreach (Petition petition in divinity.petitions)
+            {
+                Rect row = list.GetRect(Text.LineHeight * 2f);
+                Widgets.Label(row, "• " + petition.Label + "  (" + "IAG_CommandmentTimeLeft".Translate(Mathf.Max(0, petition.TicksLeft).ToStringTicksToPeriod()) + ")\n   " + petition.Hint);
+                if (Widgets.ButtonInvisible(row) && petition.pawn != null)
+                    CameraJumper.TryJumpAndSelect(petition.pawn);
+                Widgets.DrawHighlightIfMouseover(row);
+            }
+        }
+
+        private static void DrawHolyDays(Listing_Standard list, GameComponent_Divinity divinity)
+        {
+            Text.Font = GameFont.Medium;
+            list.Label("IAG_HolyDaysHeader".Translate());
+            Text.Font = GameFont.Small;
+            GUI.color = new Color(0.8f, 0.8f, 0.8f);
+            list.Label("IAG_HolyDaysIntro".Translate());
+            GUI.color = Color.white;
+            DivineDomainDef today = divinity.CurrentHolyDay;
+            foreach (DivineDomainDef domain in divinity.domains.Where(d => d.holyDay >= 0))
+            {
+                string line = "• " + domain.HolyDayName + ": " + GameComponent_Divinity.DayLabel(domain.holyDay);
+                if (domain == today)
+                    line += "  " + "IAG_HolyDayToday".Translate();
+                list.Label(line);
+            }
         }
     }
 }

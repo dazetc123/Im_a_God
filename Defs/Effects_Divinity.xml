@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- A pillar of light that falls on the target of a miracle. Tinted gold (Creation) or crimson (Chaos) in code. -->
+  <FleckDef>
+    <defName>IAG_Fleck_LightBeam</defName>
+    <fleckSystemClass>FleckSystemStatic</fleckSystemClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.12</fadeInTime>
+    <solidTime>0.5</solidTime>
+    <fadeOutTime>1.4</fadeOutTime>
+    <graphicData>
+      <texPath>ImAGod/Effects/LightBeam</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </FleckDef>
+
+  <!-- A ring of light spreading over the area of a miracle. -->
+  <FleckDef>
+    <defName>IAG_Fleck_Ring</defName>
+    <fleckSystemClass>FleckSystemStatic</fleckSystemClass>
+    <altitudeLayer>MoteOverhead</altitudeLayer>
+    <fadeInTime>0.05</fadeInTime>
+    <solidTime>0.25</solidTime>
+    <fadeOutTime>1.1</fadeOutTime>
+    <growthRate>2.5</growthRate>
+    <graphicData>
+      <texPath>ImAGod/Effects/Ring</texPath>
+      <graphicClass>Graphic_Fleck</graphicClass>
+      <shaderType>MoteGlow</shaderType>
+    </graphicData>
+  </FleckDef>
+
+</Defs>

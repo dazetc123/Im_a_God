@@ -35,7 +35,8 @@ namespace ImAGod
                 ticksPrayed += delta;
                 GameComponent_Divinity divinity = GameComponent_Divinity.Instance;
                 float certainty = pawn.ideo?.Certainty ?? 0f;
-                divinity?.AddFaith(FaithPerHour * certainty * divinity.PrayerFaithFactor * delta / GenDate.TicksPerHour);
+                float holy = divinity?.HolyDayOn(pawn.Map) != null ? GameComponent_Divinity.HolyDayPrayerFactor : 1f;
+                divinity?.AddFaith(FaithPerHour * certainty * divinity.PrayerFaithFactor * holy * delta / GenDate.TicksPerHour);
                 JoyUtility.JoyTickCheckEnd(pawn, delta, JoyTickFullJoyAction.EndJob, 1f, job.targetA.Thing as Building);
             };
             pray.AddFinishAction(() =>
@@ -45,6 +46,7 @@ namespace ImAGod
                 pawn.ideo?.OffsetCertainty(CertaintyGain);
                 DivinityUtility.GainMemory(pawn, IAG_DefOf.IAG_Prayed);
                 GameComponent_Divinity.Instance?.AddDoubt(PrayerDoubt, null);
+                GameComponent_Divinity.Instance?.Notify_Prayed(pawn);
             });
             yield return pray;
         }

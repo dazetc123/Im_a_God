@@ -46,6 +46,7 @@ namespace ImAGod
                 if (Affect(pawn, map))
                 {
                     affected++;
+                    GameComponent_Divinity.Instance?.Notify_PawnBlessed(pawn, def);
                     FleckMaker.ThrowMetaIcon(pawn.Position, map, def.affects == PawnFilter.Enemies ? FleckDefOf.IncapIcon : FleckDefOf.Heart);
                 }
             }

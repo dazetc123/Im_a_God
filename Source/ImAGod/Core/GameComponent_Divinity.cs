@@ -78,6 +78,9 @@ namespace ImAGod
             ProphecyHourlyTick();
             DomainsHourlyTick();
             DemigodsHourlyTick();
+            PetitionsHourlyTick();
+            CommandmentsHourlyTick();
+            HolyDaysHourlyTick();
         }
 
         public void Recount()
@@ -238,6 +241,13 @@ namespace ImAGod
 
             if (cell.IsValid && map != null && power.witnessRadius > 0f)
                 Witness(map, cell, power.witnessRadius);
+
+            bool big = power.requiresProphet || power.minTier >= 3;
+            if (cell.IsValid && map != null)
+                DivineVfx.Miracle(map, cell, power.radius, big);
+            else
+                DivineVfx.Global(map ?? Find.CurrentMap, big);
+            Notify_MiracleWorked(map ?? Find.CurrentMap, power, cell);
         }
 
         /// <summary>Believers who see a miracle grow more certain; non-believers begin to doubt their own faith.</summary>
@@ -258,6 +268,7 @@ namespace ImAGod
                 {
                     pawn.ideo.OffsetCertainty(WitnessCertaintyGain);
                     DivinityUtility.GainMemory(pawn, IAG_DefOf.IAG_WitnessedMiracle);
+                    Notify_Witnessed(pawn);
                 }
                 else if (pawn.ideo.IdeoConversionAttempt(WitnessConversionPower, ideo))
                 {
@@ -278,6 +289,9 @@ namespace ImAGod
             ExposeRivals();
             ExposeDomains();
             ExposeDemigods();
+            ExposePetitions();
+            ExposeCommandments();
+            ExposeHolyDays();
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 lastUsedTick ??= new Dictionary<DivinePowerDef, int>();

@@ -10,6 +10,8 @@
     <color>(0.92, 0.38, 0.6)</color>
     <order>3</order>
     <blessing>IAG_Blessing_Desire</blessing>
+    <holyDay>12</holyDay>
+    <demigodTitle>enchantress</demigodTitle>
     <recordOfferings>
       <li>
         <record>PrisonersChatted</record>

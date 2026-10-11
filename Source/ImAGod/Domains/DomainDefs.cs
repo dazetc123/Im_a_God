@@ -53,6 +53,14 @@ namespace ImAGod
         /// <summary>Faith offered whenever someone on a player home map has a mental break.</summary>
         public float mentalBreakFaith;
 
+        /// <summary>Day of the year (0-59) of the domain's holy day, or -1 for none.</summary>
+        public int holyDay = -1;
+
+        /// <summary>Title of a demigod who has learned mostly from this domain.</summary>
+        public string demigodTitle;
+
+        public string HolyDayName => "IAG_HolyDayOf".Translate(label);
+
         [Unsaved] private Texture2D iconInt;
 
         public Texture2D Icon => iconInt ??= DivinityUtility.LoadIcon(iconPath);

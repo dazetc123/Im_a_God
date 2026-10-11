@@ -18,6 +18,17 @@ namespace ImAGod
         public float xp;
         public List<DivineNodeDef> learned = new List<DivineNodeDef>();
         public int ascendedTick;
+        public bool relicBestowed;
+
+        /// <summary>The demigod's title comes from the domain they have learned most from.</summary>
+        public string Title
+        {
+            get
+            {
+                DivineDomainDef main = learned.GroupBy(n => n.domain).OrderByDescending(g => g.Sum(n => n.pointCost)).FirstOrDefault()?.Key;
+                return main?.demigodTitle.NullOrEmpty() == false ? main.demigodTitle : "IAG_DemigodTitleDefault".Translate().ToString();
+            }
+        }
 
         public static float XpForLevel(int level) => BaseXpPerLevel * Mathf.Pow(XpGrowth, level - 1);
 
@@ -48,6 +59,7 @@ namespace ImAGod
             Scribe_Values.Look(ref level, "level", 1);
             Scribe_Values.Look(ref xp, "xp");
             Scribe_Values.Look(ref ascendedTick, "ascendedTick");
+            Scribe_Values.Look(ref relicBestowed, "relicBestowed");
             Scribe_Collections.Look(ref learned, "learned", LookMode.Def);
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
@@ -91,6 +103,7 @@ namespace ImAGod
                 pawn.health.AddHediff(IAG_DefOf.IAG_Demigod);
             pawn.skills?.DirtyAptitudes();
             Find.LetterStack.ReceiveLetter("IAG_AscensionLabel".Translate(), "IAG_AscensionText".Translate(pawn.Named("PAWN")), LetterDefOf.PositiveEvent, pawn);
+            DivineVfx.Miracle(pawn.Map, pawn.Position, 2f, true);
         }
 
         private void Unmake(Demigod demigod)
@@ -108,6 +121,59 @@ namespace ImAGod
                     pawn.abilities?.RemoveAbility(node.ability);
             }
             pawn.skills?.DirtyAptitudes();
+        }
+
+        public const int DemigodRespecCost = 100;
+        public const int RelicCost = 250;
+
+        public AcceptanceReport CanRespecDemigod(Demigod demigod)
+        {
+            if (demigod.learned.Count == 0)
+                return "IAG_Reason_NothingToReset".Translate();
+            if (faith < DemigodRespecCost)
+                return "IAG_Reason_NotEnoughFaith".Translate(DemigodRespecCost);
+            return true;
+        }
+
+        public void RespecDemigod(Demigod demigod)
+        {
+            if (!CanRespecDemigod(demigod).Accepted)
+                return;
+            faith -= DemigodRespecCost;
+            foreach (DivineNodeDef node in demigod.learned)
+            {
+                if (node.ability != null)
+                    demigod.pawn.abilities?.RemoveAbility(node.ability);
+            }
+            demigod.learned.Clear();
+            Messages.Message("IAG_DemigodReset".Translate(demigod.pawn.Named("PAWN")), demigod.pawn, MessageTypeDefOf.NeutralEvent, false);
+        }
+
+        public AcceptanceReport CanBestowRelic(Demigod demigod)
+        {
+            if (demigod.relicBestowed)
+                return "IAG_Reason_RelicGiven".Translate(demigod.pawn.Named("PAWN"));
+            if (!demigod.pawn.Spawned)
+                return "IAG_Reason_NotHere".Translate(demigod.pawn.Named("PAWN"));
+            if (faith < RelicCost)
+                return "IAG_Reason_NotEnoughFaith".Translate(RelicCost);
+            return true;
+        }
+
+        /// <summary>Gives a demigod a legendary divine blade, forged in the colour of the god's path.</summary>
+        public void BestowRelic(Demigod demigod)
+        {
+            if (!CanBestowRelic(demigod).Accepted)
+                return;
+            faith -= RelicCost;
+            demigod.relicBestowed = true;
+            ThingDef def = DefDatabase<ThingDef>.GetNamed(path?.defName == "IAG_Path_Chaos" ? "IAG_Bloodblade" : "IAG_Sunblade");
+            Thing relic = ThingMaker.MakeThing(def);
+            relic.TryGetComp<CompQuality>()?.SetQuality(QualityCategory.Legendary, ArtGenerationContext.Outsider);
+            Pawn pawn = demigod.pawn;
+            GenPlace.TryPlaceThing(relic, pawn.Position, pawn.Map, ThingPlaceMode.Near);
+            DivineVfx.Miracle(pawn.Map, relic.Position, 1.5f, true);
+            Find.LetterStack.ReceiveLetter("IAG_RelicLabel".Translate(), "IAG_RelicText".Translate(pawn.Named("PAWN"), relic.LabelCap), LetterDefOf.PositiveEvent, relic);
         }
 
         public AcceptanceReport CanLearn(Demigod demigod, DivineNodeDef node)
@@ -161,6 +227,9 @@ namespace ImAGod
             DemigodFor(pawn)?.GainXp(cost * DemigodXpPerFaithSpent);
             if (target.IsValid && pawn.MapHeld != null && power.witnessRadius > 0f)
                 Witness(pawn.MapHeld, target.Cell, power.witnessRadius);
+            if (target.IsValid && pawn.MapHeld != null)
+                DivineVfx.Miracle(pawn.MapHeld, target.Cell, power.radius, false);
+            Notify_MiracleWorked(pawn.MapHeld, power, target.IsValid ? target.Cell : IntVec3.Invalid);
         }
 
         private void DemigodsHourlyTick()
@@ -280,7 +349,7 @@ namespace ImAGod
             get
             {
                 Demigod demigod = GameComponent_Divinity.Instance?.DemigodFor(Pawn);
-                return demigod == null ? null : "IAG_DemigodLevelShort".Translate(demigod.level).ToString();
+                return demigod == null ? null : "IAG_DemigodLevelShort".Translate(demigod.level) + " · " + demigod.Title;
             }
         }
     }

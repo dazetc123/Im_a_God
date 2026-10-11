@@ -43,6 +43,11 @@ namespace ImAGod
             Widgets.Label(new Rect(header.x, header.y + 24f, 330f, 24f), "IAG_DomainSlots".Translate(divinity.domains.Count, divinity.DomainSlots));
             if (divinity.CanEmbraceDomain && Widgets.ButtonText(new Rect(header.xMax - 220f, header.y + 6f, 220f, 34f), "IAG_EmbraceButton".Translate()))
                 Find.WindowStack.Add(new Dialog_ChooseDivinity(divinity.path));
+            Rect respec = new Rect(header.xMax - (divinity.CanEmbraceDomain ? 450f : 220f), header.y + 6f, 220f, 34f);
+            AcceptanceReport canRespec = divinity.CanRespec();
+            if (Widgets.ButtonText(respec, "IAG_RespecButton".Translate(divinity.RespecCost), active: canRespec.Accepted) && canRespec.Accepted)
+                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("IAG_ConfirmRespec".Translate(divinity.RespecCost), divinity.Respec, destructive: true));
+            TooltipHandler.TipRegion(respec, canRespec.Accepted ? "IAG_RespecTip".Translate().ToString() : canRespec.Reason);
 
             Rect tree = new Rect(rect.x, header.yMax + 6f, rect.width, rect.height - header.height - 6f);
             DrawTrees(tree, divinity.domains, d => d.GodNodes, divinity.IsUnlocked, divinity.CanUnlock, node =>
@@ -86,9 +91,23 @@ namespace ImAGod
             if (selectedDemigod == null)
                 return;
             Demigod selected = selectedDemigod;
-            Widgets.Label(new Rect(treeRect.x, treeRect.y, treeRect.width, 24f),
+            Widgets.Label(new Rect(treeRect.x, treeRect.y, treeRect.width - 380f, 24f),
                 "IAG_DemigodPoints".Translate(selected.pawn.Named("PAWN"), selected.Points, selected.level));
-            Rect tree = new Rect(treeRect.x, treeRect.y + 28f, treeRect.width, treeRect.height - 28f);
+            GUI.color = UnlockedColor;
+            Widgets.Label(new Rect(treeRect.x, treeRect.y + 22f, treeRect.width - 380f, 22f), selected.Title);
+            GUI.color = Color.white;
+            Rect relicButton = new Rect(treeRect.xMax - 370f, treeRect.y, 180f, 34f);
+            AcceptanceReport canRelic = divinity.CanBestowRelic(selected);
+            if (Widgets.ButtonText(relicButton, "IAG_RelicButton".Translate(GameComponent_Divinity.RelicCost), active: canRelic.Accepted) && canRelic.Accepted)
+                divinity.BestowRelic(selected);
+            TooltipHandler.TipRegion(relicButton, canRelic.Accepted ? "IAG_RelicTip".Translate().ToString() : canRelic.Reason);
+            Rect resetButton = new Rect(treeRect.xMax - 180f, treeRect.y, 180f, 34f);
+            AcceptanceReport canReset = divinity.CanRespecDemigod(selected);
+            if (Widgets.ButtonText(resetButton, "IAG_DemigodResetButton".Translate(GameComponent_Divinity.DemigodRespecCost), active: canReset.Accepted) && canReset.Accepted)
+                Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation("IAG_ConfirmDemigodReset".Translate(selected.pawn.Named("PAWN"), GameComponent_Divinity.DemigodRespecCost), () => divinity.RespecDemigod(selected), destructive: true));
+            if (!canReset.Accepted)
+                TooltipHandler.TipRegion(resetButton, canReset.Reason);
+            Rect tree = new Rect(treeRect.x, treeRect.y + 46f, treeRect.width, treeRect.height - 46f);
             DrawTrees(tree, divinity.domains, d => d.DemigodNodes, selected.Knows, n => divinity.CanLearn(selected, n), node =>
             {
                 Find.WindowStack.Add(Dialog_MessageBox.CreateConfirmation(
@@ -107,7 +126,7 @@ namespace ImAGod
             Rect text = new Rect(portrait.xMax + 6f, rect.y + 4f, rect.width - portrait.width - 12f, rect.height - 8f);
             Widgets.Label(new Rect(text.x, text.y, text.width, 22f), demigod.pawn.LabelShortCap);
             Text.Font = GameFont.Tiny;
-            Widgets.Label(new Rect(text.x, text.y + 22f, text.width, 16f), "IAG_DemigodLevelShort".Translate(demigod.level) + "  ·  " + "IAG_PointsShort".Translate(demigod.Points));
+            Widgets.Label(new Rect(text.x, text.y + 22f, text.width, 16f), "IAG_DemigodLevelShort".Translate(demigod.level) + " · " + demigod.Title);
             Text.Font = GameFont.Small;
             Rect bar = new Rect(text.x, text.y + 42f, text.width, 12f);
             Widgets.FillableBar(bar, demigod.level >= Demigod.MaxLevel ? 1f : demigod.xp / demigod.XpToNext, XpBarTex);

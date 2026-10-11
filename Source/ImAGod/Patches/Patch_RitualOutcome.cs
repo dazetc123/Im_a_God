@@ -42,7 +42,8 @@ namespace ImAGod
                     return;
 
                 float quality = Mathf.Clamp01(getQuality(__instance, jobRitual, progress));
-                float gained = divinity.AddFaith((BaseFaith + FaithPerBeliever * believers) * (MinQualityFactor + quality));
+                float holy = divinity.HolyDayOn(jobRitual.Map) != null ? GameComponent_Divinity.HolyDayRitualFactor : 1f;
+                float gained = divinity.AddFaith((BaseFaith + FaithPerBeliever * believers) * (MinQualityFactor + quality) * holy);
                 if (gained > 0f)
                     Messages.Message("IAG_RitualFaith".Translate(jobRitual.Ritual.LabelCap, gained.ToString("0")), MessageTypeDefOf.PositiveEvent, false);
                 if (quality < PoorQuality)

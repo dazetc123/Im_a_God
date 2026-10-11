@@ -10,6 +10,8 @@
     <color>(0.55, 0.78, 0.3)</color>
     <order>1</order>
     <blessing>IAG_Blessing_Harvest</blessing>
+    <holyDay>37</holyDay>
+    <demigodTitle>harvest saint</demigodTitle>
     <recordOfferings>
       <li>
         <record>PlantsHarvested</record>

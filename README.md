@@ -81,6 +81,33 @@ Phép chung, ai cũng có: Thiên nhãn, Mana trời, Thiên khải, Thần chi�
 - **Trực thuộc thần:** kỹ năng của Á thần là nút bấm như psycast nhưng **tiêu đức tin của bạn**, và chỉ học được từ các lĩnh vực bạn đã nhận.
 - Á thần chết thì nghi ngờ +15. Nếu bỏ đạo hoặc rời colony, họ mất thần lực.
 
+## Đời sống tôn giáo
+
+- **Lời cầu xin:** thỉnh thoảng một tín đồ cầu xin một điều cụ thể: chữa bệnh, thức ăn, che chở khi bị raid, một dấu hiệu khi đang hoài nghi, hoặc chấm dứt thời tiết xấu.
+  - Đáp lại đúng loại phép trước hạn chót: +đức tin, −8 nghi ngờ, người đó +10% certainty và +8 mood.
+  - Bỏ qua: +6 nghi ngờ, −6 mood.
+  - Nếu việc được giải quyết bằng cách thường (thuốc, nấu ăn, thời tiết tự hết) thì không thưởng cũng không phạt.
+- **Thiên luật:** ban một điều răn có thời hạn từ trang *Prophecies & faith*, mỗi lần một điều, cách nhau 5 ngày.
+  - Loại *cấm*: bị phá ngay khi có một tín đồ vi phạm. Ví dụ: kiêng thịt, kiêng chất kích thích, không giết người.
+  - Loại *nhiệm vụ*: hoàn thành khi đạt chỉ tiêu. Ví dụ: cầu nguyện, xây dựng, thu hoạch, đổ máu, hoan lạc, phá dỡ.
+  - Giữ được: được đức tin và mood. Thất bại: tăng nghi ngờ.
+- **Ngày lễ thánh:** mỗi lĩnh vực có một ngày lễ trong năm. Hôm đó nghi lễ ×2 đức tin, cầu nguyện ×1.5, tín đồ +6 mood.
+- **Bệ tế máu (chỉ Hỗn mang):** chọn bệ, chọn tù nhân hoặc gia súc để dâng.
+  - Nhà tiên tri, hoặc một tín đồ khác, thực hiện nghi lễ.
+  - Tù nhân dâng 90–220 đức tin, động vật tính theo kích thước.
+
+## Hiệu ứng phép lạ
+
+Mỗi phép có cột sáng rơi xuống mục tiêu, vòng sáng lan theo bán kính, tia lửa và âm thanh thần thánh. Màu vàng cho Sáng tạo, màu đỏ thẫm cho Hỗn mang. Phép lớn còn có sấm và rung màn hình.
+
+## Đặt lại và Á thần
+
+- **Tái hiến:** quên mọi phép đã mở và nhận lại điểm thần lực. Giá 150 + 50 × thần cấp đức tin.
+- **Đặt lại kỹ năng Á thần:** 100 đức tin.
+- **Danh hiệu Á thần** theo lĩnh vực họ học nhiều nhất: Thánh kỵ sĩ, Thánh y, Kẻ gặt máu, Tiên tri điên…
+- Á thần có **vầng hào quang** sáng trên đầu.
+- **Thánh khí:** mỗi Á thần được ban một lần, giá 250 đức tin, chất lượng Huyền thoại. Sáng tạo nhận *Kiếm Mặt Trời* (đốt cháy, tăng tốc chạy); Hỗn mang nhận *Kiếm Máu* (sát thương cao, né đòn).
+
 ## Tiên tri và storyteller
 
 Thiên nhãn **không tạo thêm threat**, với bất kỳ storyteller nào (Cassandra, Phoebe, Randy, hay storyteller của mod khác dùng hệ thống incident của vanilla):
@@ -149,7 +176,10 @@ Source/ImAGod/         mã nguồn C#
   Core/                GameComponent_Divinity (trạng thái), Def, settings, tiện ích
   Crisis/              nghi ngờ, dị giáo, thought khủng hoảng đức tin
   Domains/             con đường, lĩnh vực, cây phép, hộp thoại chọn
-  Demigods/            Á thần, kỹ năng (CompAbilityEffect_DivinePower), Thăng hoa
+  Demigods/            Á thần, kỹ năng (CompAbilityEffect_DivinePower), Thăng hoa, thánh khí
+  Petitions/           lời cầu xin
+  Commandments/        thiên luật
+  Sacrifice/           bệ tế máu
   Rivals/              thần đối thủ, can thiệp, champion
   Prophecy/            Thiên nhãn: giữ và báo trước sự kiện
   Powers/              DivinePowerWorker và các phép

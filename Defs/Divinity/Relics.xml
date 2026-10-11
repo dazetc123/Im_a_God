@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef Name="IAG_RelicBlade" Abstract="True">
+    <thingClass>ThingWithComps</thingClass>
+    <category>Item</category>
+    <drawGUIOverlay>true</drawGUIOverlay>
+    <altitudeLayer>Item</altitudeLayer>
+    <alwaysHaulable>true</alwaysHaulable>
+    <tickerType>Never</tickerType>
+    <selectable>true</selectable>
+    <useHitPoints>true</useHitPoints>
+    <pathCost>14</pathCost>
+    <techLevel>Ultra</techLevel>
+    <equipmentType>Primary</equipmentType>
+    <equippedAngleOffset>-65</equippedAngleOffset>
+    <tradeability>None</tradeability>
+    <thingCategories>
+      <li>WeaponsMelee</li>
+    </thingCategories>
+    <weaponTags>
+      <li>IAG_DivineRelic</li>
+    </weaponTags>
+    <statBases>
+      <MaxHitPoints>400</MaxHitPoints>
+      <Mass>1.8</Mass>
+      <MarketValue>4000</MarketValue>
+      <Flammability>0</Flammability>
+      <DeteriorationRate>0</DeteriorationRate>
+    </statBases>
+    <comps>
+      <li Class="CompProperties_Forbiddable" />
+      <li>
+        <compClass>CompEquippable</compClass>
+      </li>
+      <li>
+        <compClass>CompQuality</compClass>
+      </li>
+    </comps>
+  </ThingDef>
+
+  <ThingDef ParentName="IAG_RelicBlade">
+    <defName>IAG_Sunblade</defName>
+    <label>sunblade</label>
+    <description>A blade of living light, bestowed by a god of creation upon its demigod. It burns those it cuts and quickens the step of its bearer.</description>
+    <graphicData>
+      <texPath>ImAGod/Things/Sunblade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <equippedStatOffsets>
+      <MeleeHitChance>4</MeleeHitChance>
+      <MoveSpeed>0.3</MoveSpeed>
+      <MentalBreakThreshold>-0.05</MentalBreakThreshold>
+    </equippedStatOffsets>
+    <tools>
+      <li>
+        <label>radiant edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>28</power>
+        <cooldownTime>1.7</cooldownTime>
+        <armorPenetration>0.7</armorPenetration>
+        <extraMeleeDamages>
+          <li>
+            <def>Burn</def>
+            <amount>8</amount>
+            <chance>1</chance>
+          </li>
+        </extraMeleeDamages>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>24</power>
+        <cooldownTime>1.7</cooldownTime>
+        <armorPenetration>0.8</armorPenetration>
+      </li>
+    </tools>
+  </ThingDef>
+
+  <ThingDef ParentName="IAG_RelicBlade">
+    <defName>IAG_Bloodblade</defName>
+    <label>bloodblade</label>
+    <description>A crimson blade that drinks deep, bestowed by a god of chaos upon its demigod. It strikes savagely and drives its bearer on.</description>
+    <graphicData>
+      <texPath>ImAGod/Things/Bloodblade</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+    </graphicData>
+    <equippedStatOffsets>
+      <MeleeHitChance>3</MeleeHitChance>
+      <MeleeDodgeChance>4</MeleeDodgeChance>
+      <PainShockThreshold>0.2</PainShockThreshold>
+    </equippedStatOffsets>
+    <tools>
+      <li>
+        <label>hungering edge</label>
+        <capacities>
+          <li>Cut</li>
+        </capacities>
+        <power>34</power>
+        <cooldownTime>1.9</cooldownTime>
+        <armorPenetration>0.65</armorPenetration>
+      </li>
+      <li>
+        <label>point</label>
+        <capacities>
+          <li>Stab</li>
+        </capacities>
+        <power>26</power>
+        <cooldownTime>1.8</cooldownTime>
+        <armorPenetration>0.75</armorPenetration>
+      </li>
+    </tools>
+  </ThingDef>
+
+</Defs>

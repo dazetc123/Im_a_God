@@ -10,6 +10,8 @@
     <color>(0.55, 0.68, 0.25)</color>
     <order>5</order>
     <blessing>IAG_Blessing_Plague</blessing>
+    <holyDay>48</holyDay>
+    <demigodTitle>plague herald</demigodTitle>
     <recordOfferings>
       <li>
         <record>TimesTendedTo</record>

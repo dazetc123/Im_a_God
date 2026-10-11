@@ -10,6 +10,8 @@
     <color>(0.4, 0.62, 0.92)</color>
     <order>2</order>
     <blessing>IAG_Blessing_Protection</blessing>
+    <holyDay>52</holyDay>
+    <demigodTitle>holy guardian</demigodTitle>
     <recordOfferings>
       <li>
         <record>PawnsDowned</record>

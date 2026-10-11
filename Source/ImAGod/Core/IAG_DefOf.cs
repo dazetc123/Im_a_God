@@ -12,6 +12,13 @@ namespace ImAGod
         public static HediffDef IAG_Champion;
         public static HediffDef IAG_Demigod;
         public static MainButtonDef IAG_Divinity;
+        public static FleckDef IAG_Fleck_LightBeam;
+        public static FleckDef IAG_Fleck_Ring;
+        public static ThoughtDef IAG_PrayerAnswered;
+        public static ThoughtDef IAG_PrayerIgnored;
+        public static ThoughtDef IAG_WitnessedSacrifice;
+        public static ThoughtDef IAG_CommandmentKept;
+        public static JobDef IAG_Sacrifice;
 
         static IAG_DefOf()
         {

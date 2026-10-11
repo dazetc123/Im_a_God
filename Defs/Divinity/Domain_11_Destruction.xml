@@ -10,6 +10,8 @@
     <color>(0.95, 0.42, 0.15)</color>
     <order>1</order>
     <blessing>IAG_Blessing_Destruction</blessing>
+    <holyDay>27</holyDay>
+    <demigodTitle>ruinbringer</demigodTitle>
     <recordOfferings>
       <li>
         <record>ThingsDeconstructed</record>

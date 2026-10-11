@@ -79,6 +79,27 @@ namespace ImAGod
             Messages.Message("IAG_Node_Unlocked".Translate(node.LabelCap, node.domain.label), MessageTypeDefOf.PositiveEvent, false);
         }
 
+        public int RespecCost => 150 + 50 * TierLevel;
+
+        public AcceptanceReport CanRespec()
+        {
+            if (unlockedNodes.Count == 0)
+                return "IAG_Reason_NothingToReset".Translate();
+            if (faith < RespecCost)
+                return "IAG_Reason_NotEnoughFaith".Translate(RespecCost);
+            return true;
+        }
+
+        /// <summary>Re-sanctification: forget every unlocked miracle and get the divine points back, for a price in faith.</summary>
+        public void Respec()
+        {
+            if (!CanRespec().Accepted)
+                return;
+            faith -= RespecCost;
+            unlockedNodes.Clear();
+            Messages.Message("IAG_RespecDone".Translate(), MessageTypeDefOf.NeutralEvent, false);
+        }
+
         public void ChoosePath(DivinePathDef chosen, DivineDomainDef firstDomain)
         {
             if (HasPath)
@@ -182,7 +203,10 @@ namespace ImAGod
         /// <summary>A follower's deed recorded in their records, such as a harvest or a kill.</summary>
         public void Notify_Record(Pawn pawn, RecordDef record, float amount)
         {
-            if (domains.Count == 0 || amount <= 0f)
+            if (amount <= 0f)
+                return;
+            CommandmentRecord(pawn, record, amount);
+            if (domains.Count == 0)
                 return;
             EnsureOfferings();
             if (!recordOfferingCache.TryGetValue(record, out float faith))
@@ -194,6 +218,7 @@ namespace ImAGod
 
         public void Notify_Thought(Pawn pawn, ThoughtDef thought)
         {
+            CommandmentThought(pawn, thought);
             if (domains.Count == 0)
                 return;
             EnsureOfferings();

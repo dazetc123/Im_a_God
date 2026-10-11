@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!--
+    Commandments the god may lay on its followers from the "Prophecies & faith" page. One at a time, 5 days apart.
+    ForbidRecord / ForbidIngest: broken at once by a single follower's deed; kept if the time runs out unbroken.
+    GoalRecord / GoalThought / GoalPrayers: kept as soon as the goal (goalFlat + goalPerFollower x followers) is reached.
+    path: only offered to gods of that path (omit for any).
+  -->
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Fast</defName>
+    <label>fast of purity</label>
+    <description>No follower may eat meat, or any meal made with meat.</description>
+    <workerClass>ImAGod.CommandmentWorker_ForbidIngest</workerClass>
+    <forbid>Meat</forbid>
+    <durationDays>3</durationDays>
+    <rewardFaith>70</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Sobriety</defName>
+    <label>sobriety</label>
+    <description>No follower may take any drug, beer and smokeleaf included.</description>
+    <workerClass>ImAGod.CommandmentWorker_ForbidIngest</workerClass>
+    <forbid>Drug</forbid>
+    <durationDays>4</durationDays>
+    <rewardFaith>60</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Devotion</defName>
+    <label>devotion</label>
+    <description>The followers must pray at the shrines, twice each.</description>
+    <workerClass>ImAGod.CommandmentWorker_GoalPrayers</workerClass>
+    <goalPerFollower>2</goalPerFollower>
+    <durationDays>3</durationDays>
+    <rewardFaith>80</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Peace</defName>
+    <label>peace</label>
+    <description>No follower may take a human life.</description>
+    <workerClass>ImAGod.CommandmentWorker_ForbidRecord</workerClass>
+    <path>IAG_Path_Creation</path>
+    <record>KillsHumanlikes</record>
+    <durationDays>4</durationDays>
+    <rewardFaith>80</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Labor</defName>
+    <label>holy labour</label>
+    <description>The followers must raise buildings in their god's name: 8 constructions each.</description>
+    <workerClass>ImAGod.CommandmentWorker_GoalRecord</workerClass>
+    <path>IAG_Path_Creation</path>
+    <record>ThingsConstructed</record>
+    <goalPerFollower>8</goalPerFollower>
+    <durationDays>3</durationDays>
+    <rewardFaith>90</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Abundance</defName>
+    <label>abundance</label>
+    <description>The followers must bring in a great harvest: 40 plants each.</description>
+    <workerClass>ImAGod.CommandmentWorker_GoalRecord</workerClass>
+    <path>IAG_Path_Creation</path>
+    <record>PlantsHarvested</record>
+    <goalPerFollower>40</goalPerFollower>
+    <durationDays>4</durationDays>
+    <rewardFaith>80</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Bloodshed</defName>
+    <label>bloodshed</label>
+    <description>The god thirsts. The followers must slay 6 people.</description>
+    <workerClass>ImAGod.CommandmentWorker_GoalRecord</workerClass>
+    <path>IAG_Path_Chaos</path>
+    <record>KillsHumanlikes</record>
+    <goalFlat>6</goalFlat>
+    <durationDays>5</durationDays>
+    <rewardFaith>120</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Revelry</defName>
+    <label>revelry</label>
+    <description>The god delights in pleasure. The followers must share 4 nights of lovin'.</description>
+    <workerClass>ImAGod.CommandmentWorker_GoalThought</workerClass>
+    <path>IAG_Path_Chaos</path>
+    <thought>GotSomeLovin</thought>
+    <goalFlat>4</goalFlat>
+    <durationDays>5</durationDays>
+    <rewardFaith>90</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+  <ImAGod.CommandmentDef>
+    <defName>IAG_Cmd_Ruin</defName>
+    <label>ruin</label>
+    <description>Tear down the works of the past: the followers must deconstruct 10 things.</description>
+    <workerClass>ImAGod.CommandmentWorker_GoalRecord</workerClass>
+    <path>IAG_Path_Chaos</path>
+    <record>ThingsDeconstructed</record>
+    <goalFlat>10</goalFlat>
+    <durationDays>3</durationDays>
+    <rewardFaith>70</rewardFaith>
+  </ImAGod.CommandmentDef>
+
+</Defs>

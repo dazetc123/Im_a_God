@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ThingDef ParentName="BuildingBase">
+    <defName>IAG_SacrificialAltar</defName>
+    <label>altar of blood</label>
+    <description>A stone altar with channels for blood. A god of the path of chaos accepts sacrifices made by its followers: select the altar and choose a prisoner or one of the colony's animals to offer. The prophet, or another follower, performs the rite.\n\nA prisoner offers 90 faith or more, an animal according to its size.</description>
+    <thingClass>ImAGod.Building_SacrificialAltar</thingClass>
+    <graphicData>
+      <texPath>ImAGod/Buildings/SacrificialAltar</texPath>
+      <graphicClass>Graphic_Single</graphicClass>
+      <shaderType>CutoutComplex</shaderType>
+      <drawSize>(2.4,1.6)</drawSize>
+      <shadowData>
+        <volume>(1.8,0.4,0.6)</volume>
+      </shadowData>
+    </graphicData>
+    <altitudeLayer>Building</altitudeLayer>
+    <passability>PassThroughOnly</passability>
+    <pathCost>42</pathCost>
+    <fillPercent>0.45</fillPercent>
+    <rotatable>false</rotatable>
+    <size>(2,1)</size>
+    <designationCategory>Misc</designationCategory>
+    <stuffCategories>
+      <li>Stony</li>
+    </stuffCategories>
+    <costStuffCount>120</costStuffCount>
+    <statBases>
+      <MaxHitPoints>250</MaxHitPoints>
+      <WorkToBuild>4000</WorkToBuild>
+      <Mass>60</Mass>
+      <Flammability>0</Flammability>
+      <Beauty>-4</Beauty>
+    </statBases>
+    <constructionSkillPrerequisite>4</constructionSkillPrerequisite>
+    <placeWorkers>
+      <li>ImAGod.PlaceWorker_ChaosOnly</li>
+    </placeWorkers>
+  </ThingDef>
+
+</Defs>
