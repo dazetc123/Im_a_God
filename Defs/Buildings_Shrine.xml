@@ -9,6 +9,8 @@
     <graphicData>
       <texPath>ImAGod/Buildings/DivineShrine</texPath>
       <graphicClass>Graphic_Multi</graphicClass>
+      <!-- the _m masks tint the stone with the building's stuff and keep the bronze halo as drawn -->
+      <shaderType>CutoutComplex</shaderType>
       <drawSize>(1.8,1.8)</drawSize>
       <shadowData>
         <volume>(0.6,0.5,0.5)</volume>
