@@ -120,7 +120,7 @@ namespace ImAGod
         private bool FoodShort(Map map) =>
             map.resourceCounter.TotalHumanEdibleNutrition < 3f * map.mapPawns.FreeColonistsSpawnedCount;
 
-        private bool TryIssue(PetitionKind kind, Map map, int hours)
+        private bool TryIssue(PetitionKind kind, Map map, int hours, bool force = false)
         {
             if (petitions.Any(p => p.kind == kind))
                 return false;
@@ -147,6 +147,8 @@ namespace ImAGod
                     pawn = followers.Where(p => !p.Downed).RandomElementWithFallback();
                     break;
             }
+            if (pawn == null && force)
+                pawn = followers.RandomElementWithFallback();
             if (pawn == null)
                 return false;
 

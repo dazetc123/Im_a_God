@@ -104,6 +104,8 @@ namespace ImAGod
                 .Where(t => followerCount >= t.minFollowers && lifetimeFaith >= t.minLifetimeFaith)
                 .OrderByDescending(t => t.level)
                 .FirstOrDefault();
+            if (devTierOverride >= 0)
+                tier = DefDatabase<DivinityTierDef>.AllDefsListForReading.FirstOrDefault(t => t.level == devTierOverride);
             // Without a tier (no followers) faith is frozen rather than lost.
             if (tier != null && faith > FaithCap)
                 faith = FaithCap;
@@ -121,12 +123,12 @@ namespace ImAGod
             return amount;
         }
 
-        public int CostOf(DivinePowerDef power) =>
+        public int CostOf(DivinePowerDef power) => DevFreeMiracles ? 0 :
             Mathf.RoundToInt(power.faithCost * ImAGodMod.Settings.powerCostMultiplier * (1f + StrainCostFactor * strain));
 
         public int CooldownTicksLeft(DivinePowerDef power)
         {
-            if (!lastUsedTick.TryGetValue(power, out int last))
+            if (DevFreeMiracles || !lastUsedTick.TryGetValue(power, out int last))
                 return 0;
             return Mathf.Max(0, last + Mathf.RoundToInt(power.cooldownDays * GenDate.TicksPerDay) - Find.TickManager.TicksGame);
         }
@@ -292,6 +294,7 @@ namespace ImAGod
             ExposePetitions();
             ExposeCommandments();
             ExposeHolyDays();
+            ExposeDev();
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 lastUsedTick ??= new Dictionary<DivinePowerDef, int>();

@@ -19,6 +19,8 @@ namespace ImAGod
         {
             if (map == null)
                 return null;
+            if (devHolyDay != null && Find.TickManager.TicksGame < devHolyDayEndTick)
+                return devHolyDay;
             int day = GenLocalDate.DayOfYear(map);
             return domains.FirstOrDefault(d => d.holyDay == day);
         }

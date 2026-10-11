@@ -33,7 +33,7 @@ namespace ImAGod
 
         public bool CanEmbraceDomain => HasPath && domains.Count < DomainSlots && path.Domains.Any(d => !domains.Contains(d));
 
-        public int TotalPoints => TierPoints[Mathf.Clamp(highestTier, 0, 4)] + Mathf.Min(MaxBonusPoints, Mathf.FloorToInt(lifetimeFaith / FaithPerBonusPoint));
+        public int TotalPoints => TierPoints[Mathf.Clamp(highestTier, 0, 4)] + Mathf.Min(MaxBonusPoints, Mathf.FloorToInt(lifetimeFaith / FaithPerBonusPoint)) + devBonusPoints;
 
         public int SpentPoints => unlockedNodes.Sum(n => n.pointCost);
 

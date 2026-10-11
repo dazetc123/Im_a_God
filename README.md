@@ -163,6 +163,20 @@ Can thiệp của thần đối thủ **là sự kiện thêm**, nằm ngoài st
 
 **Mod settings:** chỉnh hệ số nhận đức tin, hệ số giá phép, bật/tắt Thiên nhãn, bật/tắt khủng hoảng đức tin, và mức hoạt động của thần đối thủ (0 = tắt).
 
+## Dev mode (để test)
+
+Bật **Development mode** trong Options → mở nút **Debug actions** (biểu tượng bánh răng trên thanh dev) → gõ tìm `I'm a God`. Mọi công cụ đều nằm trong mục đó:
+
+| Nhóm | Công cụ |
+|---|---|
+| Đức tin & cấp | Faith +100 / +1000, đầy đức tin, về 0; **ép thần cấp** 0–4 (hoặc trả về tự động); +5 điểm thần; **phép miễn phí** (không tốn đức tin, không cooldown, bật/tắt); xoá cooldown, căng thẳng và trạng thái truyền thần của nhà tiên tri; ghi toàn bộ trạng thái ra log |
+| Con đường | Đặt lại con đường và lĩnh vực (mở lại hộp thoại chọn); nhận lĩnh vực bất kỳ bỏ qua giới hạn ô; mở khoá mọi phép của các lĩnh vực đang có; quên hết phép miễn phí |
+| Khủng hoảng & đối thủ | Nghi ngờ +25 / −25 / về 0; gây dị giáo ngay; thần đối thủ +300 sức mạnh; chọn thần đối thủ và can thiệp để chạy ngay (bị Thiên nhãn báo trước nếu đang bật) |
+| Đời sống tôn giáo | Bật Thiên nhãn 3 ngày; tạo lời cầu xin theo loại (bỏ qua điều kiện); cho mọi lời cầu xin hết hạn; ban thiên luật bỏ qua cooldown; kết thúc thiên luật (giữ / phạm); xoá cooldown thiên luật; biến hôm nay thành ngày thánh của lĩnh vực bất kỳ |
+| Công cụ chọn pawn | Biến thành tín đồ (certainty 100%); phong Á thần bỏ qua giới hạn; Á thần +1 cấp / cấp tối đa; cho ban thánh khí lại; giáng Á thần về người thường; biến pawn thành champion của thần đối thủ |
+
+Ép thần cấp được lưu vào save cho tới khi chọn lại "Automatic". Phép miễn phí không được lưu, khởi động lại game là tắt.
+
 ## Cấu trúc thư mục
 
 ```
@@ -186,6 +200,7 @@ Source/ImAGod/         mã nguồn C#
   Prayer/              JobDriver_Pray, JoyGiver_Pray
   Patches/             Harmony: Storyteller.TryFire, IncidentQueue, nghi lễ, Pawn.Kill
   UI/                  MainTabWindow_Divinity
+  Dev/                 công cụ Dev mode (debug actions)
 ```
 
 ### Thêm phép mới
@@ -217,5 +232,6 @@ Copy (hoặc tạo symlink) cả thư mục repo vào `RimWorld/Mods/ImAGod`. B�
 - [x] Khủng hoảng đức tin và dị giáo
 - [x] Thần đối thủ: can thiệp, champion, Thần chiến
 - [x] Con đường Sáng tạo / Hỗn mang, 11 lĩnh vực, cây phép, Á thần
+- [x] Công cụ Dev mode
 - [ ] Bản dịch tiếng Việt
 - [ ] Ảnh preview cho Steam Workshop
