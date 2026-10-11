@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Harvest</defName>
+    <label>harvest</label>
+    <description>The god of fields, herds and plenty. Its faithful offer it every harvest, and it answers with fertile soil and swelling crops.</description>
+    <path>IAG_Path_Creation</path>
+    <iconPath>ImAGod/Domains/Harvest/Domain</iconPath>
+    <color>(0.55, 0.78, 0.3)</color>
+    <order>1</order>
+    <blessing>IAG_Blessing_Harvest</blessing>
+    <recordOfferings>
+      <li>
+        <record>PlantsHarvested</record>
+        <faith>0.5</faith>
+      </li>
+      <li>
+        <record>PlantsSown</record>
+        <faith>0.1</faith>
+      </li>
+      <li>
+        <record>AnimalsTamed</record>
+        <faith>3</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Harvest</defName>
+    <label>blessing of the harvest</label>
+    <description>Plants grow for those blessed by the harvest god. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.55, 0.78, 0.3)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <PlantHarvestYield>0.03</PlantHarvestYield>
+        </statOffsets>
+        <statFactors>
+          <PlantWorkSpeed>1.05</PlantWorkSpeed>
+          <AnimalGatherYield>1.05</AnimalGatherYield>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <PlantHarvestYield>0.06</PlantHarvestYield>
+        </statOffsets>
+        <statFactors>
+          <PlantWorkSpeed>1.1</PlantWorkSpeed>
+          <AnimalGatherYield>1.1</AnimalGatherYield>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <PlantHarvestYield>0.09</PlantHarvestYield>
+        </statOffsets>
+        <statFactors>
+          <PlantWorkSpeed>1.15</PlantWorkSpeed>
+          <AnimalGatherYield>1.15</AnimalGatherYield>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PlantHarvestYield>0.12</PlantHarvestYield>
+        </statOffsets>
+        <statFactors>
+          <PlantWorkSpeed>1.2</PlantWorkSpeed>
+          <AnimalGatherYield>1.2</AnimalGatherYield>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_FertileGround</defName>
+    <label>fertile ground</label>
+    <description>Turns poor ground around the target into rich soil.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Terrain</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/sprout</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>3.9</radius>
+    <terrain>SoilRich</terrain>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Harvest_FertileGround</defName>
+    <label>fertile ground</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_FertileGround</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_GiftOfFields</defName>
+    <label>gift of the fields</label>
+    <description>Sacks of potatoes fall from the sky; more for more followers.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/sack</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <amount>20</amount>
+    <amountPerFollower>4</amountPerFollower>
+    <thingDef>RawPotatoes</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Harvest_GiftOfFields</defName>
+    <label>gift of the fields</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_GiftOfFields</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Harvest_Bounty</defName>
+    <label>Bounty</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_Bounty</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Harvest_FertileGround</li>
+      <li>IAG_Node_Harvest_GiftOfFields</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_NourishingRain</defName>
+    <label>nourishing rain</label>
+    <description>Calls a gentle rain over the colony, quenching fires and cooling the air.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Weather</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/rain</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>None</targetMode>
+    <weather>Rain</weather>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Harvest_NourishingRain</defName>
+    <label>nourishing rain</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_NourishingRain</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Harvest_FertileGround</li>
+      <li>IAG_Node_Harvest_GiftOfFields</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_SeasonOfPlenty</defName>
+    <label>season of plenty</label>
+    <description>Every crop on the map grows by leaps and bounds.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Bounty</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/sunwheat</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>260</faithCost>
+    <cooldownDays>10</cooldownDays>
+    <targetMode>None</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <amount>0.3</amount>
+    <amountPerTier>0.1</amountPerTier>
+    <wholeMap>true</wholeMap>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Harvest_SeasonOfPlenty</defName>
+    <label>season of plenty</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_SeasonOfPlenty</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Harvest_Bounty</li>
+      <li>IAG_Node_Harvest_NourishingRain</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_QuickenGrowth_Harvest</defName>
+    <label>quicken growth</label>
+    <description>Crops near the target grow faster.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Bounty</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/sprout</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>2.9</radius>
+    <amount>0.15</amount>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_QuickenGrowth_Harvest</defName>
+    <label>quicken growth</label>
+    <description>Crops near the target grow faster. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Harvest/sprout</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_QuickenGrowth_Harvest</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Harvest_QuickenGrowth</defName>
+    <label>quicken growth</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_DGP_QuickenGrowth_Harvest</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_QuickenGrowth_Harvest</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_BlessedHands_Harvest</defName>
+    <label>blessed hands</label>
+    <description>Blesses a follower's hands for plant work for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/wheat</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <hediffDef>IAG_HarvestBlessing</hediffDef>
+    <affects>Followers</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_BlessedHands_Harvest</defName>
+    <label>blessed hands</label>
+    <description>Blesses a follower's hands for plant work for a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Harvest/wheat</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_BlessedHands_Harvest</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Harvest_BlessedHands</defName>
+    <label>blessed hands</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_DGP_BlessedHands_Harvest</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_BlessedHands_Harvest</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Harvest_QuickenGrowth</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_FertileGround_Harvest</defName>
+    <label>fertile ground</label>
+    <description>Turns poor ground into rich soil.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Terrain</workerClass>
+    <iconPath>ImAGod/Domains/Harvest/sprout</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>60</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>2.9</radius>
+    <terrain>SoilRich</terrain>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_FertileGround_Harvest</defName>
+    <label>fertile ground</label>
+    <description>Turns poor ground into rich soil. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Harvest/sprout</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_FertileGround_Harvest</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Harvest_FertileGround</defName>
+    <label>fertile ground</label>
+    <domain>IAG_Domain_Harvest</domain>
+    <power>IAG_DGP_FertileGround_Harvest</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_FertileGround_Harvest</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Harvest_BlessedHands</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

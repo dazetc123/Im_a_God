@@ -2,6 +2,9 @@
 <Defs>
 
   <!--
+    Common miracles known to every god. Domain miracles (Defs/Divinity/Domain_*.xml) must be unlocked in the domain trees;
+    IAG_Mend, IAG_Inspire, IAG_Smite, IAG_Bounty and IAG_Terror below are domain miracles too, referenced by those trees.
+
     faithCost      base cost; multiplied by the cost setting and by divine strain (+15% per point of strain)
     minTier        divinity tier required
     cooldownDays   days before the power can be used again
@@ -143,7 +146,7 @@
     <workerClass>ImAGod.DivinePowerWorker_Bounty</workerClass>
     <iconPath>ImAGod/Powers/Bounty</iconPath>
     <order>1</order>
-    <minTier>3</minTier>
+    <minTier>2</minTier>
     <faithCost>140</faithCost>
     <cooldownDays>5</cooldownDays>
     <targetMode>Cell</targetMode>
@@ -161,7 +164,7 @@
     <workerClass>ImAGod.DivinePowerWorker_Terror</workerClass>
     <iconPath>ImAGod/Powers/Terror</iconPath>
     <order>2</order>
-    <minTier>3</minTier>
+    <minTier>2</minTier>
     <faithCost>160</faithCost>
     <cooldownDays>3</cooldownDays>
     <targetMode>Cell</targetMode>
@@ -183,6 +186,22 @@
     <targetMode>Corpse</targetMode>
     <requiresProphet>true</requiresProphet>
     <prophetStrain>0.8</prophetStrain>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Ascension</defName>
+    <label>ascension</label>
+    <description>Raise a devout follower (certainty 80% or more) into a demigod: every skill +8, mood +30, little pain, half damage taken, armored skin, quick healing and much more. A demigod learns divine abilities from your domains as they grow in level, and uses them by drawing on your faith.\n\nYou can have as many demigods as your divine tier.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Ascension</workerClass>
+    <iconPath>ImAGod/Powers/Ascension</iconPath>
+    <order>5</order>
+    <minTier>1</minTier>
+    <faithCost>300</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <doubtOffset>-10</doubtOffset>
   </ImAGod.DivinePowerDef>
 
   <!-- ===== Tier 4 ===== -->

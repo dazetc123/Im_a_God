@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Madness</defName>
+    <label>madness</label>
+    <description>The god of broken minds. Every mental break in its sight is an offering, and it turns its enemies' minds against them.</description>
+    <path>IAG_Path_Chaos</path>
+    <iconPath>ImAGod/Domains/Madness/Domain</iconPath>
+    <color>(0.68, 0.35, 0.82)</color>
+    <order>2</order>
+    <blessing>IAG_Blessing_Madness</blessing>
+    <mentalBreakFaith>6</mentalBreakFaith>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Madness</defName>
+    <label>touch of madness</label>
+    <description>A sharper, stranger mind, closer to the edge. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.68, 0.35, 0.82)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <PsychicSensitivity>0.1</PsychicSensitivity>
+          <MentalBreakThreshold>0.01</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <ResearchSpeed>1.06</ResearchSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <PsychicSensitivity>0.2</PsychicSensitivity>
+          <MentalBreakThreshold>0.02</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <ResearchSpeed>1.12</ResearchSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <PsychicSensitivity>0.3</PsychicSensitivity>
+          <MentalBreakThreshold>0.03</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <ResearchSpeed>1.18</ResearchSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <PsychicSensitivity>0.4</PsychicSensitivity>
+          <MentalBreakThreshold>0.04</MentalBreakThreshold>
+        </statOffsets>
+        <statFactors>
+          <ResearchSpeed>1.24</ResearchSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_MaddeningWhisper</defName>
+    <label>maddening whisper</label>
+    <description>Drives one enemy berserk.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Madness/spiral</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>60</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <affects>Enemies</affects>
+    <mentalState>Berserk</mentalState>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Madness_MaddeningWhisper</defName>
+    <label>maddening whisper</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_MaddeningWhisper</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_MadGenius</defName>
+    <label>mad genius</label>
+    <description>One colonist researches twice as fast for a day, but is closer to breaking.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Madness/brain</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <hediffDef>IAG_MadGenius</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Madness_MadGenius</defName>
+    <label>mad genius</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_MadGenius</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Madness_Terror</defName>
+    <label>Terror</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_Terror</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Madness_MaddeningWhisper</li>
+      <li>IAG_Node_Madness_MadGenius</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_MassHysteria</defName>
+    <label>mass hysteria</label>
+    <description>Drives every enemy in the area berserk.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Madness/mask</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>200</faithCost>
+    <cooldownDays>4</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.4</prophetStrain>
+    <radius>6.9</radius>
+    <affects>Enemies</affects>
+    <mentalState>Berserk</mentalState>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Madness_MassHysteria</defName>
+    <label>mass hysteria</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_MassHysteria</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Madness_MaddeningWhisper</li>
+      <li>IAG_Node_Madness_MadGenius</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_AbyssalGaze</defName>
+    <label>abyssal gaze</label>
+    <description>Every enemy on the map goes berserk.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Madness/eye</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>400</faithCost>
+    <cooldownDays>10</cooldownDays>
+    <targetMode>None</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <affects>Enemies</affects>
+    <wholeMap>true</wholeMap>
+    <mentalState>Berserk</mentalState>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Madness_AbyssalGaze</defName>
+    <label>abyssal gaze</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_AbyssalGaze</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Madness_Terror</li>
+      <li>IAG_Node_Madness_MassHysteria</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Whisper_Madness</defName>
+    <label>maddening whisper</label>
+    <description>Drives one enemy berserk.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Madness/spiral</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <affects>Enemies</affects>
+    <mentalState>Berserk</mentalState>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Whisper_Madness</defName>
+    <label>maddening whisper</label>
+    <description>Drives one enemy berserk. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Madness/spiral</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Whisper_Madness</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Madness_Whisper</defName>
+    <label>maddening whisper</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_DGP_Whisper_Madness</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Whisper_Madness</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Terrify_Madness</defName>
+    <label>terrify</label>
+    <description>Sends one enemy fleeing in terror.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Madness/mask</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <affects>Enemies</affects>
+    <mentalState>PanicFlee</mentalState>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Terrify_Madness</defName>
+    <label>terrify</label>
+    <description>Sends one enemy fleeing in terror. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Madness/mask</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Terrify_Madness</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Madness_Terrify</defName>
+    <label>terrify</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_DGP_Terrify_Madness</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Terrify_Madness</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Madness_Whisper</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Hysteria_Madness</defName>
+    <label>hysteria</label>
+    <description>Drives enemies nearby berserk.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Madness/eye</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>120</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>3.9</radius>
+    <affects>Enemies</affects>
+    <mentalState>Berserk</mentalState>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Hysteria_Madness</defName>
+    <label>hysteria</label>
+    <description>Drives enemies nearby berserk. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Madness/eye</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Hysteria_Madness</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Madness_Hysteria</defName>
+    <label>hysteria</label>
+    <domain>IAG_Domain_Madness</domain>
+    <power>IAG_DGP_Hysteria_Madness</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Hysteria_Madness</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Madness_Terrify</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

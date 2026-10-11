@@ -93,7 +93,8 @@ namespace ImAGod
             int left = Count;
             while (left > 0)
             {
-                Thing thing = ThingMaker.MakeThing(def.thingDef);
+                Thing thing = ThingMaker.MakeThing(def.thingDef, def.thingDef.MadeFromStuff ? GenStuff.DefaultStuffFor(def.thingDef) : null);
+                thing.TryGetComp<CompQuality>()?.SetQuality(def.quality, ArtGenerationContext.Outsider);
                 thing.stackCount = Mathf.Min(left, def.thingDef.stackLimit);
                 left -= thing.stackCount;
                 things.Add(thing);
@@ -160,7 +161,8 @@ namespace ImAGod
         public override bool Apply(LocalTargetInfo target, Map map)
         {
             int grown = 0;
-            foreach (Thing thing in GenRadial.RadialDistinctThingsAround(target.Cell, map, def.radius, true).ToList())
+            IEnumerable<Thing> candidates = def.wholeMap ? map.listerThings.ThingsInGroup(ThingRequestGroup.Plant) : GenRadial.RadialDistinctThingsAround(target.Cell, map, def.radius, true);
+            foreach (Thing thing in candidates.ToList())
             {
                 if (thing is Plant plant && plant.IsCrop && plant.LifeStage != PlantLifeStage.Sowing)
                 {
@@ -178,7 +180,9 @@ namespace ImAGod
             return true;
         }
 
-        public override string EffectSummary() => "IAG_Effect_Bounty".Translate(ScaledAmount.ToStringPercent(), def.radius.ToString("0"));
+        public override string EffectSummary() => def.wholeMap
+            ? "IAG_Effect_BountyMap".Translate(ScaledAmount.ToStringPercent()).ToString()
+            : "IAG_Effect_Bounty".Translate(ScaledAmount.ToStringPercent(), def.radius.ToString("0")).ToString();
     }
 
     /// <summary>Sends hostile humanlikes in an area fleeing in terror.</summary>

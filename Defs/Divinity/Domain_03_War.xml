@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_War</defName>
+    <label>war</label>
+    <description>The god of just war. Its faithful offer it every foe defeated in battle, and it makes them deadly and unafraid.</description>
+    <path>IAG_Path_Creation</path>
+    <iconPath>ImAGod/Domains/War/Domain</iconPath>
+    <color>(0.85, 0.32, 0.25)</color>
+    <order>3</order>
+    <blessing>IAG_Blessing_War</blessing>
+    <recordOfferings>
+      <li>
+        <record>KillsHumanlikes</record>
+        <faith>3</faith>
+      </li>
+      <li>
+        <record>KillsMechanoids</record>
+        <faith>3</faith>
+      </li>
+      <li>
+        <record>PawnsDowned</record>
+        <faith>1.5</faith>
+      </li>
+      <li>
+        <record>Headshots</record>
+        <faith>1</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_War</defName>
+    <label>blessing of war</label>
+    <description>A warrior's eye and hand, granted by the war god. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.85, 0.32, 0.25)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+          <MeleeHitChance>1</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <AimingDelayFactor>0.97</AimingDelayFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+          <MeleeHitChance>2</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <AimingDelayFactor>0.94</AimingDelayFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>3</ShootingAccuracyPawn>
+          <MeleeHitChance>3</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <AimingDelayFactor>0.91</AimingDelayFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>4</ShootingAccuracyPawn>
+          <MeleeHitChance>4</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <AimingDelayFactor>0.88</AimingDelayFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_BattleHymn</defName>
+    <label>battle hymn</label>
+    <description>Colonists in the area shoot and strike truer for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/War/horn</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>9.9</radius>
+    <hediffDef>IAG_BattleHymn</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_War_BattleHymn</defName>
+    <label>battle hymn</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_BattleHymn</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Fearless</defName>
+    <label>fearless</label>
+    <description>Colonists in the area feel almost no pain for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/War/banner</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>7.9</radius>
+    <hediffDef>IAG_Fearless</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_War_Fearless</defName>
+    <label>fearless</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_Fearless</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_War_Smite</defName>
+    <label>Smite</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_Smite</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_War_BattleHymn</li>
+      <li>IAG_Node_War_Fearless</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DivineArmory</defName>
+    <label>divine armory</label>
+    <description>Excellent assault rifles fall from the sky; more for more followers.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/War/swords</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>200</faithCost>
+    <cooldownDays>10</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <amount>1</amount>
+    <amountPerFollower>0.15</amountPerFollower>
+    <thingDef>Gun_AssaultRifle</thingDef>
+    <quality>Excellent</quality>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_War_DivineArmory</defName>
+    <label>divine armory</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_DivineArmory</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_War_BattleHymn</li>
+      <li>IAG_Node_War_Fearless</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_HeavenlySpears</defName>
+    <label>heavenly spears</label>
+    <description>Spears of light pierce every enemy in the area.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaDamage</workerClass>
+    <iconPath>ImAGod/Domains/War/spears</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>300</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <radius>5.9</radius>
+    <amount>30</amount>
+    <amountPerTier>10</amountPerTier>
+    <affects>Enemies</affects>
+    <damageDef>Stab</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_War_HeavenlySpears</defName>
+    <label>heavenly spears</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_HeavenlySpears</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_War_Smite</li>
+      <li>IAG_Node_War_DivineArmory</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Rally_War</defName>
+    <label>rally</label>
+    <description>Colonists nearby fight better for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/War/horn</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>5.9</radius>
+    <hediffDef>IAG_BattleHymn</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Rally_War</defName>
+    <label>rally</label>
+    <description>Colonists nearby fight better for half a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/War/horn</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Rally_War</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_War_Rally</defName>
+    <label>rally</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_DGP_Rally_War</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Rally_War</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Smite_War</defName>
+    <label>smite</label>
+    <description>Calls down a bolt of lightning.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Smite</workerClass>
+    <iconPath>ImAGod/Domains/War/bolt</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>0.5</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>2</radius>
+    <amount>1</amount>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Smite_War</defName>
+    <label>smite</label>
+    <description>Calls down a bolt of lightning. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/War/bolt</iconPath>
+    <cooldownTicksRange>30000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Smite_War</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_War_Smite</defName>
+    <label>smite</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_DGP_Smite_War</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Smite_War</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_War_Rally</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_HeavenlySpear_War</defName>
+    <label>heavenly spear</label>
+    <description>A spear of light pierces one enemy.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaDamage</workerClass>
+    <iconPath>ImAGod/Domains/War/spears</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>35</amount>
+    <affects>Enemies</affects>
+    <damageDef>Stab</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_HeavenlySpear_War</defName>
+    <label>heavenly spear</label>
+    <description>A spear of light pierces one enemy. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/War/spears</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_HeavenlySpear_War</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_War_HeavenlySpear</defName>
+    <label>heavenly spear</label>
+    <domain>IAG_Domain_War</domain>
+    <power>IAG_DGP_HeavenlySpear_War</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_HeavenlySpear_War</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_War_Smite</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

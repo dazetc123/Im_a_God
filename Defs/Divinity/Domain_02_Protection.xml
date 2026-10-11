@@ -1,0 +1,415 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Protection</defName>
+    <label>protection</label>
+    <description>The god of walls and wards. Its faithful offer it every enemy subdued and every fire put out, and it shields them from harm.</description>
+    <path>IAG_Path_Creation</path>
+    <iconPath>ImAGod/Domains/Protection/Domain</iconPath>
+    <color>(0.4, 0.62, 0.92)</color>
+    <order>2</order>
+    <blessing>IAG_Blessing_Protection</blessing>
+    <recordOfferings>
+      <li>
+        <record>PawnsDowned</record>
+        <faith>2</faith>
+      </li>
+      <li>
+        <record>PeopleCaptured</record>
+        <faith>4</faith>
+      </li>
+      <li>
+        <record>FiresExtinguished</record>
+        <faith>0.4</faith>
+      </li>
+      <li>
+        <record>DamageTaken</record>
+        <faith>0.05</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Protection</defName>
+    <label>blessing of protection</label>
+    <description>Divine protection softens every blow and steadies the mind. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.4, 0.62, 0.92)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <MentalBreakThreshold>-0.015</MentalBreakThreshold>
+          <PainShockThreshold>0.03</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.96</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <MentalBreakThreshold>-0.03</MentalBreakThreshold>
+          <PainShockThreshold>0.06</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.92</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <MentalBreakThreshold>-0.045</MentalBreakThreshold>
+          <PainShockThreshold>0.09</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.88</IncomingDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <MentalBreakThreshold>-0.06</MentalBreakThreshold>
+          <PainShockThreshold>0.12</PainShockThreshold>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.84</IncomingDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Aegis</defName>
+    <label>aegis</label>
+    <description>Wraps one person in a divine shield: they take 60% less damage for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Protection/shield</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <hediffDef>IAG_Aegis</hediffDef>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Protection_Aegis</defName>
+    <label>aegis</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_Aegis</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Serenity</defName>
+    <label>serenity</label>
+    <description>Calms every colonist in the area, ending their mental breaks.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Protection/dove</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>60</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>9.9</radius>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Protection_Serenity</defName>
+    <label>serenity</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_Serenity</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Sanctuary</defName>
+    <label>sanctuary</label>
+    <description>Shelters everyone of the colony in the area for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Protection/dome</iconPath>
+    <order>10</order>
+    <minTier>2</minTier>
+    <faithCost>140</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>7.9</radius>
+    <hediffDef>IAG_Sanctuary</hediffDef>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Protection_Sanctuary</defName>
+    <label>sanctuary</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_Sanctuary</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Protection_Aegis</li>
+      <li>IAG_Node_Protection_Serenity</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_ClearSkies</defName>
+    <label>clear skies</label>
+    <description>Ends toxic fallout, volcanic winters, cold snaps, heat waves, flashstorms, eclipses and psychic drones.</description>
+    <workerClass>ImAGod.DivinePowerWorker_EndConditions</workerClass>
+    <iconPath>ImAGod/Domains/Protection/suncloud</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>160</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>None</targetMode>
+    <witnessRadius>0</witnessRadius>
+    <conditions>
+      <li>ToxicFallout</li>
+      <li>VolcanicWinter</li>
+      <li>ColdSnap</li>
+      <li>HeatWave</li>
+      <li>Flashstorm</li>
+      <li>Eclipse</li>
+      <li>PsychicDrone</li>
+    </conditions>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Protection_ClearSkies</defName>
+    <label>clear skies</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_ClearSkies</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Protection_Aegis</li>
+      <li>IAG_Node_Protection_Serenity</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DivineBulwark</defName>
+    <label>divine bulwark</label>
+    <description>For a day, every colonist on the map is guarded body and mind.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Protection/fortress</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>280</faithCost>
+    <cooldownDays>7</cooldownDays>
+    <targetMode>None</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <hediffDef>IAG_Bulwark</hediffDef>
+    <affects>Colonists</affects>
+    <wholeMap>true</wholeMap>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Protection_DivineBulwark</defName>
+    <label>divine bulwark</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_DivineBulwark</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Protection_Sanctuary</li>
+      <li>IAG_Node_Protection_ClearSkies</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Ward_Protection</defName>
+    <label>ward</label>
+    <description>Shields one person from harm for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Protection/shield</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>35</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <hediffDef>IAG_Aegis</hediffDef>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Ward_Protection</defName>
+    <label>ward</label>
+    <description>Shields one person from harm for half a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Protection/shield</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Ward_Protection</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Protection_Ward</defName>
+    <label>ward</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_DGP_Ward_Protection</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Ward_Protection</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Calm_Protection</defName>
+    <label>calm</label>
+    <description>Ends a colonist's mental break.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaMentalState</workerClass>
+    <iconPath>ImAGod/Domains/Protection/dove</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Calm_Protection</defName>
+    <label>calm</label>
+    <description>Ends a colonist's mental break. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Protection/dove</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Calm_Protection</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Protection_Calm</defName>
+    <label>calm</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_DGP_Calm_Protection</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Calm_Protection</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Protection_Ward</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Sanctuary_Protection</defName>
+    <label>sanctuary</label>
+    <description>Shelters the colony's people nearby for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Protection/dome</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>4.9</radius>
+    <hediffDef>IAG_Sanctuary</hediffDef>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Sanctuary_Protection</defName>
+    <label>sanctuary</label>
+    <description>Shelters the colony's people nearby for a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Protection/dome</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Sanctuary_Protection</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Protection_Sanctuary</defName>
+    <label>sanctuary</label>
+    <domain>IAG_Domain_Protection</domain>
+    <power>IAG_DGP_Sanctuary_Protection</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Sanctuary_Protection</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Protection_Calm</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

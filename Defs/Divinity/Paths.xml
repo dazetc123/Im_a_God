@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivinePathDef>
+    <defName>IAG_Path_Creation</defName>
+    <label>path of creation</label>
+    <description>You are a god who makes and keeps: harvests and walls, blades raised in defence, healing hands and patient craft. Your faithful offer you their labour, and you answer with abundance and protection.</description>
+    <iconPath>ImAGod/Paths/Creation</iconPath>
+    <color>(1, 0.85, 0.45)</color>
+    <order>1</order>
+  </ImAGod.DivinePathDef>
+
+  <ImAGod.DivinePathDef>
+    <defName>IAG_Path_Chaos</defName>
+    <label>path of chaos</label>
+    <description>You are a god of hunger and upheaval: fire and ruin, madness, desire, blood and plague. Your faithful offer you their excesses, and you answer by unleashing terrible power upon your enemies.</description>
+    <iconPath>ImAGod/Paths/Chaos</iconPath>
+    <color>(0.75, 0.3, 0.85)</color>
+    <order>2</order>
+  </ImAGod.DivinePathDef>
+
+
+</Defs>

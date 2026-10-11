@@ -10,6 +10,7 @@ namespace ImAGod
         public static ThoughtDef IAG_WitnessedMiracle;
         public static ThoughtDef IAG_Prayed;
         public static HediffDef IAG_Champion;
+        public static HediffDef IAG_Demigod;
         public static MainButtonDef IAG_Divinity;
 
         static IAG_DefOf()

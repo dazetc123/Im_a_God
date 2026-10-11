@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <!-- A follower raised to demigodhood by the Ascension miracle. All skills +8, mood +30, and the body of a god. -->
+  <HediffDef>
+    <defName>IAG_Demigod</defName>
+    <label>demigod</label>
+    <description>This person has been raised by their god into a demigod. Every skill is greatly heightened, they feel little pain, shrug off blows, dodge and turn aside attacks, heal quickly, and live in a state of divine glory. They serve their god: their divine abilities are paid from its faith.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(1, 0.85, 0.35)</defaultLabelColor>
+    <comps>
+      <li>
+        <compClass>ImAGod.HediffComp_Demigod</compClass>
+      </li>
+    </comps>
+    <aptitudes>
+      <li><skill>Shooting</skill><level>8</level></li>
+      <li><skill>Melee</skill><level>8</level></li>
+      <li><skill>Construction</skill><level>8</level></li>
+      <li><skill>Mining</skill><level>8</level></li>
+      <li><skill>Cooking</skill><level>8</level></li>
+      <li><skill>Plants</skill><level>8</level></li>
+      <li><skill>Animals</skill><level>8</level></li>
+      <li><skill>Crafting</skill><level>8</level></li>
+      <li><skill>Artistic</skill><level>8</level></li>
+      <li><skill>Medicine</skill><level>8</level></li>
+      <li><skill>Social</skill><level>8</level></li>
+      <li><skill>Intellectual</skill><level>8</level></li>
+    </aptitudes>
+    <stages>
+      <li>
+        <painFactor>0.3</painFactor>
+        <totalBleedFactor>0.3</totalBleedFactor>
+        <naturalHealingFactor>4</naturalHealingFactor>
+        <hungerRateFactor>0.8</hungerRateFactor>
+        <restFallFactor>0.6</restFallFactor>
+        <capMods>
+          <li><capacity>Consciousness</capacity><offset>0.2</offset></li>
+          <li><capacity>Moving</capacity><offset>0.2</offset></li>
+          <li><capacity>Manipulation</capacity><offset>0.2</offset></li>
+          <li><capacity>Sight</capacity><offset>0.2</offset></li>
+          <li><capacity>Hearing</capacity><offset>0.2</offset></li>
+          <li><capacity>Talking</capacity><offset>0.2</offset></li>
+          <li><capacity>Breathing</capacity><offset>0.2</offset></li>
+          <li><capacity>BloodPumping</capacity><offset>0.2</offset></li>
+          <li><capacity>BloodFiltration</capacity><offset>0.2</offset></li>
+        </capMods>
+        <statOffsets>
+          <MeleeDodgeChance>20</MeleeDodgeChance>
+          <MeleeHitChance>10</MeleeHitChance>
+          <ShootingAccuracyPawn>10</ShootingAccuracyPawn>
+          <ArmorRating_Sharp>0.4</ArmorRating_Sharp>
+          <ArmorRating_Blunt>0.3</ArmorRating_Blunt>
+          <ArmorRating_Heat>0.3</ArmorRating_Heat>
+          <MentalBreakThreshold>-0.2</MentalBreakThreshold>
+          <PainShockThreshold>0.3</PainShockThreshold>
+          <ToxicResistance>0.5</ToxicResistance>
+          <PsychicSensitivity>0.5</PsychicSensitivity>
+        </statOffsets>
+        <statFactors>
+          <IncomingDamageFactor>0.5</IncomingDamageFactor>
+          <ImmunityGainSpeed>1.6</ImmunityGainSpeed>
+          <GlobalLearningFactor>1.5</GlobalLearningFactor>
+          <MeleeDamageFactor>1.3</MeleeDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <ThoughtDef>
+    <defName>IAG_DemigodGlory</defName>
+    <workerClass>ThoughtWorker_Hediff</workerClass>
+    <hediff>IAG_Demigod</hediff>
+    <validWhileDespawned>true</validWhileDespawned>
+    <stages>
+      <li>
+        <label>divine glory</label>
+        <description>I have been raised up by my god. Nothing in this world can truly trouble me.</description>
+        <baseMoodEffect>30</baseMoodEffect>
+      </li>
+    </stages>
+  </ThoughtDef>
+
+  <!-- Base of every demigod ability; the abilities themselves are generated per domain. -->
+  <AbilityDef Name="IAG_DemigodAbilityBase" Abstract="True">
+    <displayGizmoWhileUndrafted>true</displayGizmoWhileUndrafted>
+    <disableGizmoWhileUndrafted>false</disableGizmoWhileUndrafted>
+    <aiCanUse>false</aiCanUse>
+    <casterMustBeCapableOfViolence>false</casterMustBeCapableOfViolence>
+    <showPsycastEffects>false</showPsycastEffects>
+    <verbProperties>
+      <verbClass>Verb_CastAbility</verbClass>
+      <warmupTime>1</warmupTime>
+      <range>24.9</range>
+      <drawAimPie>false</drawAimPie>
+      <requireLineOfSight>false</requireLineOfSight>
+    </verbProperties>
+  </AbilityDef>
+
+</Defs>

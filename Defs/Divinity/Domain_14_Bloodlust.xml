@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Bloodlust</defName>
+    <label>bloodlust</label>
+    <description>The god of slaughter. Its faithful offer it every life they take, and it drives them into a crimson frenzy.</description>
+    <path>IAG_Path_Chaos</path>
+    <iconPath>ImAGod/Domains/Bloodlust/Domain</iconPath>
+    <color>(0.75, 0.12, 0.15)</color>
+    <order>4</order>
+    <blessing>IAG_Blessing_Bloodlust</blessing>
+    <recordOfferings>
+      <li>
+        <record>KillsHumanlikes</record>
+        <faith>5</faith>
+      </li>
+      <li>
+        <record>KillsAnimals</record>
+        <faith>1</faith>
+      </li>
+      <li>
+        <record>AnimalsSlaughtered</record>
+        <faith>2</faith>
+      </li>
+      <li>
+        <record>DamageDealt</record>
+        <faith>0.02</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Bloodlust</defName>
+    <label>blessing of blood</label>
+    <description>A hunger for battle; quick to strike, slow to feel pain, quick to anger. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.75, 0.12, 0.15)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <painFactor>0.95</painFactor>
+        <socialFightChanceFactor>1.2</socialFightChanceFactor>
+        <statOffsets>
+          <MeleeHitChance>1.5</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.06</MeleeDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <painFactor>0.9</painFactor>
+        <socialFightChanceFactor>1.2</socialFightChanceFactor>
+        <statOffsets>
+          <MeleeHitChance>3</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.12</MeleeDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <painFactor>0.85</painFactor>
+        <socialFightChanceFactor>1.2</socialFightChanceFactor>
+        <statOffsets>
+          <MeleeHitChance>4.5</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.18</MeleeDamageFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <painFactor>0.8</painFactor>
+        <socialFightChanceFactor>1.2</socialFightChanceFactor>
+        <statOffsets>
+          <MeleeHitChance>6</MeleeHitChance>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.24</MeleeDamageFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_BloodFrenzy</defName>
+    <label>blood frenzy</label>
+    <description>One colonist enters a divine blood frenzy for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/fist</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>60</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <hediffDef>IAG_BloodFrenzy</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Bloodlust_BloodFrenzy</defName>
+    <label>blood frenzy</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_BloodFrenzy</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Bloodletting</defName>
+    <label>bloodletting</label>
+    <description>Opens deep wounds on one enemy.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaDamage</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/dagger</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <amount>20</amount>
+    <amountPerTier>6</amountPerTier>
+    <affects>Enemies</affects>
+    <damageDef>Cut</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Bloodlust_Bloodletting</defName>
+    <label>bloodletting</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_Bloodletting</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_CrimsonTide</defName>
+    <label>crimson tide</label>
+    <description>Colonists in the area are seized by bloodlust for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/wave</iconPath>
+    <order>10</order>
+    <minTier>2</minTier>
+    <faithCost>150</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>7.9</radius>
+    <hediffDef>IAG_CrimsonTide</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Bloodlust_CrimsonTide</defName>
+    <label>crimson tide</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_CrimsonTide</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Bloodlust_BloodFrenzy</li>
+      <li>IAG_Node_Bloodlust_Bloodletting</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_FeastOfBlood</defName>
+    <label>feast of blood</label>
+    <description>Heals the colony's warriors in the area.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHeal</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/goblet</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>110</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>7.9</radius>
+    <amount>15</amount>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Bloodlust_FeastOfBlood</defName>
+    <label>feast of blood</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_FeastOfBlood</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Bloodlust_BloodFrenzy</li>
+      <li>IAG_Node_Bloodlust_Bloodletting</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_RainOfBlood</defName>
+    <label>rain of blood</label>
+    <description>Cuts every enemy in the area.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaDamage</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/bloodrain</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>320</faithCost>
+    <cooldownDays>6</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <radius>6.9</radius>
+    <amount>25</amount>
+    <amountPerTier>8</amountPerTier>
+    <affects>Enemies</affects>
+    <damageDef>Cut</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Bloodlust_RainOfBlood</defName>
+    <label>rain of blood</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_RainOfBlood</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Bloodlust_CrimsonTide</li>
+      <li>IAG_Node_Bloodlust_FeastOfBlood</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Frenzy_Bloodlust</defName>
+    <label>frenzy</label>
+    <description>A colonist enters a blood frenzy for half a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/fist</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <hediffDef>IAG_BloodFrenzy</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Frenzy_Bloodlust</defName>
+    <label>frenzy</label>
+    <description>A colonist enters a blood frenzy for half a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Bloodlust/fist</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Frenzy_Bloodlust</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Bloodlust_Frenzy</defName>
+    <label>frenzy</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_DGP_Frenzy_Bloodlust</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Frenzy_Bloodlust</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Bloodletting_Bloodlust</defName>
+    <label>bloodletting</label>
+    <description>Opens deep wounds on one enemy.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaDamage</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/dagger</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>0.5</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>18</amount>
+    <affects>Enemies</affects>
+    <damageDef>Cut</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Bloodletting_Bloodlust</defName>
+    <label>bloodletting</label>
+    <description>Opens deep wounds on one enemy. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Bloodlust/dagger</iconPath>
+    <cooldownTicksRange>30000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>false</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Bloodletting_Bloodlust</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Bloodlust_Bloodletting</defName>
+    <label>bloodletting</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_DGP_Bloodletting_Bloodlust</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Bloodletting_Bloodlust</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Bloodlust_Frenzy</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_CrimsonTide_Bloodlust</defName>
+    <label>crimson tide</label>
+    <description>Colonists nearby are seized by bloodlust.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Bloodlust/wave</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>4.9</radius>
+    <hediffDef>IAG_CrimsonTide</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_CrimsonTide_Bloodlust</defName>
+    <label>crimson tide</label>
+    <description>Colonists nearby are seized by bloodlust. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Bloodlust/wave</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_CrimsonTide_Bloodlust</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Bloodlust_CrimsonTide</defName>
+    <label>crimson tide</label>
+    <domain>IAG_Domain_Bloodlust</domain>
+    <power>IAG_DGP_CrimsonTide_Bloodlust</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_CrimsonTide_Bloodlust</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Bloodlust_Bloodletting</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

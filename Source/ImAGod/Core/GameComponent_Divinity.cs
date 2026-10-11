@@ -29,10 +29,14 @@ namespace ImAGod
         private float devotion;
         private DivinityTierDef tier;
 
-        public static GameComponent_Divinity Instance => Current.Game?.GetComponent<GameComponent_Divinity>();
+        private static GameComponent_Divinity cached;
+
+        /// <summary>The current game's component. Cached, since record and thought patches ask for it very often.</summary>
+        public static GameComponent_Divinity Instance => Current.Game == null ? null : cached ??= Current.Game.GetComponent<GameComponent_Divinity>();
 
         public GameComponent_Divinity(Game game)
         {
+            cached = this;
         }
 
         public int FollowerCount => followerCount;
@@ -52,6 +56,8 @@ namespace ImAGod
         {
             Recount();
             SyncRivals();
+            highestTier = Mathf.Max(highestTier, TierLevel);
+            PromptForPathIfNeeded();
         }
 
         public override void GameComponentTick()
@@ -70,6 +76,8 @@ namespace ImAGod
             CrisisHourlyTick();
             RivalsHourlyTick();
             ProphecyHourlyTick();
+            DomainsHourlyTick();
+            DemigodsHourlyTick();
         }
 
         public void Recount()
@@ -124,6 +132,8 @@ namespace ImAGod
         {
             if (DivinityUtility.PlayerIdeo == null)
                 return "IAG_Reason_NoIdeo".Translate();
+            if (!IsPowerKnown(power))
+                return "IAG_Reason_PowerNotUnlocked".Translate();
             if (TierLevel < power.minTier)
                 return "IAG_Reason_TierTooLow".Translate(power.minTier);
             int cooldown = CooldownTicksLeft(power);
@@ -266,6 +276,8 @@ namespace ImAGod
             ExposeProphecy();
             ExposeCrisis();
             ExposeRivals();
+            ExposeDomains();
+            ExposeDemigods();
             if (Scribe.mode == LoadSaveMode.PostLoadInit)
             {
                 lastUsedTick ??= new Dictionary<DivinePowerDef, int>();

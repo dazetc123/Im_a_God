@@ -6,11 +6,13 @@ using Verse;
 
 namespace ImAGod
 {
-    public class MainTabWindow_Divinity : MainTabWindow
+    public partial class MainTabWindow_Divinity : MainTabWindow
     {
         private enum Tab
         {
             Miracles,
+            Domains,
+            Demigods,
             Rivals,
             Faith
         }
@@ -31,7 +33,7 @@ namespace ImAGod
         private float statusHeight = 600f;
         private Vector2 scrollPosition;
 
-        public override Vector2 RequestedTabSize => new Vector2(980f, 700f);
+        public override Vector2 RequestedTabSize => new Vector2(1060f, 720f);
 
         public override void DoWindowContents(Rect inRect)
         {
@@ -52,6 +54,8 @@ namespace ImAGod
             var tabs = new List<TabRecord>
             {
                 new TabRecord("IAG_Tab_Miracles".Translate(), () => tab = Tab.Miracles, tab == Tab.Miracles),
+                new TabRecord("IAG_Tab_Domains".Translate(), () => tab = Tab.Domains, tab == Tab.Domains),
+                new TabRecord("IAG_Tab_Demigods".Translate(), () => tab = Tab.Demigods, tab == Tab.Demigods),
                 new TabRecord("IAG_Tab_Rivals".Translate(), () => tab = Tab.Rivals, tab == Tab.Rivals),
                 new TabRecord("IAG_Tab_Faith".Translate(), () => tab = Tab.Faith, tab == Tab.Faith)
             };
@@ -62,6 +66,12 @@ namespace ImAGod
             {
                 case Tab.Miracles:
                     DrawPowers(content, divinity);
+                    break;
+                case Tab.Domains:
+                    DrawDomains(content, divinity);
+                    break;
+                case Tab.Demigods:
+                    DrawDemigods(content, divinity);
                     break;
                 case Tab.Rivals:
                     DrawRivals(content, divinity);
@@ -82,6 +92,16 @@ namespace ImAGod
             Text.Font = GameFont.Medium;
             list.Label("IAG_GodOf".Translate(ideo.name));
             Text.Font = GameFont.Small;
+            if (divinity.HasPath)
+            {
+                GUI.color = divinity.path.color;
+                list.Label(divinity.path.LabelCap + ": " + divinity.domains.Select(d => d.LabelCap.ToString()).ToCommaList());
+                GUI.color = Color.white;
+            }
+            else if (list.ButtonText("IAG_ChoosePathButton".Translate()))
+            {
+                Find.WindowStack.Add(new Dialog_ChooseDivinity(null));
+            }
 
             DivinityTierDef tier = divinity.Tier;
             if (tier != null)
@@ -201,7 +221,9 @@ namespace ImAGod
 
         private void DrawPowers(Rect rect, GameComponent_Divinity divinity)
         {
-            List<DivinePowerDef> powers = DefDatabase<DivinePowerDef>.AllDefsListForReading.OrderBy(p => p.minTier).ThenBy(p => p.order).ToList();
+            List<DivinePowerDef> powers = DefDatabase<DivinePowerDef>.AllDefsListForReading
+                .Where(divinity.IsPowerKnown)
+                .OrderBy(p => p.minTier).ThenBy(p => p.order).ToList();
             Rect view = new Rect(0f, 0f, rect.width - 16f, powers.Count * RowHeight);
             Widgets.BeginScrollView(rect, ref scrollPosition, view);
             float y = 0f;

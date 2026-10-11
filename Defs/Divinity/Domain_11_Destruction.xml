@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Destruction</defName>
+    <label>destruction</label>
+    <description>The god of fire and ruin. Its faithful offer it everything they break and burn, and it rains devastation upon its enemies.</description>
+    <path>IAG_Path_Chaos</path>
+    <iconPath>ImAGod/Domains/Destruction/Domain</iconPath>
+    <color>(0.95, 0.42, 0.15)</color>
+    <order>1</order>
+    <blessing>IAG_Blessing_Destruction</blessing>
+    <recordOfferings>
+      <li>
+        <record>ThingsDeconstructed</record>
+        <faith>0.5</faith>
+      </li>
+      <li>
+        <record>KillsMechanoids</record>
+        <faith>3</faith>
+      </li>
+      <li>
+        <record>DamageDealt</record>
+        <faith>0.015</faith>
+      </li>
+      <li>
+        <record>ShotsFired</record>
+        <faith>0.03</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Destruction</defName>
+    <label>blessing of ruin</label>
+    <description>Hands made for breaking things. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.95, 0.42, 0.15)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>0.5</ShootingAccuracyPawn>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.05</MeleeDamageFactor>
+          <MiningSpeed>1.05</MiningSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>1</ShootingAccuracyPawn>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.1</MeleeDamageFactor>
+          <MiningSpeed>1.1</MiningSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>1.5</ShootingAccuracyPawn>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.15</MeleeDamageFactor>
+          <MiningSpeed>1.15</MiningSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <ShootingAccuracyPawn>2</ShootingAccuracyPawn>
+        </statOffsets>
+        <statFactors>
+          <MeleeDamageFactor>1.2</MeleeDamageFactor>
+          <MiningSpeed>1.2</MiningSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Hellfire</defName>
+    <label>hellfire</label>
+    <description>Sets the ground around the target ablaze.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Fire</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/flame</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>3.9</radius>
+    <amount>6</amount>
+    <amountPerTier>2</amountPerTier>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Destruction_Hellfire</defName>
+    <label>hellfire</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_Hellfire</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Shatter</defName>
+    <label>shatter</label>
+    <description>A divine blast at the target.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Explosion</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/burst</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>2.9</radius>
+    <amount>35</amount>
+    <amountPerTier>10</amountPerTier>
+    <damageDef>Bomb</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Destruction_Shatter</defName>
+    <label>shatter</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_Shatter</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Destruction_Smite</defName>
+    <label>Smite</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_Smite</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Destruction_Hellfire</li>
+      <li>IAG_Node_Destruction_Shatter</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Starfall</defName>
+    <label>starfall</label>
+    <description>Calls a meteorite down on the target.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Meteor</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/meteor</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>160</faithCost>
+    <cooldownDays>4</cooldownDays>
+    <targetMode>Cell</targetMode>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Destruction_Starfall</defName>
+    <label>starfall</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_Starfall</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Destruction_Hellfire</li>
+      <li>IAG_Node_Destruction_Shatter</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Cataclysm</defName>
+    <label>cataclysm</label>
+    <description>A tremendous, burning explosion.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Explosion</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/skullburst</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>320</faithCost>
+    <cooldownDays>7</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <radius>6.9</radius>
+    <amount>60</amount>
+    <damageDef>Bomb</damageDef>
+    <fireChance>0.4</fireChance>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Destruction_Cataclysm</defName>
+    <label>cataclysm</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_Cataclysm</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Destruction_Smite</li>
+      <li>IAG_Node_Destruction_Starfall</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Firebrand_Destruction</defName>
+    <label>firebrand</label>
+    <description>Sets a small fire.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Fire</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/flame</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>25</faithCost>
+    <cooldownDays>0.5</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>1.9</radius>
+    <amount>2</amount>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Firebrand_Destruction</defName>
+    <label>firebrand</label>
+    <description>Sets a small fire. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Destruction/flame</iconPath>
+    <cooldownTicksRange>30000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Firebrand_Destruction</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Destruction_Firebrand</defName>
+    <label>firebrand</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_DGP_Firebrand_Destruction</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Firebrand_Destruction</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Blast_Destruction</defName>
+    <label>blast</label>
+    <description>A small divine blast.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Explosion</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/burst</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>45</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>1.9</radius>
+    <amount>25</amount>
+    <damageDef>Bomb</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Blast_Destruction</defName>
+    <label>blast</label>
+    <description>A small divine blast. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Destruction/burst</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Blast_Destruction</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Destruction_Blast</defName>
+    <label>blast</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_DGP_Blast_Destruction</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Blast_Destruction</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Destruction_Firebrand</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_GreatBlast_Destruction</defName>
+    <label>great blast</label>
+    <description>A powerful divine blast.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Explosion</workerClass>
+    <iconPath>ImAGod/Domains/Destruction/skullburst</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>3.9</radius>
+    <amount>40</amount>
+    <damageDef>Bomb</damageDef>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_GreatBlast_Destruction</defName>
+    <label>great blast</label>
+    <description>A powerful divine blast. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Destruction/skullburst</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_GreatBlast_Destruction</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Destruction_GreatBlast</defName>
+    <label>great blast</label>
+    <domain>IAG_Domain_Destruction</domain>
+    <power>IAG_DGP_GreatBlast_Destruction</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_GreatBlast_Destruction</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Destruction_Blast</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

@@ -1,0 +1,391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Life</defName>
+    <label>life</label>
+    <description>The god of healing and new life. Its faithful offer it every wound tended and every soul saved, and it mends bodies and cures disease.</description>
+    <path>IAG_Path_Creation</path>
+    <iconPath>ImAGod/Domains/Life/Domain</iconPath>
+    <color>(0.45, 0.85, 0.6)</color>
+    <order>6</order>
+    <blessing>IAG_Blessing_Life</blessing>
+    <recordOfferings>
+      <li>
+        <record>TimesTendedOther</record>
+        <faith>0.8</faith>
+      </li>
+      <li>
+        <record>OperationsPerformed</record>
+        <faith>4</faith>
+      </li>
+      <li>
+        <record>PrisonersRecruited</record>
+        <faith>6</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Life</defName>
+    <label>blessing of life</label>
+    <description>Wounds heal and sickness passes quickly. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.45, 0.85, 0.6)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <MedicalTendQuality>0.04</MedicalTendQuality>
+        </statOffsets>
+        <statFactors>
+          <ImmunityGainSpeed>1.05</ImmunityGainSpeed>
+          <InjuryHealingFactor>1.1</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <MedicalTendQuality>0.08</MedicalTendQuality>
+        </statOffsets>
+        <statFactors>
+          <ImmunityGainSpeed>1.1</ImmunityGainSpeed>
+          <InjuryHealingFactor>1.2</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <MedicalTendQuality>0.12</MedicalTendQuality>
+        </statOffsets>
+        <statFactors>
+          <ImmunityGainSpeed>1.15</ImmunityGainSpeed>
+          <InjuryHealingFactor>1.3</InjuryHealingFactor>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <MedicalTendQuality>0.16</MedicalTendQuality>
+        </statOffsets>
+        <statFactors>
+          <ImmunityGainSpeed>1.2</ImmunityGainSpeed>
+          <InjuryHealingFactor>1.4</InjuryHealingFactor>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Life_Mend</defName>
+    <label>Mend</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_Mend</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Cure</defName>
+    <label>cure</label>
+    <description>Cures one person of every disease and infection.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHeal</workerClass>
+    <iconPath>ImAGod/Domains/Life/flask</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <amount>0</amount>
+    <affects>Allies</affects>
+    <cureDiseases>true</cureDiseases>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Life_Cure</defName>
+    <label>cure</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_Cure</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_HealingLight</defName>
+    <label>healing light</label>
+    <description>Heals everyone of the colony in the area.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHeal</workerClass>
+    <iconPath>ImAGod/Domains/Life/sunheart</iconPath>
+    <order>10</order>
+    <minTier>2</minTier>
+    <faithCost>140</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>7.9</radius>
+    <amount>20</amount>
+    <amountPerTier>5</amountPerTier>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Life_HealingLight</defName>
+    <label>healing light</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_HealingLight</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Life_Mend</li>
+      <li>IAG_Node_Life_Cure</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Vitality</defName>
+    <label>vitality</label>
+    <description>Everyone of the colony in the area heals and fights off disease much faster for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Life/leafheart</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>7.9</radius>
+    <hediffDef>IAG_Vitality</hediffDef>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Life_Vitality</defName>
+    <label>vitality</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_Vitality</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Life_Mend</li>
+      <li>IAG_Node_Life_Cure</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Restoration</defName>
+    <label>restoration</label>
+    <description>Restores one person's health like several healer serums: scars, lost limbs, chronic illness.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Restore</workerClass>
+    <iconPath>ImAGod/Domains/Life/lotus</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>220</faithCost>
+    <cooldownDays>7</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <amount>3</amount>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Life_Restoration</defName>
+    <label>restoration</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_Restoration</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Life_HealingLight</li>
+      <li>IAG_Node_Life_Vitality</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Mend_Life</defName>
+    <label>mending touch</label>
+    <description>Heals one person's wounds.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHeal</workerClass>
+    <iconPath>ImAGod/Domains/Life/cross</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>15</amount>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Mend_Life</defName>
+    <label>mending touch</label>
+    <description>Heals one person's wounds. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Life/cross</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Mend_Life</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Life_Mend</defName>
+    <label>mending touch</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_DGP_Mend_Life</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Mend_Life</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Cure_Life</defName>
+    <label>cure</label>
+    <description>Cures one person of disease and infection.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHeal</workerClass>
+    <iconPath>ImAGod/Domains/Life/flask</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>0</amount>
+    <affects>Allies</affects>
+    <cureDiseases>true</cureDiseases>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Cure_Life</defName>
+    <label>cure</label>
+    <description>Cures one person of disease and infection. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Life/flask</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Cure_Life</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Life_Cure</defName>
+    <label>cure</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_DGP_Cure_Life</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Cure_Life</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Life_Mend</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_HealingLight_Life</defName>
+    <label>healing light</label>
+    <description>Heals the colony's people nearby.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHeal</workerClass>
+    <iconPath>ImAGod/Domains/Life/sunheart</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>80</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>4.9</radius>
+    <amount>12</amount>
+    <affects>Allies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_HealingLight_Life</defName>
+    <label>healing light</label>
+    <description>Heals the colony's people nearby. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Life/sunheart</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_HealingLight_Life</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Life_HealingLight</defName>
+    <label>healing light</label>
+    <domain>IAG_Domain_Life</domain>
+    <power>IAG_DGP_HealingLight_Life</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_HealingLight_Life</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Life_Cure</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

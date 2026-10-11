@@ -52,6 +52,35 @@ Bạn không còn chỉ là người quan sát: **bạn là vị thần mà colo
 
 Mở tab **Divinity** ở thanh dưới màn hình. Tab này có ba trang con: *Miracles* (phép lạ), *Rival gods* (thần đối thủ) và *Prophecies & faith* (tiên tri và nhật ký nghi ngờ).
 
+## Con đường thần thánh và Lĩnh vực
+
+Khi bắt đầu game, hoặc khi tải một save chưa chọn, mod hỏi bạn là thần gì:
+
+1. **Con đường** (chọn một lần, vĩnh viễn): **Sáng tạo** hoặc **Hỗn mang**.
+2. **Lĩnh vực** đầu tiên thuộc con đường đó. Lên cấp 2 được nhận thêm lĩnh vực thứ hai, lên cấp 4 được thêm lĩnh vực thứ ba (cùng con đường).
+
+| Sáng tạo | Hỗn mang |
+|---|---|
+| Mùa màng · Bảo hộ · Chiến tranh · Xây dựng · Chế tạo · Sự sống | Hủy diệt · Điên loạn · Dục vọng · Khát máu · Dịch bệnh |
+
+Mỗi lĩnh vực có:
+- **Phước lành**: hediff cho mọi tín đồ, mạnh dần theo thần cấp. Ví dụ Mùa màng tăng tốc độ làm cây và sản lượng; Khát máu tăng sát thương cận chiến nhưng dễ ẩu đả.
+- **Lễ vật**: việc tín đồ làm trong lĩnh vực đó dâng đức tin. Mùa màng là thu hoạch và gieo trồng; Chiến tranh là hạ gục kẻ thù; Chế tạo là chế đồ, nấu ăn, nghiên cứu; Điên loạn là mỗi cơn break trên bản đồ; Dục vọng là lovin', tiệc tùng…
+- **Cây phép của thần**: 5 phép trên 3 hàng, giá 1/2/3 Điểm thần lực. Mỗi phép cần *một* phép bất kỳ ở hàng trên.
+- **Cây kỹ năng Á thần**: 3 kỹ năng, mở ở cấp Á thần 1/4/7.
+
+**Điểm thần lực:** nhận theo thần cấp cao nhất từng đạt (cấp 1: 2 điểm, cấp 2: 4, cấp 3: 7, cấp 4: 10), cộng 1 điểm cho mỗi 1000 đức tin từng nhận (tối đa thêm 10).
+
+Phép chung, ai cũng có: Thiên nhãn, Mana trời, Thiên khải, Thần chiến, Hồi sinh, Giáng thế, Thăng hoa. Các phép đặc thù cũ nay thuộc về lĩnh vực: Chữa lành → Sự sống, Ban cảm hứng → Chế tạo, Sét → Chiến tranh và Hủy diệt, Bội thu → Mùa màng, Thịnh nộ → Điên loạn.
+
+## Á thần
+
+- Phép **Thăng hoa** (cấp 1, 300 đức tin, cần nhà tiên tri) nâng một tín đồ có certainty ≥ 80% thành Á thần. Số Á thần tối đa bằng thần cấp.
+- **Á thần nhận được:** mọi kỹ năng +8, mood +30, đau chỉ còn 30%, sát thương nhận vào ×0.5, giáp da (sắc +40%, cùn +30%, nhiệt +30%), né cận chiến +20, trúng +10, bắn +10, mọi năng lực cơ thể +20%, hồi máu ×4, chảy máu ×0.3, miễn dịch ×1.6, học nhanh ×1.5, ít đói và ít buồn ngủ hơn.
+- **Kinh nghiệm:** Á thần lên cấp (tối đa 10) theo thời gian, theo đức tin mà việc họ làm dâng lên, và theo đức tin họ tiêu. Mỗi cấp cho 1 điểm để học kỹ năng trong trang *Demigods*.
+- **Trực thuộc thần:** kỹ năng của Á thần là nút bấm như psycast nhưng **tiêu đức tin của bạn**, và chỉ học được từ các lĩnh vực bạn đã nhận.
+- Á thần chết thì nghi ngờ +15. Nếu bỏ đạo hoặc rời colony, họ mất thần lực.
+
 ## Tiên tri và storyteller
 
 Thiên nhãn **không tạo thêm threat**, với bất kỳ storyteller nào (Cassandra, Phoebe, Randy, hay storyteller của mod khác dùng hệ thống incident của vanilla):
@@ -113,11 +142,14 @@ Can thiệp của thần đối thủ **là sự kiện thêm**, nằm ngoài st
 About/                 About.xml
 1.6/Assemblies/        ImAGod.dll (đã build sẵn)
 Defs/                  thần cấp, phép lạ, bàn thờ, job, thought, hediff, main tab
+Defs/Divinity/         con đường, 11 lĩnh vực (phép, cây, kỹ năng Á thần), Á thần
 Languages/English/     chuỗi giao diện (Keyed)
 Textures/ImAGod/       icon phép, icon tab, texture bàn thờ
 Source/ImAGod/         mã nguồn C#
   Core/                GameComponent_Divinity (trạng thái), Def, settings, tiện ích
   Crisis/              nghi ngờ, dị giáo, thought khủng hoảng đức tin
+  Domains/             con đường, lĩnh vực, cây phép, hộp thoại chọn
+  Demigods/            Á thần, kỹ năng (CompAbilityEffect_DivinePower), Thăng hoa
   Rivals/              thần đối thủ, can thiệp, champion
   Prophecy/            Thiên nhãn: giữ và báo trước sự kiện
   Powers/              DivinePowerWorker và các phép
@@ -154,5 +186,6 @@ Copy (hoặc tạo symlink) cả thư mục repo vào `RimWorld/Mods/ImAGod`. B�
 - [x] Tiên tri chi tiết: hướng tấn công, cách đến, chiến thuật, champion, dịch bệnh
 - [x] Khủng hoảng đức tin và dị giáo
 - [x] Thần đối thủ: can thiệp, champion, Thần chiến
+- [x] Con đường Sáng tạo / Hỗn mang, 11 lĩnh vực, cây phép, Á thần
 - [ ] Bản dịch tiếng Việt
 - [ ] Ảnh preview cho Steam Workshop

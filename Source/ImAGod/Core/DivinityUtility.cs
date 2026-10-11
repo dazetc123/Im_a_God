@@ -1,4 +1,5 @@
 using RimWorld;
+using UnityEngine;
 using Verse;
 
 namespace ImAGod
@@ -69,6 +70,33 @@ namespace ImAGod
             if (strain != null && strain.Severity >= ProphetOverwhelmedSeverity)
                 return "IAG_Reason_ProphetOverwhelmed".Translate(prophet.Named("PROPHET"));
             return true;
+        }
+
+        public static Texture2D LoadIcon(string path)
+        {
+            Texture2D tex = path.NullOrEmpty() ? null : ContentFinder<Texture2D>.Get(path, reportFailure: false);
+            return tex ?? BaseContent.BadTex;
+        }
+
+        public static bool Matches(Pawn pawn, PawnFilter filter)
+        {
+            if (pawn == null || pawn.Dead)
+                return false;
+            switch (filter)
+            {
+                case PawnFilter.Followers:
+                    return IsFollower(pawn) && pawn.Faction == Faction.OfPlayer;
+                case PawnFilter.Colonists:
+                    return pawn.RaceProps.Humanlike && pawn.Faction == Faction.OfPlayer;
+                case PawnFilter.Allies:
+                    return pawn.Faction == Faction.OfPlayer || pawn.IsPrisonerOfColony;
+                case PawnFilter.Enemies:
+                    return pawn.HostileTo(Faction.OfPlayer);
+                case PawnFilter.Animals:
+                    return pawn.RaceProps.Animal && pawn.Faction == Faction.OfPlayer;
+                default:
+                    return true;
+            }
         }
 
         public static void GainMemory(Pawn pawn, ThoughtDef thought)

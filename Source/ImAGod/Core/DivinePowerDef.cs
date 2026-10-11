@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using RimWorld;
 using UnityEngine;
 using Verse;
 
@@ -11,6 +13,17 @@ namespace ImAGod
         Pawn,
         Corpse,
         RivalGod
+    }
+
+    /// <summary>Which pawns an area miracle affects.</summary>
+    public enum PawnFilter
+    {
+        Followers,
+        Colonists,
+        Allies,
+        Enemies,
+        Animals,
+        Everyone
     }
 
     public class DivinePowerDef : Def
@@ -41,6 +54,20 @@ namespace ImAGod
         public float durationDays;
         public ThingDef thingDef;
         public HediffDef hediffDef;
+        public PawnFilter affects = PawnFilter.Allies;
+        public bool wholeMap;
+        public MentalStateDef mentalState;
+        public DamageDef damageDef;
+        public WeatherDef weather;
+        public TerrainDef terrain;
+        public ThoughtDef thought;
+        public bool cureDiseases;
+        public QualityCategory quality = QualityCategory.Normal;
+        public List<GameConditionDef> conditions;
+        public float fireChance;
+
+        /// <summary>A weaker variant used by demigod abilities; never listed among the god's own miracles.</summary>
+        public bool demigodOnly;
 
         [Unsaved] private DivinePowerWorker workerInt;
         [Unsaved] private Texture2D iconInt;
@@ -64,13 +91,7 @@ namespace ImAGod
         {
             get
             {
-                if (iconInt == null)
-                {
-                    iconInt = iconPath.NullOrEmpty() ? null : ContentFinder<Texture2D>.Get(iconPath, reportFailure: false);
-                    if (iconInt == null)
-                        iconInt = BaseContent.BadTex;
-                }
-                return iconInt;
+                return iconInt ??= DivinityUtility.LoadIcon(iconPath);
             }
         }
 

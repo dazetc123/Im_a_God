@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Building</defName>
+    <label>building</label>
+    <description>The god of builders and miners. Its faithful offer it every wall raised and every vein of ore, and it makes their works endure.</description>
+    <path>IAG_Path_Creation</path>
+    <iconPath>ImAGod/Domains/Building/Domain</iconPath>
+    <color>(0.78, 0.6, 0.38)</color>
+    <order>4</order>
+    <blessing>IAG_Blessing_Building</blessing>
+    <recordOfferings>
+      <li>
+        <record>ThingsConstructed</record>
+        <faith>0.6</faith>
+      </li>
+      <li>
+        <record>ThingsRepaired</record>
+        <faith>0.2</faith>
+      </li>
+      <li>
+        <record>CellsMined</record>
+        <faith>0.03</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Building</defName>
+    <label>blessing of the builder</label>
+    <description>Sure hands for stone, wood and steel. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.78, 0.6, 0.38)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <ConstructSuccessChance>0.02</ConstructSuccessChance>
+        </statOffsets>
+        <statFactors>
+          <ConstructionSpeed>1.06</ConstructionSpeed>
+          <MiningSpeed>1.05</MiningSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <ConstructSuccessChance>0.04</ConstructSuccessChance>
+        </statOffsets>
+        <statFactors>
+          <ConstructionSpeed>1.12</ConstructionSpeed>
+          <MiningSpeed>1.1</MiningSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <ConstructSuccessChance>0.06</ConstructSuccessChance>
+        </statOffsets>
+        <statFactors>
+          <ConstructionSpeed>1.18</ConstructionSpeed>
+          <MiningSpeed>1.15</MiningSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <ConstructSuccessChance>0.08</ConstructSuccessChance>
+        </statOffsets>
+        <statFactors>
+          <ConstructionSpeed>1.24</ConstructionSpeed>
+          <MiningSpeed>1.2</MiningSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_MendStone</defName>
+    <label>mend stone</label>
+    <description>Repairs half of the damage to the colony's buildings in the area.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Repair</workerClass>
+    <iconPath>ImAGod/Domains/Building/brick</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>9.9</radius>
+    <amount>0.5</amount>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Building_MendStone</defName>
+    <label>mend stone</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_MendStone</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_BuildersZeal</defName>
+    <label>builder's zeal</label>
+    <description>Colonists in the area build and mine much faster for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Building/hammer</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>60</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>9.9</radius>
+    <hediffDef>IAG_BuildersZeal</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Building_BuildersZeal</defName>
+    <label>builder's zeal</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_BuildersZeal</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_GiftOfStone</defName>
+    <label>gift of stone</label>
+    <description>Granite blocks fall from the sky; more for more followers.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Building/bricks</iconPath>
+    <order>10</order>
+    <minTier>2</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>4</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <amount>75</amount>
+    <amountPerFollower>10</amountPerFollower>
+    <thingDef>BlocksGranite</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Building_GiftOfStone</defName>
+    <label>gift of stone</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_GiftOfStone</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Building_MendStone</li>
+      <li>IAG_Node_Building_BuildersZeal</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_SteelFromHeaven</defName>
+    <label>steel from heaven</label>
+    <description>Steel falls from the sky; more for more followers.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Building/ingot</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>130</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <amount>60</amount>
+    <amountPerFollower>8</amountPerFollower>
+    <thingDef>Steel</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Building_SteelFromHeaven</defName>
+    <label>steel from heaven</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_SteelFromHeaven</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Building_MendStone</li>
+      <li>IAG_Node_Building_BuildersZeal</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_OrdainedWorks</defName>
+    <label>ordained works</label>
+    <description>Every construction in the area whose materials are all delivered is finished at once.</description>
+    <workerClass>ImAGod.DivinePowerWorker_CompleteFrames</workerClass>
+    <iconPath>ImAGod/Domains/Building/temple</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>260</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.5</prophetStrain>
+    <radius>12.9</radius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Building_OrdainedWorks</defName>
+    <label>ordained works</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_OrdainedWorks</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Building_GiftOfStone</li>
+      <li>IAG_Node_Building_SteelFromHeaven</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Repair_Building</defName>
+    <label>repair</label>
+    <description>Repairs buildings nearby.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Repair</workerClass>
+    <iconPath>ImAGod/Domains/Building/brick</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>4.9</radius>
+    <amount>0.4</amount>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Repair_Building</defName>
+    <label>repair</label>
+    <description>Repairs buildings nearby. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Building/brick</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Repair_Building</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Building_Repair</defName>
+    <label>repair</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_DGP_Repair_Building</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Repair_Building</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_BuildersZeal_Building</defName>
+    <label>builder's zeal</label>
+    <description>One colonist builds and mines much faster for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Building/hammer</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <hediffDef>IAG_BuildersZeal</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_BuildersZeal_Building</defName>
+    <label>builder's zeal</label>
+    <description>One colonist builds and mines much faster for a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Building/hammer</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_BuildersZeal_Building</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Building_BuildersZeal</defName>
+    <label>builder's zeal</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_DGP_BuildersZeal_Building</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_BuildersZeal_Building</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Building_Repair</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_GiftOfStone_Building</defName>
+    <label>gift of stone</label>
+    <description>Granite blocks fall from the sky.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Building/bricks</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>40</amount>
+    <thingDef>BlocksGranite</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_GiftOfStone_Building</defName>
+    <label>gift of stone</label>
+    <description>Granite blocks fall from the sky. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Building/bricks</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_GiftOfStone_Building</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Building_GiftOfStone</defName>
+    <label>gift of stone</label>
+    <domain>IAG_Domain_Building</domain>
+    <power>IAG_DGP_GiftOfStone_Building</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_GiftOfStone_Building</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Building_BuildersZeal</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

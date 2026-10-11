@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Desire</defName>
+    <label>desire</label>
+    <description>The god of pleasure, longing and charm. Its faithful offer it their every delight, and it bends hearts and wills.</description>
+    <path>IAG_Path_Chaos</path>
+    <iconPath>ImAGod/Domains/Desire/Domain</iconPath>
+    <color>(0.92, 0.38, 0.6)</color>
+    <order>3</order>
+    <blessing>IAG_Blessing_Desire</blessing>
+    <recordOfferings>
+      <li>
+        <record>PrisonersChatted</record>
+        <faith>0.5</faith>
+      </li>
+    </recordOfferings>
+    <thoughtOfferings>
+      <li>
+        <thought>GotSomeLovin</thought>
+        <faith>3</faith>
+      </li>
+      <li>
+        <thought>AttendedParty</thought>
+        <faith>3</faith>
+      </li>
+      <li>
+        <thought>Catharsis</thought>
+        <faith>2</faith>
+      </li>
+    </thoughtOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Desire</defName>
+    <label>blessing of desire</label>
+    <description>Charm, presence and a silver tongue. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.92, 0.38, 0.6)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statOffsets>
+          <TradePriceImprovement>0.02</TradePriceImprovement>
+        </statOffsets>
+        <statFactors>
+          <SocialImpact>1.06</SocialImpact>
+          <NegotiationAbility>1.05</NegotiationAbility>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statOffsets>
+          <TradePriceImprovement>0.04</TradePriceImprovement>
+        </statOffsets>
+        <statFactors>
+          <SocialImpact>1.12</SocialImpact>
+          <NegotiationAbility>1.1</NegotiationAbility>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statOffsets>
+          <TradePriceImprovement>0.06</TradePriceImprovement>
+        </statOffsets>
+        <statFactors>
+          <SocialImpact>1.18</SocialImpact>
+          <NegotiationAbility>1.15</NegotiationAbility>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statOffsets>
+          <TradePriceImprovement>0.08</TradePriceImprovement>
+        </statOffsets>
+        <statFactors>
+          <SocialImpact>1.24</SocialImpact>
+          <NegotiationAbility>1.2</NegotiationAbility>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Rapture</defName>
+    <label>rapture</label>
+    <description>Every follower on the map is filled with rapture.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaThought</workerClass>
+    <iconPath>ImAGod/Domains/Desire/heart</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>None</targetMode>
+    <affects>Followers</affects>
+    <thought>IAG_Rapture</thought>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Desire_Rapture</defName>
+    <label>rapture</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_Rapture</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Allure</defName>
+    <label>allure</label>
+    <description>Wears down a prisoner's resistance and will.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Allure</workerClass>
+    <iconPath>ImAGod/Domains/Desire/rose</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>40</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <amount>6</amount>
+    <amountPerTier>2</amountPerTier>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Desire_Allure</defName>
+    <label>allure</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_Allure</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_Enthrall</defName>
+    <label>enthrall</label>
+    <description>Wins a prisoner or a downed enemy over to the colony at once.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Enthrall</workerClass>
+    <iconPath>ImAGod/Domains/Desire/chainheart</iconPath>
+    <order>10</order>
+    <minTier>2</minTier>
+    <faithCost>220</faithCost>
+    <cooldownDays>5</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <requiresProphet>true</requiresProphet>
+    <prophetStrain>0.4</prophetStrain>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Desire_Enthrall</defName>
+    <label>enthrall</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_Enthrall</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Desire_Rapture</li>
+      <li>IAG_Node_Desire_Allure</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_SweetLethargy</defName>
+    <label>sweet lethargy</label>
+    <description>Enemies in the area slow to a crawl.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Desire/moon</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>120</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>6.9</radius>
+    <hediffDef>IAG_Lethargy</hediffDef>
+    <affects>Enemies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Desire_SweetLethargy</defName>
+    <label>sweet lethargy</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_SweetLethargy</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Desire_Rapture</li>
+      <li>IAG_Node_Desire_Allure</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_EndlessRevel</defName>
+    <label>endless revel</label>
+    <description>Every follower on the map is lost in ecstasy for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Desire/goblet</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>260</faithCost>
+    <cooldownDays>7</cooldownDays>
+    <targetMode>None</targetMode>
+    <hediffDef>IAG_Ecstasy</hediffDef>
+    <affects>Followers</affects>
+    <wholeMap>true</wholeMap>
+    <witnessRadius>0</witnessRadius>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Desire_EndlessRevel</defName>
+    <label>endless revel</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_EndlessRevel</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Desire_Enthrall</li>
+      <li>IAG_Node_Desire_SweetLethargy</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Charm_Desire</defName>
+    <label>charm</label>
+    <description>Wears down a prisoner's resistance.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Allure</workerClass>
+    <iconPath>ImAGod/Domains/Desire/rose</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>4</amount>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Charm_Desire</defName>
+    <label>charm</label>
+    <description>Wears down a prisoner's resistance. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Desire/rose</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Charm_Desire</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Desire_Charm</defName>
+    <label>charm</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_DGP_Charm_Desire</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Charm_Desire</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Rapture_Desire</defName>
+    <label>rapture</label>
+    <description>Fills followers nearby with rapture.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaThought</workerClass>
+    <iconPath>ImAGod/Domains/Desire/heart</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>7.9</radius>
+    <affects>Followers</affects>
+    <thought>IAG_Rapture</thought>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Rapture_Desire</defName>
+    <label>rapture</label>
+    <description>Fills followers nearby with rapture. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Desire/heart</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Rapture_Desire</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Desire_Rapture</defName>
+    <label>rapture</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_DGP_Rapture_Desire</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Rapture_Desire</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Desire_Charm</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Lethargy_Desire</defName>
+    <label>lethargy</label>
+    <description>Enemies nearby slow to a crawl.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Desire/moon</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>2</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <radius>3.9</radius>
+    <hediffDef>IAG_Lethargy</hediffDef>
+    <affects>Enemies</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Lethargy_Desire</defName>
+    <label>lethargy</label>
+    <description>Enemies nearby slow to a crawl. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Desire/moon</iconPath>
+    <cooldownTicksRange>120000</cooldownTicksRange>
+    <hostile>true</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Lethargy_Desire</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Desire_Lethargy</defName>
+    <label>lethargy</label>
+    <domain>IAG_Domain_Desire</domain>
+    <power>IAG_DGP_Lethargy_Desire</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Lethargy_Desire</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Desire_Rapture</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>

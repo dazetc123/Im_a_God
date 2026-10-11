@@ -193,4 +193,101 @@ The colony's doubt rises by {1} and every believer grows a little less certain.<
   <IAG_ChallengeLabel>{0} humbled</IAG_ChallengeLabel>
   <IAG_ChallengeText>Your prophet confronts {0} in your name and prevails. The rival god loses {1} power, and for {2} its curses cannot touch your colony and no champion of it will lead a raid.</IAG_ChallengeText>
 
+  <!-- Paths and domains -->
+  <IAG_Tab_Domains>Domains</IAG_Tab_Domains>
+  <IAG_Tab_Demigods>Demigods</IAG_Tab_Demigods>
+  <IAG_ChoosePathTitle>What kind of god are you?</IAG_ChoosePathTitle>
+  <IAG_ChoosePathIntro>Choose your path once and for all, then the first domain you rule. As your divinity grows you may embrace more domains of the same path (a second at tier 2, a third at tier 4).</IAG_ChoosePathIntro>
+  <IAG_EmbraceTitle>Embrace a new domain</IAG_EmbraceTitle>
+  <IAG_EmbraceIntro>Your divinity has grown. Choose another domain of your path to rule.</IAG_EmbraceIntro>
+  <IAG_ChoosePathButton>Choose your divine path</IAG_ChoosePathButton>
+  <IAG_DecideLater>Decide later</IAG_DecideLater>
+  <IAG_PickDomain>Pick a domain</IAG_PickDomain>
+  <IAG_ConfirmDomain>Become the god of {0}</IAG_ConfirmDomain>
+  <IAG_PathDomains>Domains: {0}</IAG_PathDomains>
+  <IAG_DomainOfferings>Offerings: {0}</IAG_DomainOfferings>
+  <IAG_DomainMiracles>Miracles: {0}</IAG_DomainMiracles>
+  <IAG_DomainDemigodAbilities>Demigod abilities: {0}</IAG_DomainDemigodAbilities>
+  <IAG_DomainBlessing>Blessing: {0}</IAG_DomainBlessing>
+  <IAG_OfferingMentalBreak>every mental break nearby</IAG_OfferingMentalBreak>
+  <IAG_PathChosenLabel>{0}</IAG_PathChosenLabel>
+  <IAG_PathChosenText>You have taken the {0} and become the god of {1}.\n\n{2}\n\nYour followers now carry your blessing, and their deeds in your domain are offerings to you. Unlock miracles in the Domains page of the divinity tab with divine points.</IAG_PathChosenText>
+  <IAG_DomainEmbraced>You have embraced the domain of {0}.</IAG_DomainEmbraced>
+  <IAG_NewDomainSlotLabel>A new domain</IAG_NewDomainSlotLabel>
+  <IAG_NewDomainSlotText>Your divinity has grown enough to rule another domain. Embrace it from the Domains page of the divinity tab.</IAG_NewDomainSlotText>
+  <IAG_NoPathYet>You have not yet chosen what kind of god you are.</IAG_NoPathYet>
+  <IAG_DivinePoints>Divine points: {0} available ({1} total)</IAG_DivinePoints>
+  <IAG_DivinePointsTip>Divine points unlock miracles in your domain trees. You gain them as you reach higher tiers (2 at tier 1, 4 at tier 2, 7 at tier 3, 10 at tier 4) and one for every 1000 faith ever offered (up to 10 more). A miracle costs 1, 2 or 3 points by row, and needs any one miracle of the row above.</IAG_DivinePointsTip>
+  <IAG_NextBonusPoint>Next point in {0} more faith offered.</IAG_NextBonusPoint>
+  <IAG_DomainSlots>Domains: {0} / {1}</IAG_DomainSlots>
+  <IAG_EmbraceButton>Embrace a new domain</IAG_EmbraceButton>
+  <IAG_ConfirmUnlock>Unlock {0} for {1} divine points?</IAG_ConfirmUnlock>
+  <IAG_NodeCost>{0} pt · tier {1}</IAG_NodeCost>
+  <IAG_NodeUnlocked>unlocked</IAG_NodeUnlocked>
+  <IAG_Node_Unlocked>You can now work {0} ({1}).</IAG_Node_Unlocked>
+  <IAG_Node_AlreadyUnlocked>Already unlocked.</IAG_Node_AlreadyUnlocked>
+  <IAG_Node_DomainNotEmbraced>You do not rule the domain of {0}.</IAG_Node_DomainNotEmbraced>
+  <IAG_Node_NeedsPrerequisite>Requires one of: {0}.</IAG_Node_NeedsPrerequisite>
+  <IAG_Node_NotEnoughPoints>Requires {0} points.</IAG_Node_NotEnoughPoints>
+  <IAG_Node_DemigodLevel>Requires demigod level {0}.</IAG_Node_DemigodLevel>
+  <IAG_Reason_PowerNotUnlocked>Unlock this miracle in your domain tree first.</IAG_Reason_PowerNotUnlocked>
+
+  <!-- Demigods -->
+  <IAG_AscensionLabel>Ascension</IAG_AscensionLabel>
+  <IAG_AscensionText>{PAWN_labelShort} has been raised into a demigod!\n\nEvery skill +8, mood +30, little pain, half damage taken, armored skin and quick healing. As {PAWN_pronoun} grows in level, {PAWN_pronoun} can learn divine abilities from your domains in the Demigods page of the divinity tab. Those abilities draw on your faith.</IAG_AscensionText>
+  <IAG_Effect_Ascension>demigods {0} / {1}</IAG_Effect_Ascension>
+  <IAG_DemigodCount>Demigods: {0} / {1}</IAG_DemigodCount>
+  <IAG_DemigodHint>Raise a follower with at least {0} certainty using the Ascension miracle. You may have as many demigods as your tier.</IAG_DemigodHint>
+  <IAG_NoDemigods>You have no demigods yet.</IAG_NoDemigods>
+  <IAG_DemigodPoints>{PAWN_labelShort}: {1} points available · level {2}</IAG_DemigodPoints>
+  <IAG_DemigodLevelShort>Lv {0}</IAG_DemigodLevelShort>
+  <IAG_PointsShort>{0} pts</IAG_PointsShort>
+  <IAG_DemigodXpTip>Divine experience {0} / {1}.\n\nDemigods grow with time, with the faith their deeds offer, and with the faith they spend. Each level gives one point.</IAG_DemigodXpTip>
+  <IAG_ConfirmLearn>Teach {PAWN_labelShort} {1} for {2} points?</IAG_ConfirmLearn>
+  <IAG_DemigodLearned>{PAWN_labelShort} has learned {1}.</IAG_DemigodLearned>
+  <IAG_DemigodLevelUp>{PAWN_labelShort} has reached demigod level {1}.</IAG_DemigodLevelUp>
+  <IAG_DemigodAbilityCost>Costs {0} of your god's faith.</IAG_DemigodAbilityCost>
+  <IAG_DemigodFallenLabel>A demigod has fallen</IAG_DemigodFallenLabel>
+  <IAG_DemigodFallenText>{PAWN_labelShort}, your demigod, is dead. Your faithful are shaken.</IAG_DemigodFallenText>
+  <IAG_DemigodLostLabel>Demigodhood lost</IAG_DemigodLostLabel>
+  <IAG_DemigodLostText>{PAWN_labelShort} no longer serves you, and has lost {PAWN_possessive} divine gifts.</IAG_DemigodLostText>
+  <IAG_DoubtReason_DemigodDied>Demigod {0} died</IAG_DoubtReason_DemigodDied>
+  <IAG_Reason_AlreadyDemigod>{PAWN_labelShort} is already a demigod.</IAG_Reason_AlreadyDemigod>
+  <IAG_Reason_CertaintyTooLow>{PAWN_labelShort} needs at least {1} certainty to ascend.</IAG_Reason_CertaintyTooLow>
+  <IAG_Reason_TooManyDemigods>You can have at most {0} demigods at your tier.</IAG_Reason_TooManyDemigods>
+  <IAG_Reason_NotDemigod>Only a demigod can use this.</IAG_Reason_NotDemigod>
+
+  <!-- Generic miracle effects -->
+  <IAG_Affects_Followers>followers</IAG_Affects_Followers>
+  <IAG_Affects_Colonists>colonists</IAG_Affects_Colonists>
+  <IAG_Affects_Allies>the colony's people</IAG_Affects_Allies>
+  <IAG_Affects_Enemies>enemies</IAG_Affects_Enemies>
+  <IAG_Affects_Animals>the colony's animals</IAG_Affects_Animals>
+  <IAG_Affects_Everyone>everyone</IAG_Affects_Everyone>
+  <IAG_Effect_WholeMap>all {0} on the map</IAG_Effect_WholeMap>
+  <IAG_Effect_AreaWho>{0} within {1}</IAG_Effect_AreaWho>
+  <IAG_Effect_Cure>cures disease</IAG_Effect_Cure>
+  <IAG_Effect_Damage>{0} {1} damage</IAG_Effect_Damage>
+  <IAG_Effect_Explosion>{0} damage, radius {1}</IAG_Effect_Explosion>
+  <IAG_Effect_Fire>{0} fires within {1}</IAG_Effect_Fire>
+  <IAG_Effect_Repair>repairs {0} of damage</IAG_Effect_Repair>
+  <IAG_Effect_Restore>{0} healing serums' worth</IAG_Effect_Restore>
+  <IAG_Effect_Terrain>{0} within {1}</IAG_Effect_Terrain>
+  <IAG_Effect_Allure>-{0} resistance</IAG_Effect_Allure>
+  <IAG_Effect_BountyMap>+{0} growth to every crop on the map</IAG_Effect_BountyMap>
+  <IAG_PowerAffected>{0}: {1} affected.</IAG_PowerAffected>
+  <IAG_MiracleReason>{0}</IAG_MiracleReason>
+  <IAG_ConditionsEnded>Ended: {0}.</IAG_ConditionsEnded>
+  <IAG_Repaired>{0} buildings repaired.</IAG_Repaired>
+  <IAG_FramesCompleted>{0} constructions finished.</IAG_FramesCompleted>
+  <IAG_Reason_NoMap>There is no map here.</IAG_Reason_NoMap>
+  <IAG_Reason_WrongTarget>Must target {0}.</IAG_Reason_WrongTarget>
+  <IAG_Reason_NoOneAffected>No one there would be affected.</IAG_Reason_NoOneAffected>
+  <IAG_Reason_NothingBurns>Nothing there will burn.</IAG_Reason_NothingBurns>
+  <IAG_Reason_Roofed>The sky must be open above the target.</IAG_Reason_Roofed>
+  <IAG_Reason_NoConditions>There is nothing to clear.</IAG_Reason_NoConditions>
+  <IAG_Reason_NoGround>There is no poor ground there to enrich.</IAG_Reason_NoGround>
+  <IAG_Reason_NothingToRepair>Nothing there needs repair.</IAG_Reason_NothingToRepair>
+  <IAG_Reason_NoFrames>No construction there has all its materials.</IAG_Reason_NoFrames>
+
 </LanguageData>

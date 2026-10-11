@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+  <ImAGod.DivineDomainDef>
+    <defName>IAG_Domain_Crafting</defName>
+    <label>crafting</label>
+    <description>The god of forge, workshop and study. Its faithful offer it every thing they make, and it gifts them materials and genius.</description>
+    <path>IAG_Path_Creation</path>
+    <iconPath>ImAGod/Domains/Crafting/Domain</iconPath>
+    <color>(0.92, 0.55, 0.22)</color>
+    <order>5</order>
+    <blessing>IAG_Blessing_Crafting</blessing>
+    <recordOfferings>
+      <li>
+        <record>ThingsCrafted</record>
+        <faith>1.2</faith>
+      </li>
+      <li>
+        <record>MealsCooked</record>
+        <faith>0.12</faith>
+      </li>
+      <li>
+        <record>ResearchPointsResearched</record>
+        <faith>0.003</faith>
+      </li>
+    </recordOfferings>
+  </ImAGod.DivineDomainDef>
+
+  <HediffDef>
+    <defName>IAG_Blessing_Crafting</defName>
+    <label>blessing of the forge</label>
+    <description>Skilled, quick hands and a clear mind. Its strength grows with the god's tier.</description>
+    <hediffClass>HediffWithComps</hediffClass>
+    <isBad>false</isBad>
+    <everCurableByItem>false</everCurableByItem>
+    <defaultLabelColor>(0.92, 0.55, 0.22)</defaultLabelColor>
+    <initialSeverity>1</initialSeverity>
+    <maxSeverity>4</maxSeverity>
+    <stages>
+      <li>
+        <minSeverity>1</minSeverity>
+        <label>I</label>
+        <statFactors>
+          <WorkSpeedGlobal>1.03</WorkSpeedGlobal>
+          <ResearchSpeed>1.04</ResearchSpeed>
+          <GeneralLaborSpeed>1.04</GeneralLaborSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>2</minSeverity>
+        <label>II</label>
+        <statFactors>
+          <WorkSpeedGlobal>1.06</WorkSpeedGlobal>
+          <ResearchSpeed>1.08</ResearchSpeed>
+          <GeneralLaborSpeed>1.08</GeneralLaborSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>3</minSeverity>
+        <label>III</label>
+        <statFactors>
+          <WorkSpeedGlobal>1.09</WorkSpeedGlobal>
+          <ResearchSpeed>1.12</ResearchSpeed>
+          <GeneralLaborSpeed>1.12</GeneralLaborSpeed>
+        </statFactors>
+      </li>
+      <li>
+        <minSeverity>4</minSeverity>
+        <label>IV</label>
+        <statFactors>
+          <WorkSpeedGlobal>1.12</WorkSpeedGlobal>
+          <ResearchSpeed>1.16</ResearchSpeed>
+          <GeneralLaborSpeed>1.16</GeneralLaborSpeed>
+        </statFactors>
+      </li>
+    </stages>
+  </HediffDef>
+
+  <!-- ================= miracles of the god ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_ArtisansFocus</defName>
+    <label>artisan's focus</label>
+    <description>One colonist works and learns 50% faster for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/anvil</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <hediffDef>IAG_ArtisansFocus</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Crafting_ArtisansFocus</defName>
+    <label>artisan's focus</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_ArtisansFocus</power>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_ComponentsFromHeaven</defName>
+    <label>components from heaven</label>
+    <description>Components fall from the sky; more for more followers.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/gear</iconPath>
+    <order>1</order>
+    <minTier>1</minTier>
+    <faithCost>70</faithCost>
+    <cooldownDays>4</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <amount>3</amount>
+    <amountPerFollower>0.5</amountPerFollower>
+    <thingDef>ComponentIndustrial</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Crafting_ComponentsFromHeaven</defName>
+    <label>components from heaven</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_ComponentsFromHeaven</power>
+    <row>0</row>
+    <column>1</column>
+    <pointCost>1</pointCost>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Crafting_Inspire</defName>
+    <label>Inspire</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_Inspire</power>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Crafting_ArtisansFocus</li>
+      <li>IAG_Node_Crafting_ComponentsFromHeaven</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_SparkOfGenius</defName>
+    <label>spark of genius</label>
+    <description>Colonists in the area research 50% faster for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/bulb</iconPath>
+    <order>11</order>
+    <minTier>2</minTier>
+    <faithCost>100</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <radius>9.9</radius>
+    <hediffDef>IAG_SparkOfGenius</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Crafting_SparkOfGenius</defName>
+    <label>spark of genius</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_SparkOfGenius</power>
+    <row>1</row>
+    <column>1</column>
+    <pointCost>2</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Crafting_ArtisansFocus</li>
+      <li>IAG_Node_Crafting_ComponentsFromHeaven</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_GiftOfTheForge</defName>
+    <label>gift of the forge</label>
+    <description>Plasteel falls from the sky; more for more followers.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/plasteel</iconPath>
+    <order>20</order>
+    <minTier>3</minTier>
+    <faithCost>240</faithCost>
+    <cooldownDays>7</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <amount>40</amount>
+    <amountPerFollower>5</amountPerFollower>
+    <thingDef>Plasteel</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_Node_Crafting_GiftOfTheForge</defName>
+    <label>gift of the forge</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_GiftOfTheForge</power>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <prerequisites>
+      <li>IAG_Node_Crafting_Inspire</li>
+      <li>IAG_Node_Crafting_SparkOfGenius</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <!-- ================= abilities of demigods ================= -->
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Focus_Crafting</defName>
+    <label>artisan's focus</label>
+    <description>One colonist works and learns faster for a day.</description>
+    <workerClass>ImAGod.DivinePowerWorker_AreaHediff</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/anvil</iconPath>
+    <order>0</order>
+    <minTier>1</minTier>
+    <faithCost>30</faithCost>
+    <cooldownDays>1</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <hediffDef>IAG_ArtisansFocus</hediffDef>
+    <affects>Colonists</affects>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Focus_Crafting</defName>
+    <label>artisan's focus</label>
+    <description>One colonist works and learns faster for a day. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Crafting/anvil</iconPath>
+    <cooldownTicksRange>60000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Focus_Crafting</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Crafting_Focus</defName>
+    <label>artisan's focus</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_DGP_Focus_Crafting</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Focus_Crafting</ability>
+    <row>0</row>
+    <column>0</column>
+    <pointCost>1</pointCost>
+    <minDemigodLevel>1</minDemigodLevel>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Components_Crafting</defName>
+    <label>components</label>
+    <description>Two components fall from the sky.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Manna</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/gear</iconPath>
+    <order>1</order>
+    <minTier>2</minTier>
+    <faithCost>50</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Cell</targetMode>
+    <demigodOnly>true</demigodOnly>
+    <amount>2</amount>
+    <thingDef>ComponentIndustrial</thingDef>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Components_Crafting</defName>
+    <label>components</label>
+    <description>Two components fall from the sky. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Crafting/gear</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>true</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Components_Crafting</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Crafting_Components</defName>
+    <label>components</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_DGP_Components_Crafting</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Components_Crafting</ability>
+    <row>1</row>
+    <column>0</column>
+    <pointCost>2</pointCost>
+    <minDemigodLevel>4</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Crafting_Focus</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+  <ImAGod.DivinePowerDef>
+    <defName>IAG_DGP_Inspire_Crafting</defName>
+    <label>inspire</label>
+    <description>Kindles an inspiration in a follower.</description>
+    <workerClass>ImAGod.DivinePowerWorker_Inspire</workerClass>
+    <iconPath>ImAGod/Domains/Crafting/star</iconPath>
+    <order>2</order>
+    <minTier>3</minTier>
+    <faithCost>90</faithCost>
+    <cooldownDays>3</cooldownDays>
+    <targetMode>Pawn</targetMode>
+    <demigodOnly>true</demigodOnly>
+  </ImAGod.DivinePowerDef>
+
+  <AbilityDef ParentName="IAG_DemigodAbilityBase">
+    <defName>IAG_DG_Inspire_Crafting</defName>
+    <label>inspire</label>
+    <description>Kindles an inspiration in a follower. Demigods draw on their god's faith to use this ability.</description>
+    <iconPath>ImAGod/Domains/Crafting/star</iconPath>
+    <cooldownTicksRange>180000</cooldownTicksRange>
+    <hostile>false</hostile>
+    <verbProperties>
+      <range>24.9</range>
+      <targetParams>
+        <canTargetLocations>false</canTargetLocations>
+        <canTargetPawns>true</canTargetPawns>
+        <canTargetBuildings>false</canTargetBuildings>
+        <canTargetAnimals>true</canTargetAnimals>
+        <canTargetMechs>false</canTargetMechs>
+        <canTargetSelf>true</canTargetSelf>
+        <mapObjectTargetsMustBeAutoAttackable>false</mapObjectTargetsMustBeAutoAttackable>
+      </targetParams>
+    </verbProperties>
+    <comps>
+      <li Class="ImAGod.CompProperties_DivinePower">
+        <power>IAG_DGP_Inspire_Crafting</power>
+      </li>
+    </comps>
+  </AbilityDef>
+
+  <ImAGod.DivineNodeDef>
+    <defName>IAG_DGNode_Crafting_Inspire</defName>
+    <label>inspire</label>
+    <domain>IAG_Domain_Crafting</domain>
+    <power>IAG_DGP_Inspire_Crafting</power>
+    <forDemigod>true</forDemigod>
+    <ability>IAG_DG_Inspire_Crafting</ability>
+    <row>2</row>
+    <column>0</column>
+    <pointCost>3</pointCost>
+    <minDemigodLevel>7</minDemigodLevel>
+    <prerequisites>
+      <li>IAG_DGNode_Crafting_Components</li>
+    </prerequisites>
+  </ImAGod.DivineNodeDef>
+
+
+</Defs>
